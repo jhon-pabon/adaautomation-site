@@ -1,57 +1,256 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ADA Automation</title>
-  <style>
-    body{
-      margin:0;
-      font-family:Arial, Helvetica, sans-serif;
-      background:#0f172a;
-      color:white;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      height:100vh;
-      text-align:center;
-    }
-    .card{
-      background:#1e293b;
-      padding:40px;
-      border-radius:12px;
-      box-shadow:0 20px 40px rgba(0,0,0,0.4);
-      max-width:600px;
-    }
-    h1{
-      margin-top:0;
-      font-size:32px;
-      color:#38bdf8;
-    }
-    p{
-      opacity:0.85;
-      line-height:1.6;
-    }
-    .btn{
-      display:inline-block;
-      margin-top:20px;
-      padding:12px 20px;
-      background:#38bdf8;
-      color:#0f172a;
-      text-decoration:none;
-      border-radius:8px;
-      font-weight:bold;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ADA | Systèmes intelligents pour entreprises</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background: #f8fafc;
+  color: #1e293b;
+  line-height: 1.6;
+}
+
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: auto;
+}
+
+header {
+  padding: 20px 0;
+  background: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav img {
+  height: 50px;
+}
+
+.nav ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #1e293b;
+  font-weight: 500;
+}
+
+.btn {
+  background: #1e3a8a;
+  color: white;
+  padding: 12px 22px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #172c6c;
+}
+
+.hero {
+  padding: 80px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.hero h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  color: #475569;
+  margin: 20px 0;
+}
+
+.section {
+  padding: 80px 0;
+}
+
+.section h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+}
+
+.card h3 {
+  margin-bottom: 10px;
+}
+
+.solution {
+  text-align: center;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.step {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+}
+
+.cta-final {
+  background: #e0ecff;
+  text-align: center;
+  padding: 80px 20px;
+}
+
+footer {
+  background: white;
+  padding: 30px 0;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+/* Desktop */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .hero-text {
+    flex: 1;
+  }
+
+  .hero-image {
+    flex: 1;
+  }
+
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .steps {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+</style>
 </head>
+
 <body>
-  <div class="card">
-    <h1>ADA Automation</h1>
-    <p>
-      Nous automatisons les processus pour les entreprises en Suisse romande.
-      Ceci est une version provisoire du site.
-    </p>
-    <a class="btn" href="mailto:contact@adaautomation.ch">Contactez-nous</a>
+
+<header>
+  <div class="container nav">
+    <img src="logo.png" alt="ADA Logo" />
+    <ul>
+      <li><a href="#">Accueil</a></li>
+      <li><a href="#">Méthode</a></li>
+      <li><a href="#">Diagnostic</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <a href="#" class="btn">Diagnostic Gratuit</a>
   </div>
+</header>
+
+<section class="hero container">
+  <div class="hero-text">
+    <h1>Combien de clients perdez-vous chaque mois sans vous en rendre compte ?</h1>
+    <p>Pendant que vous travaillez, des opportunités se perdent par manque de suivi, de réponse ou de structure.</p>
+    <a href="#" class="btn">Recevoir un diagnostic intelligent gratuit</a>
+    <p style="margin-top:10px;font-size:0.9rem;color:#64748b;">
+      Sans engagement. Découvrez où vous perdez du temps et de l'argent.
+    </p>
+  </div>
+  <div class="hero-image">
+    <img src="hero.jpg" alt="Professionnelle travaillant" style="width:100%;border-radius:12px;">
+  </div>
+</section>
+
+<section class="section container">
+  <h2>Si cette situation vous semble familière, votre entreprise perd du potentiel</h2>
+  <div class="cards">
+    <div class="card"><h3>Les clients ne reviennent pas</h3></div>
+    <div class="card"><h3>Trop de gestion manuelle</h3></div>
+    <div class="card"><h3>Réponses tardives</h3></div>
+    <div class="card"><h3>Annulations fréquentes</h3></div>
+    <div class="card"><h3>Croissance lente</h3></div>
+    <div class="card"><h3>Tout dépend de vous</h3></div>
+  </div>
+</section>
+
+<section class="section solution container">
+  <h2>Nous mettons en place un système qui travaille pour vous</h2>
+  <div class="cards">
+    <div class="card">Organisation automatique des réservations</div>
+    <div class="card">Rappels pour réduire les annulations</div>
+    <div class="card">Suivi automatique des clients</div>
+    <div class="card">Réactivation des clients inactifs</div>
+    <div class="card">Réponses même hors horaires</div>
+  </div>
+  <div style="margin-top:40px;">
+    <a href="#" class="btn">Recevoir mon analyse gratuite</a>
+  </div>
+</section>
+
+<section class="section container">
+  <h2>Notre méthode en 4 étapes</h2>
+  <div class="steps">
+    <div class="step">1. Analyse de votre situation</div>
+    <div class="step">2. Identification des pertes invisibles</div>
+    <div class="step">3. Mise en place du système adapté</div>
+    <div class="step">4. Optimisation continue</div>
+  </div>
+</section>
+
+<section class="cta-final">
+  <h2>Arrêtez de perdre des clients en silence.</h2>
+  <p style="margin:20px 0;">Votre entreprise mérite un système structuré.</p>
+  <a href="#" class="btn">Commencer maintenant</a>
+</section>
+
+<footer>
+  <div class="container">
+    <p>© ADA 2026 — Tous droits réservés</p>
+  </div>
+</footer>
+
 </body>
 </html>
