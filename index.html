@@ -1,107 +1,120 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ADA | Systèmes d'Automatisation Intelligents</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
-        .gold-text { color: #d4af37; }
-        .bg-ada-blue { background-color: #1e3a8a; }
-        .border-gold { border-color: #d4af37; }
-        .shadow-premium { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ADA | Temps, Revenus & Sérénité</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+    .bg-ada-blue { background-color: #1e3a8a; }
+    .border-gold { border-color: #d4af37; }
+    .shadow-premium { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06); }
+  </style>
 </head>
+
 <body class="bg-gray-50 text-slate-900">
 
-    <!-- HEADER -->
-    <header class="fixed w-full bg-white/80 backdrop-blur-md z-50 border-b border-gray-100">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center">
-                <img src="TU_LOGO_AQUI.png" alt="ADA Logo" class="h-12">
-            </div>
-            <nav class="hidden md:flex space-x-8 font-medium text-sm uppercase tracking-wide">
-                <a href="#" class="hover:text-blue-800 transition">Accueil</a>
-                <a href="#methode" class="hover:text-blue-800 transition">Méthode</a>
-                <a href="#diagnostic" class="hover:text-blue-800 transition">Diagnostic</a>
-                <a href="#contact" class="hover:text-blue-800 transition">Contact</a>
-            </nav>
-            <a href="#diagnostic" class="bg-ada-blue text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-700 transition shadow-lg">
-                Diagnostic Gratuit
-            </a>
-        </div>
-    </header>
+  <!-- HEADER -->
+  <header class="fixed w-full bg-white/80 backdrop-blur-md z-50 border-b border-gray-100">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      
+      <!-- LOGO -->
+      <div class="flex items-center">
+        <img src="Logo_ada.PNG" alt="ADA Logo" class="h-12 w-auto">
+      </div>
 
-    <!-- HERO SECTION -->
-    <section class="pt-32 pb-20 px-6">
-        <div class="container mx-auto flex flex-col md:flex-row items-center">
-            
-            <!-- TEXTO -->
-            <div class="md:w-1/2 space-y-6">
-                <h1 class="text-4xl md:text-6xl font-bold leading-tight">
-                    Gagnez du <span class="text-blue-800">temps</span>, plus de <span class="text-blue-800">revenus</span> et surtout de la <span class="text-blue-800">tranquillité</span>.
-                </h1>
-                <p class="text-xl text-gray-600 max-w-lg">
-                    Pendant que vous vous concentrez sur votre métier, votre système travaille pour vous :
-                    suivi automatique, réponses instantanées et gestion optimisée.
-                </p>
-                <div class="pt-4">
-                    <a href="#diagnostic" class="bg-ada-blue text-white px-8 py-4 rounded-xl text-lg font-bold hover:scale-105 transition-transform shadow-2xl inline-block">
-                        🔵 Recevoir un diagnostic intelligent gratuit
-                    </a>
-                    <p class="text-sm text-gray-400 mt-3 ml-2 italic">
-                        Sans engagement. Découvrez comment structurer votre croissance.
-                    </p>
-                </div>
-            </div>
+      <nav class="hidden md:flex space-x-8 font-medium text-sm uppercase tracking-wide">
+        <a href="#" class="hover:text-blue-800 transition">Accueil</a>
+        <a href="#diagnostic" class="hover:text-blue-800 transition">Diagnostic</a>
+        <a href="#contact" class="hover:text-blue-800 transition">Contact</a>
+      </nav>
 
-            <!-- IMAGEN ACTUALIZADA -->
-            <div class="md:w-1/2 mt-12 md:mt-0 relative">
-                <div class="absolute -top-4 -left-4 w-24 h-24 border-t-4 border-l-4 border-gold rounded-tl-3xl"></div>
-                <img src="hero.jpg.PNG" alt="ADA Lausanne Office" class="rounded-2xl shadow-premium">
-            </div>
-
-        </div>
-    </section>
-
-    <!-- PROBLEMAS -->
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl font-bold mb-12">
-                Votre entreprise mérite un système qui travaille pendant que vous travaillez.
-            </h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-                <div class="p-8 border border-gray-100 rounded-2xl shadow-premium hover:border-blue-200 transition">
-                    <span class="text-blue-600 text-2xl">✓</span>
-                    <h3 class="font-bold mt-4">Suivi automatique des clients</h3>
-                    <p class="text-gray-600 mt-2">Ne laissez plus aucune opportunité sans réponse.</p>
-                </div>
-
-                <div class="p-8 border border-gray-100 rounded-2xl shadow-premium hover:border-blue-200 transition">
-                    <span class="text-blue-600 text-2xl">✓</span>
-                    <h3 class="font-bold mt-4">Organisation centralisée</h3>
-                    <p class="text-gray-600 mt-2">Réservations, rappels et communication en un seul système.</p>
-                </div>
-
-                <div class="p-8 border border-gray-100 rounded-2xl shadow-premium hover:border-blue-200 transition">
-                    <span class="text-blue-600 text-2xl">✓</span>
-                    <h3 class="font-bold mt-4">Réponses 24/7</h3>
-                    <p class="text-gray-600 mt-2">Même lorsque vous êtes occupé ou en dehors des heures de travail.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CHAT BOT -->
-    <div class="fixed bottom-6 right-6 z-50">
-        <div class="bg-white p-4 rounded-2xl shadow-2xl border border-gray-100 flex items-center space-x-3 cursor-pointer hover:scale-105 transition">
-            <div class="w-10 h-10 bg-ada-blue rounded-full flex items-center justify-center text-white">🤖</div>
-            <p class="text-sm font-medium">Bonjour 👋 Puis-je analyser votre situation ?</p>
-        </div>
+      <a href="#diagnostic" class="bg-ada-blue text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-700 transition shadow-lg">
+        Diagnostic Gratuit
+      </a>
     </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="pt-32 pb-20 px-6">
+    <div class="container mx-auto flex flex-col md:flex-row items-center">
+      
+      <!-- TEXTO -->
+      <div class="md:w-1/2 space-y-6">
+        <h1 class="text-4xl md:text-6xl font-bold leading-tight">
+          Gagnez du <span class="text-blue-800">temps</span>, plus de <span class="text-blue-800">revenus</span> et surtout de la <span class="text-blue-800">tranquillité</span>.
+        </h1>
+
+        <p class="text-xl text-gray-600 max-w-lg">
+          Pendant que vous vous concentrez sur votre métier,
+          votre système travaille pour vous : suivi automatique,
+          réponses instantanées et gestion optimisée.
+        </p>
+
+        <div class="pt-4">
+          <a href="#diagnostic"
+             class="inline-block bg-ada-blue text-white px-8 py-4 rounded-xl text-lg font-bold hover:scale-105 transition-transform shadow-2xl">
+            🔵 Recevoir un diagnostic intelligent gratuit
+          </a>
+
+          <p class="text-sm text-gray-400 mt-3 ml-2 italic">
+            Sans engagement. Découvrez comment structurer votre croissance.
+          </p>
+        </div>
+      </div>
+
+      <!-- IMAGEN HERO -->
+      <div class="md:w-1/2 mt-12 md:mt-0 relative">
+        <div class="absolute -top-4 -left-4 w-24 h-24 border-t-4 border-l-4 border-gold rounded-tl-3xl"></div>
+
+        <img src="hero.jpg.PNG"
+             alt="ADA Lausanne Office"
+             class="rounded-2xl shadow-premium w-full object-cover">
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BENEFICIOS -->
+  <section class="py-20 bg-white">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold mb-12">
+        Votre entreprise mérite un système qui travaille pendant que vous travaillez.
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+        <div class="p-8 border border-gray-100 rounded-2xl shadow-premium hover:border-blue-200 transition">
+          <span class="text-blue-600 text-2xl">✓</span>
+          <h3 class="font-bold mt-4">Suivi automatique des clients</h3>
+          <p class="text-gray-600 mt-2">Ne laissez plus aucune opportunité sans réponse.</p>
+        </div>
+
+        <div class="p-8 border border-gray-100 rounded-2xl shadow-premium hover:border-blue-200 transition">
+          <span class="text-blue-600 text-2xl">✓</span>
+          <h3 class="font-bold mt-4">Organisation centralisée</h3>
+          <p class="text-gray-600 mt-2">Réservations, rappels et communication en un seul système.</p>
+        </div>
+
+        <div class="p-8 border border-gray-100 rounded-2xl shadow-premium hover:border-blue-200 transition">
+          <span class="text-blue-600 text-2xl">✓</span>
+          <h3 class="font-bold mt-4">Réponses 24/7</h3>
+          <p class="text-gray-600 mt-2">Même lorsque vous êtes occupé.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHAT -->
+  <div class="fixed bottom-6 right-6 z-50">
+    <div class="bg-white p-4 rounded-2xl shadow-2xl border border-gray-100 flex items-center space-x-3 cursor-pointer hover:scale-105 transition">
+      <div class="w-10 h-10 bg-ada-blue rounded-full flex items-center justify-center text-white">🤖</div>
+      <p class="text-sm font-medium">Bonjour 👋 Puis-je analyser votre situation ?</p>
+    </div>
+  </div>
 
 </body>
 </html>
