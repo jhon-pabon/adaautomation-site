@@ -3,243 +3,98 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ADA | Temps, Sérénité & Liberté pour les professionnels</title>
+  <title>ADA | Liberté, Temps & Sérénité pour les Experts</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
 
   <style>
-    body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
     .gold-text { color: #d4af37; }
     .bg-ada-blue { background-color: #1e3a8a; }
-    .border-gold { border-color: #d4af37; }
-    .shadow-premium { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06); }
+    .border-gold { border-color: rgba(212, 175, 55, 0.4); }
+    .shadow-premium { box-shadow: 0 20px 50px rgba(0, 0, 0, 0.04); }
+    .gradient-text { background: linear-gradient(90deg, #1e3a8a, #d4af37); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
   </style>
 </head>
 
-<body class="bg-gray-50 text-slate-900">
+<body class="bg-[#fcfcfd] text-slate-900">
 
-  <!-- HEADER -->
-  <header class="fixed w-full bg-white/80 backdrop-blur-md z-50 border-b border-gray-100">
+  <header class="fixed w-full bg-white/70 backdrop-blur-xl z-50 border-b border-gray-100">
     <div class="container mx-auto px-6 py-4 flex justify-between items-center">
       <div class="flex items-center gap-3">
-        <!-- Sube tu logo SIN fondo como logo.png -->
-        <img src="logo.png" alt="ADA Logo" class="h-12">
-        <span class="hidden sm:inline font-bold tracking-wide">ADA</span>
+        <img src="logo.png" alt="ADA Logo" class="h-12 w-auto">
+        <span class="hidden sm:inline font-extrabold tracking-tighter text-xl">ADA</span>
       </div>
 
-      <nav class="hidden md:flex space-x-8 font-medium text-sm uppercase tracking-wide">
-        <a href="#top" class="hover:text-blue-800 transition">Accueil</a>
-        <a href="#methode" class="hover:text-blue-800 transition">Méthode</a>
-        <a href="#diagnostic" class="hover:text-blue-800 transition">Diagnostic</a>
-        <a href="#contact" class="hover:text-blue-800 transition">Contact</a>
+      <nav class="hidden md:flex space-x-10 font-semibold text-sm text-slate-600">
+        <a href="#top" class="hover:text-blue-900 transition">Accueil</a>
+        <a href="#methode" class="hover:text-blue-900 transition">Méthode</a>
+        <a href="#diagnostic" class="hover:text-blue-900 transition">Diagnostic</a>
       </nav>
 
-      <a href="#diagnostic" class="bg-ada-blue text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-700 transition shadow-lg">
+      <a href="#diagnostic" class="bg-ada-blue text-white px-7 py-2.5 rounded-full font-bold hover:bg-blue-800 transition shadow-xl shadow-blue-900/10">
         Diagnostic Gratuit
       </a>
     </div>
   </header>
 
-  <!-- HERO -->
-  <section id="top" class="pt-32 pb-20 px-6">
-    <div class="container mx-auto flex flex-col md:flex-row items-center">
-      <div class="md:w-1/2 space-y-6">
-        <p class="text-xs font-semibold uppercase tracking-widest text-slate-600">
-          Pour entreprises de services • Suisse romande
-        </p>
+  <section id="top" class="pt-40 pb-24 px-6">
+    <div class="container mx-auto flex flex-col md:flex-row items-center gap-16">
+      
+      <div class="md:w-1/2 space-y-8">
+        <span class="inline-block py-1 px-4 rounded-full bg-blue-50 text-blue-700 text-xs font-bold uppercase tracking-widest">
+          L'Intelligence au service de votre Liberté
+        </span>
 
-        <h1 class="text-4xl md:text-6xl font-bold leading-tight">
-          Et si votre entreprise <span class="text-blue-800">fonctionnait</span> même quand vous n’êtes pas disponible ?
+        <h1 class="text-5xl md:text-7xl font-extrabold leading-[1.1] tracking-tight">
+          Et si votre entreprise <span class="gradient-text">fonctionnait</span> même sans vous ?
         </h1>
 
-        <p class="text-xl text-gray-600 max-w-lg">
-          ADA met en place un système simple pour vous rendre <b>du temps</b>, apporter <b>de la sérénité</b>
-          et vous donner <b>plus de liberté</b> — pendant que vous vous concentrez sur votre métier.
+        <p class="text-xl text-slate-500 leading-relaxed max-w-lg">
+          ADA déploie des systèmes intelligents pour vous rendre votre <b>temps</b> y su <b>sérénité</b>. Concentrez-vous sur votre expertise, nous gérons le reste.
         </p>
 
-        <div class="pt-4">
+        <div class="pt-4 flex flex-col gap-4">
           <a href="#diagnostic"
-             class="inline-flex items-center bg-ada-blue text-white px-8 py-4 rounded-xl text-lg font-bold hover:scale-105 transition-transform shadow-2xl">
-            🔵 Recevoir un diagnostic intelligent gratuit
+             class="inline-flex justify-center items-center bg-ada-blue text-white px-10 py-5 rounded-2xl text-lg font-bold hover:scale-105 transition shadow-2xl shadow-blue-900/20">
+            Découvrir ma future liberté
           </a>
-
-          <p class="text-sm text-gray-400 mt-3 ml-2 italic">
-            Sans engagement. Découvrez en 2 minutes ce qui vous prend du temps — et comment le récupérer.
-          </p>
-        </div>
-
-        <!-- mini bénéfices (sin cambiar layout global) -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-          <div class="bg-white p-4 rounded-2xl border border-gray-100 shadow-premium">
-            <div class="font-semibold text-sm">⏱️ Temps</div>
-            <div class="text-xs text-slate-500">Moins de gestion manuelle</div>
-          </div>
-          <div class="bg-white p-4 rounded-2xl border border-gray-100 shadow-premium">
-            <div class="font-semibold text-sm">😌 Sérénité</div>
-            <div class="text-xs text-slate-500">Réponses même occupé</div>
-          </div>
-          <div class="bg-white p-4 rounded-2xl border border-gray-100 shadow-premium">
-            <div class="font-semibold text-sm">🧠 Liberté</div>
-            <div class="text-xs text-slate-500">Le système travaille pour vous</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="md:w-1/2 mt-12 md:mt-0 relative">
-        <div class="absolute -top-4 -left-4 w-24 h-24 border-t-4 border-l-4 border-gold rounded-tl-3xl"></div>
-        <img
-          src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1000"
-          alt="Bureau Professionnel"
-          class="rounded-2xl shadow-premium"
-        />
-        <div class="mt-4 bg-white p-4 rounded-2xl border border-gray-100 shadow-premium">
-          <p class="text-sm text-slate-700">
-            <b>Objectif :</b> une entreprise plus organisée, moins de stress, et plus de temps pour vous.
+          <p class="text-sm text-slate-400 italic flex items-center gap-2">
+            <span class="text-blue-600">✓</span> Sans engagement. Diagnostic en 2 minutes.
           </p>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- PROBLÈMES -->
-  <section class="py-20 bg-white">
-    <div class="container mx-auto px-6 text-center">
-      <h2 class="text-3xl font-bold mb-4">
-        Si cela vous parle, vous n’êtes pas seul.
-      </h2>
-      <p class="text-gray-600 max-w-2xl mx-auto mb-12">
-        Beaucoup de professionnels travaillent dur… mais se retrouvent prisonniers de la gestion quotidienne.
-        Nous mettons en place une structure simple pour vous libérer.
-      </p>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-        <div class="p-8 border border-gray-100 rounded-2xl shadow-premium hover:border-blue-200 transition">
-          <span class="text-blue-600 text-2xl">⏳</span>
-          <h3 class="font-bold mt-4">Trop de tâches manuelles</h3>
-          <p class="text-sm text-gray-500 mt-2">Messages, confirmations, suivi… tout repose sur vous.</p>
+      <div class="md:w-1/2 relative">
+        <div class="absolute -top-6 -left-6 w-32 h-32 border-t-4 border-l-4 border-gold rounded-tl-[2rem] opacity-50"></div>
+        
+        <div class="rounded-[2.5rem] overflow-hidden shadow-premium border border-gray-100">
+          <img
+            src="oficina_ada.png"
+            alt="Bureau ADA AI Solutions Lausanne"
+            class="w-full h-auto object-cover transform hover:scale-105 transition duration-700"
+          />
         </div>
 
-        <div class="p-8 border border-gray-100 rounded-2xl shadow-premium hover:border-blue-200 transition">
-          <span class="text-blue-600 text-2xl">📵</span>
-          <h3 class="font-bold mt-4">Réponses tardives</h3>
-          <p class="text-sm text-gray-500 mt-2">Quand vous êtes occupé, les demandes attendent… ou disparaissent.</p>
-        </div>
-
-        <div class="p-8 border border-gray-100 rounded-2xl shadow-premium hover:border-blue-200 transition">
-          <span class="text-blue-600 text-2xl">🔁</span>
-          <h3 class="font-bold mt-4">Tout dépend de vous</h3>
-          <p class="text-sm text-gray-500 mt-2">Sans système, votre activité ralentit dès que vous lâchez.</p>
+        <div class="absolute -bottom-6 -right-6 bg-white p-6 rounded-3xl shadow-2xl border border-gray-50 max-w-[200px]">
+          <p class="text-xs font-bold text-blue-900 uppercase tracking-widest mb-1">Localisation</p>
+          <p class="text-sm font-semibold text-slate-700">Expertise & Innovation <br>à Lausanne, Suisse.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- MÉTHODE (anchor listo aunque no tengas sección extra) -->
-  <section id="methode" class="py-14 bg-gray-50">
-    <div class="container mx-auto px-6">
-      <div class="bg-white border border-gray-100 rounded-3xl p-8 md:p-10 shadow-premium">
-        <h2 class="text-2xl md:text-3xl font-bold">La méthode ADA (simple et claire)</h2>
-        <p class="text-gray-600 mt-3">
-          Nous comprenons votre quotidien, puis nous mettons en place un système adapté pour vous libérer du maximum de gestion.
-        </p>
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-6 text-left">
-          <div class="p-5 rounded-2xl border border-gray-100 bg-gray-50">
-            <div class="text-xs uppercase tracking-widest text-gray-500 font-semibold">Étape 1</div>
-            <div class="font-bold mt-2">Analyse</div>
-            <div class="text-sm text-gray-600 mt-1">Votre activité, vos contraintes, vos priorités.</div>
-          </div>
-          <div class="p-5 rounded-2xl border border-gray-100 bg-gray-50">
-            <div class="text-xs uppercase tracking-widest text-gray-500 font-semibold">Étape 2</div>
-            <div class="font-bold mt-2">Diagnostic</div>
-            <div class="text-sm text-gray-600 mt-1">Où se perd votre temps (et votre énergie).</div>
-          </div>
-          <div class="p-5 rounded-2xl border border-gray-100 bg-gray-50">
-            <div class="text-xs uppercase tracking-widest text-gray-500 font-semibold">Étape 3</div>
-            <div class="font-bold mt-2">Mise en place</div>
-            <div class="text-sm text-gray-600 mt-1">Une structure simple qui tourne pour vous.</div>
-          </div>
-          <div class="p-5 rounded-2xl border border-gray-100 bg-gray-50">
-            <div class="text-xs uppercase tracking-widest text-gray-500 font-semibold">Étape 4</div>
-            <div class="font-bold mt-2">Optimisation</div>
-            <div class="text-sm text-gray-600 mt-1">Ajustements selon vos retours.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- DIAGNOSTIC -->
-  <section id="diagnostic" class="py-20 bg-white">
-    <div class="container mx-auto px-6">
-      <div class="bg-gray-50 border border-gray-100 rounded-3xl p-8 md:p-10 shadow-premium">
-        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <div>
-            <h2 class="text-3xl font-bold">Diagnostic intelligent (gratuit)</h2>
-            <p class="text-gray-600 mt-2 max-w-2xl">
-              Répondez à quelques questions. Vous recevez une recommandation claire pour gagner du temps et travailler plus sereinement.
-            </p>
-          </div>
-          <a href="#contact" class="bg-ada-blue text-white px-7 py-3 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg">
-            Lancer le diagnostic
-          </a>
-        </div>
-        <p class="text-xs text-gray-500 mt-6">
-          * Sans engagement. Notre objectif : vous donner une vision simple et utile.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact" class="py-20 bg-gray-50">
-    <div class="container mx-auto px-6 text-center">
-      <h2 class="text-3xl font-bold">Contact</h2>
-      <p class="text-gray-600 mt-3 max-w-2xl mx-auto">
-        Envoyez-nous 2 lignes sur votre situation. Nous vous répondons avec un plan simple.
-      </p>
-
-      <div class="mt-8 max-w-xl mx-auto bg-white border border-gray-100 rounded-3xl p-8 shadow-premium text-left">
-        <div class="grid gap-4">
-          <div>
-            <label class="text-sm font-semibold">Nom</label>
-            <input class="mt-1 w-full rounded-xl border border-gray-200 p-3" placeholder="Votre nom" />
-          </div>
-          <div>
-            <label class="text-sm font-semibold">Email</label>
-            <input class="mt-1 w-full rounded-xl border border-gray-200 p-3" placeholder="votre@email.com" />
-          </div>
-          <div>
-            <label class="text-sm font-semibold">Votre situation</label>
-            <textarea class="mt-1 w-full rounded-xl border border-gray-200 p-3" rows="4"
-              placeholder="Ex : Je suis débordé, je réponds tard et je veux une structure simple."></textarea>
-          </div>
-          <button type="button" class="bg-ada-blue text-white px-6 py-3 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg">
-            Envoyer
-          </button>
-          <p class="text-xs text-gray-500">
-            (Provisoire) — on connecte ce formulaire à n8n après validation.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CHAT WIDGET (mantengo tu bloque, pero con copy C) -->
-  <div class="fixed bottom-6 right-6 z-50">
+  <div class="fixed bottom-8 right-8 z-50">
     <button id="chatWidget"
-      class="bg-white p-4 rounded-2xl shadow-2xl border border-gray-100 flex items-center space-x-3 cursor-pointer hover:scale-105 transition"
-      aria-label="Ouvrir le diagnostic">
-      <div class="w-10 h-10 bg-ada-blue rounded-full flex items-center justify-center text-white">🤖</div>
-      <p class="text-sm font-medium">Bonjour 👋 Je vous aide à gagner du temps.</p>
+      class="bg-white p-5 rounded-[2rem] shadow-2xl border border-gray-100 flex items-center space-x-4 cursor-pointer hover:scale-105 transition duration-300">
+      <div class="w-12 h-12 bg-ada-blue rounded-full flex items-center justify-center text-xl shadow-lg shadow-blue-900/20 text-white">🤖</div>
+      <div class="text-left">
+        <p class="text-xs text-slate-400 font-bold uppercase tracking-tighter leading-none mb-1">ADA Assistant</p>
+        <p class="text-sm font-bold text-slate-800">Besoin de plus de temps ?</p>
+      </div>
     </button>
   </div>
-
-  <script>
-    document.getElementById('chatWidget')?.addEventListener('click', function () {
-      document.getElementById('diagnostic')?.scrollIntoView({ behavior: 'smooth' });
-    });
-  </script>
 
 </body>
 </html>
