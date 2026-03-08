@@ -371,7 +371,7 @@
 
   <div class="celest-launcher" id="celest-launcher">
     <button onclick="celestOpen()" class="bg-white p-4 rounded-2xl shadow-2xl border border-gray-100 flex items-center space-x-3 cursor-pointer hover:scale-105 transition">
-      <div class="w-10 h-10 bg-ada-blue rounded-full flex items-center justify-center text-white">🤖</div>
+      <div class="w-10 h-10 bg-ada-blue rounded-full flex items-center justify-center text-white">🎧</div>
       <p class="text-sm font-medium">Parler avec Celest</p>
     </button>
   </div>
@@ -391,7 +391,7 @@
 
   <!-- ===== CELEST LOGIC (2B) ===== -->
   <script>
-    const CELEST_WEBHOOK_URL = "PEGAR_AQUI_TU_WEBHOOK_N8N";
+    const CELEST_WEBHOOK_URL = "https://n8n-production-f9a1.up.railway.app/webhook/d8f51545-d5e1-46aa-92bd-7e214c15ea1e/chat";
 
     const CELEST_SESSION_ID =
       localStorage.getItem("celest_session_id") ||
@@ -419,7 +419,7 @@
       box.style.display = "block";
       box.setAttribute("aria-hidden", "false");
       if (msgs.childElementCount === 0) {
-        addMsg("Bonjour 👋 Je suis Celest. Quel est votre métier ?", "bot");
+        addMsg("Bonjour 👋\nJe suis Celest, l’assistant qui analyse comment les professionnels peuvent faire évoluer leur activité.\n\nPour commencer : dans quel domaine travaillez-vous ?", "bot");
       }
       setTimeout(() => input.focus(), 80);
     }
