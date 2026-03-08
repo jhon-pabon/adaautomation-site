@@ -15,15 +15,23 @@
     .border-gold { border-color: #d4af37; }
     .shadow-premium { box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
 
-    /* ===== CELEST WIDGET (2A + 2B styles) ===== */
+    /* ===== CELEST WIDGET ===== */
     .celest-launcher {
-      position: fixed; right: 18px; bottom: 18px; z-index: 9999;
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 9999;
     }
+
     .celest-box {
       display: none;
-      position: fixed; right: 18px; bottom: 86px;
-      width: 360px; max-width: 92vw;
-      height: 520px; max-height: 75vh;
+      position: fixed;
+      right: 18px;
+      bottom: 86px;
+      width: 360px;
+      max-width: 92vw;
+      height: 520px;
+      max-height: 75vh;
       z-index: 9999;
       background: #fff;
       border: 1px solid #eee;
@@ -31,70 +39,49 @@
       box-shadow: 0 20px 60px rgba(0,0,0,.18);
       overflow: hidden;
     }
+
     .celest-header {
-      background: #1e3a8a; color: #fff;
-      padding: 12px 14px;
-      display: flex; justify-content: space-between; align-items: center;
-      font-family: Inter, system-ui;
-      font-weight: 800;
-    }
-    .celest-close {
-      background: transparent; border: 0; color: #fff;
-      font-size: 18px; cursor: pointer;
-      width: 34px; height: 34px; border-radius: 10px;
-    }
-    .celest-messages {
-      padding: 12px;
-      height: calc(520px - 56px - 62px);
-      max-height: calc(75vh - 56px - 62px);
-      overflow: auto;
-      background: #f8fafc;
-    }
-    .celest-footer {
-      display: flex; gap: 8px;
-      padding: 10px;
-      border-top: 1px solid #eee;
-      background: #fff;
-    }
-    .celest-input {
-      flex: 1;
-      border: 1px solid #ccc;
-      border-radius: 12px;
-      padding: 10px 12px;
-      outline: none;
-      font-family: Inter, system-ui;
-    }
-    .celest-send {
       background: #1e3a8a;
       color: #fff;
-      border: 0;
-      border-radius: 12px;
-      padding: 10px 14px;
+      padding: 12px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: Inter, system-ui;
       font-weight: 800;
+    }
+
+    .celest-close {
+      background: transparent;
+      border: 0;
+      color: #fff;
+      font-size: 18px;
       cursor: pointer;
-      font-family: Inter, system-ui;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
     }
-    .celest-bubble-wrap { margin: 8px 0; display: flex; }
-    .celest-bubble {
-      display: inline-block;
-      padding: 10px 12px;
-      border-radius: 14px;
-      max-width: 80%;
-      font-family: Inter, system-ui;
-      font-size: 14px;
-      line-height: 1.35;
-      white-space: pre-wrap;
+
+    .celest-frame {
+      width: 100%;
+      height: calc(100% - 56px);
+      border: 0;
+      background: #fff;
+      display: block;
     }
-    .celest-user { justify-content: flex-end; }
-    .celest-user .celest-bubble { background: #1e3a8a; color: #fff; }
-    .celest-bot { justify-content: flex-start; }
-    .celest-bot .celest-bubble { background: #fff; border: 1px solid #ddd; color: #0f172a; }
-    .celest-typing { opacity: .7; font-style: italic; }
 
     @media (max-width: 420px){
-      .celest-box{ right: 12px; left: 12px; width: auto; }
-      .celest-launcher{ right: 12px; bottom: 12px; }
-      .celest-box{ bottom: 78px; }
+      .celest-box {
+        right: 12px;
+        left: 12px;
+        width: auto;
+        bottom: 78px;
+      }
+
+      .celest-launcher {
+        right: 12px;
+        bottom: 12px;
+      }
     }
   </style>
 </head>
@@ -251,7 +238,7 @@
     </div>
   </section>
 
-  <!-- DIAGNOSTIC CTA FINAL (point 3) -->
+  <!-- DIAGNOSTIC CTA FINAL -->
   <section id="diagnostic" class="py-18 bg-white">
     <div class="container mx-auto px-6">
       <div class="rounded-3xl bg-gray-50 border border-gray-100 shadow-premium p-10 md:p-14 text-center">
@@ -290,7 +277,7 @@
     </div>
   </section>
 
-  <!-- CONTACT (max info mais optionnel) -->
+  <!-- CONTACT -->
   <section id="contact" class="py-18 bg-gray-50">
     <div class="container mx-auto px-6">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
@@ -356,22 +343,24 @@
     </div>
   </section>
 
-  <!-- ===== CELEST BOT (2A) ===== -->
+  <!-- ===== CELEST BOT ===== -->
   <div class="celest-box" id="celest-box" aria-hidden="true">
     <div class="celest-header">
       <div>Celest • ADA</div>
       <button class="celest-close" onclick="celestClose()" aria-label="Fermer">✕</button>
     </div>
-    <div class="celest-messages" id="celest-messages"></div>
-    <div class="celest-footer">
-      <input class="celest-input" id="celest-input" placeholder="Écrivez ici…" />
-      <button class="celest-send" onclick="celestSend()">Envoyer</button>
-    </div>
+
+    <iframe
+      id="celest-frame"
+      class="celest-frame"
+      src="https://n8n-production-f9a1.up.railway.app/webhook/d8f51545-d5e1-46aa-92bd-7e214c15ea1e/chat"
+      title="Celest Chat">
+    </iframe>
   </div>
 
   <div class="celest-launcher" id="celest-launcher">
     <button onclick="celestOpen()" class="bg-white p-4 rounded-2xl shadow-2xl border border-gray-100 flex items-center space-x-3 cursor-pointer hover:scale-105 transition">
-      <div class="w-10 h-10 bg-ada-blue rounded-full flex items-center justify-center text-white">🎧</div>
+      <div class="w-10 h-10 bg-ada-blue rounded-full flex items-center justify-center text-white text-lg">🎧</div>
       <p class="text-sm font-medium">Parler avec Celest</p>
     </button>
   </div>
@@ -389,87 +378,19 @@
     </div>
   </footer>
 
-  <!-- ===== CELEST LOGIC (2B) ===== -->
+  <!-- ===== CELEST LOGIC ===== -->
   <script>
-    const CELEST_WEBHOOK_URL = "https://n8n-production-f9a1.up.railway.app/webhook/d8f51545-d5e1-46aa-92bd-7e214c15ea1e/chat";
-
-    const CELEST_SESSION_ID =
-      localStorage.getItem("celest_session_id") ||
-      (crypto && crypto.randomUUID ? crypto.randomUUID() : String(Date.now()));
-    localStorage.setItem("celest_session_id", CELEST_SESSION_ID);
-
     const box = document.getElementById("celest-box");
-    const msgs = document.getElementById("celest-messages");
-    const input = document.getElementById("celest-input");
-
-    function addMsg(text, who) {
-      const wrap = document.createElement("div");
-      wrap.className = "celest-bubble-wrap " + (who === "user" ? "celest-user" : "celest-bot");
-
-      const bubble = document.createElement("div");
-      bubble.className = "celest-bubble" + (text === "..." ? " celest-typing" : "");
-      bubble.textContent = text;
-
-      wrap.appendChild(bubble);
-      msgs.appendChild(wrap);
-      msgs.scrollTop = msgs.scrollHeight;
-    }
 
     function celestOpen() {
       box.style.display = "block";
       box.setAttribute("aria-hidden", "false");
-      if (msgs.childElementCount === 0) {
-        addMsg("Bonjour 👋\nJe suis Celest, l’assistant qui analyse comment les professionnels peuvent faire évoluer leur activité.\n\nPour commencer : dans quel domaine travaillez-vous ?", "bot");
-      }
-      setTimeout(() => input.focus(), 80);
     }
 
     function celestClose() {
       box.style.display = "none";
       box.setAttribute("aria-hidden", "true");
     }
-
-    async function celestSend() {
-      const text = input.value.trim();
-      if (!text) return;
-
-      addMsg(text, "user");
-      input.value = "";
-
-      addMsg("...", "bot");
-
-      try {
-        const res = await fetch(CELEST_WEBHOOK_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            session_id: CELEST_SESSION_ID,
-            message: text,
-            page_url: window.location.href,
-            language: navigator.language || "fr-CH"
-          }),
-        });
-
-        const data = await res.json();
-
-        // Remove last typing bubble
-        const last = msgs.lastElementChild;
-        if (last && last.textContent.trim() === "...") last.remove();
-
-        addMsg(data.reply || "Désolé, je n’ai pas compris. Pouvez-vous reformuler ?", "bot");
-      } catch (e) {
-        const last = msgs.lastElementChild;
-        if (last && last.textContent.trim() === "...") last.remove();
-        addMsg("Oups… problème technique. Réessayez dans un instant.", "bot");
-      }
-    }
-
-    input.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        celestSend();
-      }
-    });
   </script>
 
 </body>
