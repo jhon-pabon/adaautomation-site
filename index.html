@@ -6,7 +6,7 @@
   <title>ADA | Temps, Sérénité & Liberté (Lausanne)</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
@@ -15,86 +15,96 @@
     .border-gold { border-color: #d4af37; }
     .shadow-premium { box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
 
-    /* ===== CELEST WIDGET (2A + 2B styles) ===== */
-    .celest-launcher {
-      position: fixed; right: 18px; bottom: 18px; z-index: 9999;
+    .gradient-soft {
+      background: linear-gradient(135deg, #eff6ff 0%, #ffffff 55%, #f8fafc 100%);
     }
-    .celest-box {
-      display: none;
-      position: fixed; right: 18px; bottom: 86px;
-      width: 360px; max-width: 92vw;
-      height: 520px; max-height: 75vh;
-      z-index: 9999;
-      background: #fff;
-      border: 1px solid #eee;
-      border-radius: 18px;
-      box-shadow: 0 20px 60px rgba(0,0,0,.18);
-      overflow: hidden;
+
+    .section-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .5rem 1rem;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #1e3a8a;
+      font-weight: 700;
+      font-size: .8rem;
+      letter-spacing: .04em;
+      text-transform: uppercase;
     }
-    .celest-header {
-      background: #1e3a8a; color: #fff;
-      padding: 12px 14px;
-      display: flex; justify-content: space-between; align-items: center;
-      font-family: Inter, system-ui;
-      font-weight: 800;
-    }
-    .celest-close {
-      background: transparent; border: 0; color: #fff;
-      font-size: 18px; cursor: pointer;
-      width: 34px; height: 34px; border-radius: 10px;
-    }
-    .celest-messages {
-      padding: 12px;
-      height: calc(520px - 56px - 62px);
-      max-height: calc(75vh - 56px - 62px);
-      overflow: auto;
-      background: #f8fafc;
-    }
-    .celest-footer {
-      display: flex; gap: 8px;
-      padding: 10px;
-      border-top: 1px solid #eee;
-      background: #fff;
-    }
-    .celest-input {
-      flex: 1;
-      border: 1px solid #ccc;
-      border-radius: 12px;
-      padding: 10px 12px;
-      outline: none;
-      font-family: Inter, system-ui;
-    }
-    .celest-send {
+
+    .demo-badge {
       background: #1e3a8a;
       color: #fff;
-      border: 0;
-      border-radius: 12px;
-      padding: 10px 14px;
-      font-weight: 800;
-      cursor: pointer;
-      font-family: Inter, system-ui;
-    }
-    .celest-bubble-wrap { margin: 8px 0; display: flex; }
-    .celest-bubble {
+      border-radius: 999px;
+      padding: .45rem .9rem;
+      font-size: .8rem;
+      font-weight: 700;
       display: inline-block;
-      padding: 10px 12px;
-      border-radius: 14px;
-      max-width: 80%;
-      font-family: Inter, system-ui;
-      font-size: 14px;
-      line-height: 1.35;
-      white-space: pre-wrap;
     }
-    .celest-user { justify-content: flex-end; }
-    .celest-user .celest-bubble { background: #1e3a8a; color: #fff; }
-    .celest-bot { justify-content: flex-start; }
-    .celest-bot .celest-bubble { background: #fff; border: 1px solid #ddd; color: #0f172a; }
-    .celest-typing { opacity: .7; font-style: italic; }
 
-    @media (max-width: 420px){
-      .celest-box{ right: 12px; left: 12px; width: auto; }
-      .celest-launcher{ right: 12px; bottom: 12px; }
-      .celest-box{ bottom: 78px; }
+    .feature-card:hover,
+    .pain-card:hover,
+    .step-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .feature-card,
+    .pain-card,
+    .step-card {
+      transition: all .2s ease;
+    }
+
+    /* Typebot bubble position customization */
+    typebot-bubble::part(button) {
+      bottom: 84px;
+      right: 18px;
+      box-shadow: 0 16px 40px rgba(0,0,0,.18);
+    }
+
+    typebot-bubble::part(bot) {
+      bottom: 160px;
+      right: 18px;
+      height: min(720px, calc(100% - 180px));
+      max-width: 420px;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    typebot-bubble::part(preview-message) {
+      bottom: 160px;
+      right: 18px;
+    }
+
+    .ada-chat-launcher {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 9998;
+    }
+
+    @media (max-width: 768px) {
+      typebot-bubble::part(button) {
+        bottom: 76px;
+        right: 12px;
+      }
+
+      typebot-bubble::part(bot) {
+        right: 12px;
+        left: 12px;
+        max-width: none;
+        width: auto;
+        height: min(75vh, 680px);
+      }
+
+      typebot-bubble::part(preview-message) {
+        right: 12px;
+      }
+
+      .ada-chat-launcher {
+        right: 12px;
+        bottom: 12px;
+      }
     }
   </style>
 </head>
@@ -115,12 +125,13 @@
 
       <nav class="hidden md:flex space-x-8 font-medium text-sm uppercase tracking-wide">
         <a href="#top" class="hover:text-blue-800 transition">Accueil</a>
-        <a href="#methode" class="hover:text-blue-800 transition">Méthode</a>
+        <a href="#benefices" class="hover:text-blue-800 transition">Bénéfices</a>
+        <a href="#fonctionnement" class="hover:text-blue-800 transition">Fonctionnement</a>
         <a href="#diagnostic" class="hover:text-blue-800 transition">Diagnostic</a>
         <a href="#contact" class="hover:text-blue-800 transition">Contact</a>
       </nav>
 
-      <a href="#" onclick="celestOpen(); return false;" class="bg-ada-blue text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-700 transition shadow-lg">
+      <a href="#" onclick="openAdaBot(); return false;" class="bg-ada-blue text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-700 transition shadow-lg">
         Diagnostic Gratuit
       </a>
 
@@ -128,26 +139,24 @@
   </header>
 
   <!-- HERO -->
-  <section id="top" class="pt-32 pb-18 px-6">
+  <section id="top" class="pt-32 pb-20 px-6 gradient-soft">
     <div class="container mx-auto flex flex-col md:flex-row items-center gap-10">
 
       <div class="md:w-1/2 space-y-6">
-
-        <p class="text-xs font-semibold uppercase tracking-widest text-slate-600">
-          Pour indépendants & entreprises de services • Suisse romande
-        </p>
+        <span class="section-pill">ADA • Automatisation pour entreprises de services</span>
 
         <h1 class="text-4xl md:text-6xl font-bold leading-tight">
-          Et si votre entreprise <span class="text-blue-800">tournait</span>
-          même quand vous êtes <span class="text-blue-800">occupé</span> ?
+          Et si votre entreprise <span class="text-blue-800">répondait</span>,
+          <span class="text-blue-800">organisait</span> et <span class="text-blue-800">relançait</span>
+          même quand vous êtes occupé ?
         </h1>
 
         <p class="text-xl text-gray-600 max-w-xl">
-          ADA met en place un système simple qui <b>répond</b>, <b>organise</b> et <b>assure le suivi</b> à votre place —
-          pour que vous gardiez <b>du temps</b>, de <b>l’argent</b> et votre <b>sérénité</b>.
+          ADA met en place un système simple qui vous aide à <b>répondre plus vite</b>,
+          <b>capturer plus de demandes</b> et <b>réduire la gestion manuelle</b> —
+          pour que vous retrouviez du temps, de l’ordre et plus de sérénité.
         </p>
 
-        <!-- Preuve sociale Suisse romande -->
         <div class="flex flex-wrap gap-3 pt-1">
           <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-100 shadow-sm text-sm text-gray-700">
             ✅ Présence à Lausanne
@@ -156,19 +165,22 @@
             ✅ Pour professions de service
           </span>
           <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-100 shadow-sm text-sm text-gray-700">
-            ✅ Mise en place rapide
+            ✅ Diagnostic simple et rapide
           </span>
         </div>
 
-        <div class="pt-4">
-          <a href="#" onclick="celestOpen(); return false;" class="inline-block bg-ada-blue text-white px-8 py-4 rounded-xl text-lg font-bold hover:scale-105 transition-transform shadow-2xl">
+        <div class="pt-4 flex flex-col sm:flex-row gap-4">
+          <a href="#" onclick="openAdaBot(); return false;" class="inline-block bg-ada-blue text-white px-8 py-4 rounded-xl text-lg font-bold hover:scale-105 transition-transform shadow-2xl text-center">
             🔵 Recevoir mon diagnostic gratuit
           </a>
-          <p class="text-sm text-gray-400 mt-3 ml-2 italic">
-            Sans engagement • 2 minutes • Recommandation claire.
-          </p>
+          <a href="#fonctionnement" class="inline-block bg-white text-slate-900 px-8 py-4 rounded-xl text-lg font-bold border border-gray-200 hover:border-blue-300 transition text-center">
+            Voir comment ça fonctionne
+          </a>
         </div>
 
+        <p class="text-sm text-gray-400 ml-1 italic">
+          Sans engagement • 2 minutes • Recommandation claire.
+        </p>
       </div>
 
       <div class="md:w-1/2 mt-6 md:mt-0 relative">
@@ -179,126 +191,249 @@
     </div>
   </section>
 
-  <!-- DOULEURS (humain, romand) -->
+  <!-- DOULEURS -->
   <section class="py-16 bg-white">
     <div class="container mx-auto px-6 text-center">
       <h2 class="text-3xl font-bold mb-4">Si ça vous parle… vous n’êtes pas seul.</h2>
       <p class="text-gray-600 max-w-2xl mx-auto mb-10">
-        Beaucoup de pros bossent dur, mais finissent coincés dans la gestion. ADA vous aide à remettre de l’ordre — sans usine à gaz.
+        Beaucoup de professionnels travaillent dur, mais restent bloqués dans la gestion quotidienne. ADA vous aide à remettre de l’ordre — sans complexité inutile.
       </p>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-        <div class="p-8 border border-gray-100 rounded-2xl shadow-premium hover:border-blue-200 transition">
+        <div class="pain-card p-8 border border-gray-100 rounded-2xl shadow-premium hover:border-blue-200 bg-white">
           <span class="text-blue-600 text-2xl">⏳</span>
           <h3 class="font-bold mt-4">Trop de gestion manuelle</h3>
-          <p class="text-gray-600 mt-2">Messages, confirmations, relances… ça vous bouffe la semaine.</p>
+          <p class="text-gray-600 mt-2">Messages, confirmations, relances… cela prend une place énorme dans vos journées.</p>
         </div>
 
-        <div class="p-8 border border-gray-100 rounded-2xl shadow-premium hover:border-blue-200 transition">
+        <div class="pain-card p-8 border border-gray-100 rounded-2xl shadow-premium hover:border-blue-200 bg-white">
           <span class="text-blue-600 text-2xl">📵</span>
-          <h3 class="font-bold mt-4">Vous répondez trop tard</h3>
-          <p class="text-gray-600 mt-2">Quand vous êtes en prestation, la demande attend — ou part ailleurs.</p>
+          <h3 class="font-bold mt-4">Des réponses trop tardives</h3>
+          <p class="text-gray-600 mt-2">Quand vous êtes en prestation, la demande attend — et parfois le client part ailleurs.</p>
         </div>
 
-        <div class="p-8 border border-gray-100 rounded-2xl shadow-premium hover:border-blue-200 transition">
+        <div class="pain-card p-8 border border-gray-100 rounded-2xl shadow-premium hover:border-blue-200 bg-white">
           <span class="text-blue-600 text-2xl">🔁</span>
-          <h3 class="font-bold mt-4">Tout dépend de vous</h3>
-          <p class="text-gray-600 mt-2">Sans système, dès que vous relâchez… tout ralentit.</p>
+          <h3 class="font-bold mt-4">Tout repose sur vous</h3>
+          <p class="text-gray-600 mt-2">Sans système, chaque demande dépend de votre présence, de votre temps et de votre énergie.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- METHODE -->
-  <section id="methode" class="py-16 bg-gray-50">
+  <!-- BENEFICES -->
+  <section id="benefices" class="py-16 bg-gray-50">
     <div class="container mx-auto px-6">
-      <div class="bg-white border border-gray-100 rounded-3xl p-8 md:p-10 shadow-premium">
-        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <div>
-            <h2 class="text-3xl font-bold">La méthode ADA (simple, claire, efficace)</h2>
-            <p class="text-gray-600 mt-3 max-w-2xl">
-              On part de votre réalité, pas d’un modèle “standard”. L’objectif : vous libérer du maximum de gestion, sans complexité inutile.
-            </p>
-          </div>
-          <a href="#" onclick="celestOpen(); return false;" class="bg-ada-blue text-white px-7 py-3 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg">
-            Voir mon diagnostic
-          </a>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8 text-left">
-          <div class="p-5 rounded-2xl border border-gray-100 bg-gray-50">
-            <div class="text-xs uppercase tracking-widest text-gray-500 font-semibold">Étape 1</div>
-            <div class="font-bold mt-2">Analyse</div>
-            <div class="text-sm text-gray-600 mt-1">On comprend votre quotidien.</div>
-          </div>
-          <div class="p-5 rounded-2xl border border-gray-100 bg-gray-50">
-            <div class="text-xs uppercase tracking-widest text-gray-500 font-semibold">Étape 2</div>
-            <div class="font-bold mt-2">Diagnostic</div>
-            <div class="text-sm text-gray-600 mt-1">Où se perd votre temps.</div>
-          </div>
-          <div class="p-5 rounded-2xl border border-gray-100 bg-gray-50">
-            <div class="text-xs uppercase tracking-widest text-gray-500 font-semibold">Étape 3</div>
-            <div class="font-bold mt-2">Mise en place</div>
-            <div class="text-sm text-gray-600 mt-1">Un système léger qui tourne.</div>
-          </div>
-          <div class="p-5 rounded-2xl border border-gray-100 bg-gray-50">
-            <div class="text-xs uppercase tracking-widest text-gray-500 font-semibold">Étape 4</div>
-            <div class="font-bold mt-2">Optimisation</div>
-            <div class="text-sm text-gray-600 mt-1">On affine selon vos retours.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- DIAGNOSTIC CTA FINAL (point 3) -->
-  <section id="diagnostic" class="py-18 bg-white">
-    <div class="container mx-auto px-6">
-      <div class="rounded-3xl bg-gray-50 border border-gray-100 shadow-premium p-10 md:p-14 text-center">
-        <h2 class="text-3xl md:text-4xl font-bold">
-          En 2 minutes, découvrez comment récupérer du temps.
-        </h2>
-
-        <p class="text-gray-600 text-lg mt-4 max-w-2xl mx-auto">
-          Vous recevez une recommandation claire : quoi mettre en place en premier pour gagner du temps, réduire le stress et mieux gérer vos demandes.
+      <div class="text-center mb-10">
+        <span class="section-pill">Ce que vous gagnez</span>
+        <h2 class="text-3xl md:text-4xl font-bold mt-4">Un système pensé pour vous faire gagner du temps — et ne plus laisser passer les opportunités.</h2>
+        <p class="text-gray-600 max-w-3xl mx-auto mt-4">
+          L’objectif n’est pas d’ajouter un outil de plus. L’objectif est de mettre en place un système simple qui répond, organise et prépare vos demandes clients automatiquement.
         </p>
+      </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 text-left">
-          <div class="p-5 rounded-2xl bg-white border border-gray-100">
-            <div class="font-semibold">✅ Où vous perdez du temps</div>
-            <div class="text-sm text-gray-600 mt-1">les tâches qui se répètent chaque semaine</div>
-          </div>
-          <div class="p-5 rounded-2xl bg-white border border-gray-100">
-            <div class="font-semibold">✅ Ce qui bloque vos demandes</div>
-            <div class="text-sm text-gray-600 mt-1">réponses tardives, suivi irrégulier, etc.</div>
-          </div>
-          <div class="p-5 rounded-2xl bg-white border border-gray-100">
-            <div class="font-semibold">✅ Le 1er levier à activer</div>
-            <div class="text-sm text-gray-600 mt-1">simple, concret, actionnable</div>
-          </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="feature-card bg-white rounded-3xl border border-gray-100 shadow-premium p-8">
+          <div class="text-3xl">⚡</div>
+          <h3 class="font-bold text-xl mt-4">Répondre plus vite</h3>
+          <p class="text-gray-600 mt-3">
+            Vos prospects obtiennent une première réponse immédiatement, même quand vous êtes occupé.
+          </p>
         </div>
 
-        <div class="mt-9">
-          <a href="#" onclick="celestOpen(); return false;" class="inline-block bg-ada-blue text-white px-10 py-4 rounded-xl text-lg font-bold hover:scale-105 transition-transform shadow-2xl">
-            ✅ Commencer mon diagnostic gratuit
-          </a>
-          <p class="text-sm text-gray-400 mt-3 italic">
-            Vous pouvez laisser autant d’infos que vous voulez — le minimum suffit.
+        <div class="feature-card bg-white rounded-3xl border border-gray-100 shadow-premium p-8">
+          <div class="text-3xl">🎯</div>
+          <h3 class="font-bold text-xl mt-4">Capturer plus de demandes</h3>
+          <p class="text-gray-600 mt-3">
+            Chaque visiteur peut être guidé, qualifié et transformé en contact concret.
+          </p>
+        </div>
+
+        <div class="feature-card bg-white rounded-3xl border border-gray-100 shadow-premium p-8">
+          <div class="text-3xl">🗂️</div>
+          <h3 class="font-bold text-xl mt-4">Mieux organiser vos leads</h3>
+          <p class="text-gray-600 mt-3">
+            Les demandes arrivent de façon plus claire, plus propre, et avec les bonnes informations dès le départ.
           </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT (max info mais optionnel) -->
-  <section id="contact" class="py-18 bg-gray-50">
+  <!-- COMMENT CA FONCTIONNE -->
+  <section id="fonctionnement" class="py-16 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-10">
+        <span class="section-pill">Comment ça fonctionne</span>
+        <h2 class="text-3xl md:text-4xl font-bold mt-4">Un parcours simple, clair et efficace pour transformer plus de visiteurs en contacts qualifiés.</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
+        <div class="step-card p-6 rounded-3xl border border-gray-100 bg-gray-50 shadow-premium">
+          <div class="text-xs uppercase tracking-widest text-gray-500 font-semibold">Étape 1</div>
+          <div class="font-bold mt-2 text-lg">Le visiteur démarre</div>
+          <div class="text-sm text-gray-600 mt-2">Il arrive sur votre site et lance le diagnostic en quelques secondes.</div>
+        </div>
+
+        <div class="step-card p-6 rounded-3xl border border-gray-100 bg-gray-50 shadow-premium">
+          <div class="text-xs uppercase tracking-widest text-gray-500 font-semibold">Étape 2</div>
+          <div class="font-bold mt-2 text-lg">Le système pose les bonnes questions</div>
+          <div class="text-sm text-gray-600 mt-2">Il comprend le besoin du client et identifie rapidement sa situation.</div>
+        </div>
+
+        <div class="step-card p-6 rounded-3xl border border-gray-100 bg-gray-50 shadow-premium">
+          <div class="text-xs uppercase tracking-widest text-gray-500 font-semibold">Étape 3</div>
+          <div class="font-bold mt-2 text-lg">Les coordonnées sont capturées</div>
+          <div class="text-sm text-gray-600 mt-2">Le prospect laisse son WhatsApp ou son email pour recevoir la suite.</div>
+        </div>
+
+        <div class="step-card p-6 rounded-3xl border border-gray-100 bg-gray-50 shadow-premium">
+          <div class="text-xs uppercase tracking-widest text-gray-500 font-semibold">Étape 4</div>
+          <div class="font-bold mt-2 text-lg">Vous avancez plus vite</div>
+          <div class="text-sm text-gray-600 mt-2">Vous recevez un lead mieux préparé, plus simple à traiter et plus facile à convertir.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREUVE / DEMO -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+        <div>
+          <span class="demo-badge">Exemple concret</span>
+          <h2 class="text-3xl md:text-4xl font-bold mt-4">Voilà à quoi peut ressembler votre système ADA.</h2>
+          <p class="text-gray-600 text-lg mt-4">
+            Le visiteur est guidé automatiquement, ses besoins sont clarifiés, ses coordonnées sont récupérées et vous recevez une opportunité mieux qualifiée.
+          </p>
+
+          <div class="mt-6 space-y-3 text-gray-700">
+            <div>✅ Accueil immédiat du prospect</div>
+            <div>✅ Questions simples pour comprendre le besoin</div>
+            <div>✅ Capture de WhatsApp ou email</div>
+            <div>✅ Plus d’opportunités, moins de gestion manuelle</div>
+          </div>
+
+          <div class="mt-8">
+            <a href="#" onclick="openAdaBot(); return false;" class="inline-block bg-ada-blue text-white px-8 py-4 rounded-xl text-lg font-bold hover:scale-105 transition-transform shadow-2xl">
+              Voir le diagnostic interactif
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-white border border-gray-100 rounded-3xl shadow-premium p-4">
+          <img src="demo-celest-esthetique.png" alt="Exemple de démonstration ADA" class="rounded-2xl w-full object-cover" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- METHODE -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="bg-gray-50 border border-gray-100 rounded-3xl p-8 md:p-10 shadow-premium">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div>
+            <h2 class="text-3xl font-bold">La méthode ADA</h2>
+            <p class="text-gray-600 mt-3 max-w-2xl">
+              On part de votre réalité, pas d’un modèle standard. L’objectif est simple : alléger la gestion, mieux traiter les demandes et vous faire gagner du temps.
+            </p>
+          </div>
+          <a href="#" onclick="openAdaBot(); return false;" class="bg-ada-blue text-white px-7 py-3 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg">
+            Lancer mon diagnostic
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8 text-left">
+          <div class="p-5 rounded-2xl border border-gray-100 bg-white">
+            <div class="text-xs uppercase tracking-widest text-gray-500 font-semibold">Étape 1</div>
+            <div class="font-bold mt-2">Analyse</div>
+            <div class="text-sm text-gray-600 mt-1">On comprend comment vous travaillez aujourd’hui.</div>
+          </div>
+          <div class="p-5 rounded-2xl border border-gray-100 bg-white">
+            <div class="text-xs uppercase tracking-widest text-gray-500 font-semibold">Étape 2</div>
+            <div class="font-bold mt-2">Diagnostic</div>
+            <div class="text-sm text-gray-600 mt-1">On identifie où se perdent le temps et les opportunités.</div>
+          </div>
+          <div class="p-5 rounded-2xl border border-gray-100 bg-white">
+            <div class="text-xs uppercase tracking-widest text-gray-500 font-semibold">Étape 3</div>
+            <div class="font-bold mt-2">Mise en place</div>
+            <div class="text-sm text-gray-600 mt-1">On installe un système simple et adapté à votre activité.</div>
+          </div>
+          <div class="p-5 rounded-2xl border border-gray-100 bg-white">
+            <div class="text-xs uppercase tracking-widest text-gray-500 font-semibold">Étape 4</div>
+            <div class="font-bold mt-2">Optimisation</div>
+            <div class="text-sm text-gray-600 mt-1">On affine selon les résultats et les retours terrain.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIAGNOSTIC -->
+  <section id="diagnostic" class="py-18 bg-gray-50">
+    <div class="container mx-auto px-6">
+      <div class="rounded-3xl bg-white border border-gray-100 shadow-premium p-10 md:p-14 text-center">
+        <span class="section-pill">Diagnostic interactif</span>
+
+        <h2 class="text-3xl md:text-4xl font-bold mt-4">
+          En 2 minutes, découvrez où vous pouvez récupérer du temps.
+        </h2>
+
+        <p class="text-gray-600 text-lg mt-4 max-w-2xl mx-auto">
+          Vous recevez une recommandation claire : quoi améliorer en premier pour répondre plus vite, mieux organiser vos demandes et ne plus laisser passer d’opportunités.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 text-left">
+          <div class="p-5 rounded-2xl bg-gray-50 border border-gray-100">
+            <div class="font-semibold">✅ Où vous perdez du temps</div>
+            <div class="text-sm text-gray-600 mt-1">Les tâches répétitives qui reviennent chaque semaine.</div>
+          </div>
+          <div class="p-5 rounded-2xl bg-gray-50 border border-gray-100">
+            <div class="font-semibold">✅ Ce qui freine vos demandes</div>
+            <div class="text-sm text-gray-600 mt-1">Réponses tardives, suivi irrégulier, gestion dispersée.</div>
+          </div>
+          <div class="p-5 rounded-2xl bg-gray-50 border border-gray-100">
+            <div class="font-semibold">✅ Le levier le plus simple à activer</div>
+            <div class="text-sm text-gray-600 mt-1">Une première amélioration claire, concrète et réaliste.</div>
+          </div>
+        </div>
+
+        <div class="mt-9">
+          <a href="#" onclick="openAdaBot(); return false;" class="inline-block bg-ada-blue text-white px-10 py-4 rounded-xl text-lg font-bold hover:scale-105 transition-transform shadow-2xl">
+            ✅ Commencer mon diagnostic gratuit
+          </a>
+          <p class="text-sm text-gray-400 mt-3 italic">
+            Vous pouvez laisser autant d’infos que vous voulez — le minimum suffit.
+          </p>
+        </div>
+
+        <!-- Standard Typebot optional area -->
+        <div class="mt-12 text-left">
+          <div class="bg-gray-50 border border-dashed border-gray-300 rounded-3xl p-6">
+            <div class="font-bold text-lg">Zone prête pour un bot intégré dans la page</div>
+            <p class="text-sm text-gray-600 mt-2">
+              Si vous préférez afficher le bot directement dans cette section plutôt qu’en fenêtre flottante, laissez ce bloc et activez le code Typebot standard plus bas.
+            </p>
+
+            <div id="typebot-embed-section" class="mt-5 hidden">
+              <typebot-standard style="width: 100%; height: 620px;"></typebot-standard>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="py-18 bg-white">
     <div class="container mx-auto px-6">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
 
         <div>
           <h2 class="text-3xl font-bold">Contact</h2>
           <p class="text-gray-600 mt-3">
-            Laissez-nous votre situation. Plus vous donnez d’infos, plus la recommandation sera précise — mais tout reste <b>optionnel</b>.
+            Laissez-nous votre situation. Plus vous donnez d’informations, plus la recommandation sera précise — mais tout reste <b>optionnel</b>.
           </p>
 
           <div class="mt-6 space-y-3 text-sm text-gray-600">
@@ -307,39 +442,39 @@
           </div>
         </div>
 
-        <form class="bg-white border border-gray-100 rounded-3xl p-8 shadow-premium">
+        <form class="bg-gray-50 border border-gray-100 rounded-3xl p-8 shadow-premium">
           <div class="grid grid-cols-1 gap-4">
 
             <div>
               <label class="text-sm font-semibold">Votre email (obligatoire)</label>
-              <input required class="mt-1 w-full rounded-xl border border-gray-200 p-3" placeholder="vous@email.com" />
+              <input required class="mt-1 w-full rounded-xl border border-gray-200 p-3 bg-white" placeholder="vous@email.com" />
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label class="text-sm font-semibold">Nom (optionnel)</label>
-                <input class="mt-1 w-full rounded-xl border border-gray-200 p-3" placeholder="Votre nom" />
+                <input class="mt-1 w-full rounded-xl border border-gray-200 p-3 bg-white" placeholder="Votre nom" />
               </div>
               <div>
                 <label class="text-sm font-semibold">Téléphone / WhatsApp (optionnel)</label>
-                <input class="mt-1 w-full rounded-xl border border-gray-200 p-3" placeholder="+41 ..." />
+                <input class="mt-1 w-full rounded-xl border border-gray-200 p-3 bg-white" placeholder="+41 ..." />
               </div>
             </div>
 
             <div>
               <label class="text-sm font-semibold">Activité (optionnel)</label>
-              <input class="mt-1 w-full rounded-xl border border-gray-200 p-3" placeholder="Ex : esthéticienne, coach, salon, etc." />
+              <input class="mt-1 w-full rounded-xl border border-gray-200 p-3 bg-white" placeholder="Ex : esthéticienne, coach, cabinet, salon..." />
             </div>
 
             <div>
               <label class="text-sm font-semibold">Ville (optionnel)</label>
-              <input class="mt-1 w-full rounded-xl border border-gray-200 p-3" placeholder="Lausanne, Vevey, Montreux..." />
+              <input class="mt-1 w-full rounded-xl border border-gray-200 p-3 bg-white" placeholder="Lausanne, Vevey, Montreux..." />
             </div>
 
             <div>
               <label class="text-sm font-semibold">Votre situation (optionnel mais conseillé)</label>
-              <textarea class="mt-1 w-full rounded-xl border border-gray-200 p-3" rows="4"
-                placeholder="Ex : Je reçois des demandes mais je réponds tard. Je veux une organisation simple et gagner du temps."></textarea>
+              <textarea class="mt-1 w-full rounded-xl border border-gray-200 p-3 bg-white" rows="4"
+                placeholder="Ex : Je reçois beaucoup de demandes, mais je réponds tard. Je veux une organisation plus simple et gagner du temps."></textarea>
             </div>
 
             <button type="button" class="bg-ada-blue text-white px-6 py-3 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg">
@@ -347,7 +482,7 @@
             </button>
 
             <p class="text-xs text-slate-500">
-              (Aujourd’hui) Ce formulaire est un placeholder — demain on le connecte à n8n.
+              Formulaire prêt à être connecté à votre système plus tard.
             </p>
           </div>
         </form>
@@ -356,22 +491,10 @@
     </div>
   </section>
 
-  <!-- ===== CELEST BOT (2A) ===== -->
-  <div class="celest-box" id="celest-box" aria-hidden="true">
-    <div class="celest-header">
-      <div>Celest • ADA</div>
-      <button class="celest-close" onclick="celestClose()" aria-label="Fermer">✕</button>
-    </div>
-    <div class="celest-messages" id="celest-messages"></div>
-    <div class="celest-footer">
-      <input class="celest-input" id="celest-input" placeholder="Écrivez ici…" />
-      <button class="celest-send" onclick="celestSend()">Envoyer</button>
-    </div>
-  </div>
-
-  <div class="celest-launcher" id="celest-launcher">
-    <button onclick="celestOpen()" class="bg-white p-4 rounded-2xl shadow-2xl border border-gray-100 flex items-center space-x-3 cursor-pointer hover:scale-105 transition">
-      <img src="operadora.jpg.PNG" class="w-10 h-10 rounded-full object-cover">
+  <!-- CUSTOM ADA LAUNCHER -->
+  <div class="ada-chat-launcher">
+    <button onclick="openAdaBot(); return false;" class="bg-white p-4 rounded-2xl shadow-2xl border border-gray-100 flex items-center space-x-3 cursor-pointer hover:scale-105 transition">
+      <img src="operadora.jpg.PNG" alt="Celest ADA" class="w-10 h-10 rounded-full object-cover">
       <p class="text-sm font-medium">Parler avec Celest</p>
     </button>
   </div>
@@ -389,89 +512,72 @@
         © ADA 2026 — Tous droits réservés<br>
         Fondé par <span class="font-semibold">Jhon Edward Pabón</span>
       </div>
+    </div>
   </footer>
 
-  <!-- ===== CELEST LOGIC (2B) ===== -->
-  <script>
-    const CELEST_WEBHOOK_URL = "https://n8n-production-f9a1.up.railway.app/webhook/celeste-chat";
+  <!-- TYPEBOT PREP -->
+  <script type="module">
+    import Typebot from "https://cdn.jsdelivr.net/npm/@typebot.io/js@0/dist/web.js";
 
-    const CELEST_SESSION_ID =
-      localStorage.getItem("celest_session_id") ||
-      (crypto && crypto.randomUUID ? crypto.randomUUID() : String(Date.now()));
-    localStorage.setItem("celest_session_id", CELEST_SESSION_ID);
+    /*
+      1) Remplacez YOUR_TYPEBOT_ID_HERE par l’identifiant public de votre bot
+      2) Si vous voulez un bot flottant + vos propres boutons ADA :
+         - laissez initBubble
+         - gardez theme.button.isHidden: true
+         - utilisez openAdaBot() sur vos CTA
+      3) Si vous voulez afficher le bot directement dans la section diagnostic :
+         - passez ENABLE_STANDARD_EMBED à true
+    */
 
-    const box = document.getElementById("celest-box");
-    const msgs = document.getElementById("celest-messages");
-    const input = document.getElementById("celest-input");
+    const TYPEBOT_ID = "YOUR_TYPEBOT_ID_HERE";
+    const ENABLE_STANDARD_EMBED = false;
 
-    function addMsg(text, who) {
-      const wrap = document.createElement("div");
-      wrap.className = "celest-bubble-wrap " + (who === "user" ? "celest-user" : "celest-bot");
-
-      const bubble = document.createElement("div");
-      bubble.className = "celest-bubble" + (text === "..." ? " celest-typing" : "");
-      bubble.textContent = text;
-
-      wrap.appendChild(bubble);
-      msgs.appendChild(wrap);
-      msgs.scrollTop = msgs.scrollHeight;
-    }
-
-    function celestOpen() {
-      box.style.display = "block";
-      box.setAttribute("aria-hidden", "false");
-      if (msgs.childElementCount === 0) {
-        addMsg("Bonjour 👋\nJe suis Celest, l’assistant qui analyse comment les professionnels peuvent faire évoluer leur activité.\n\nPour commencer : dans quel domaine travaillez-vous ?", "bot");
+    window.openAdaBot = function () {
+      if (!TYPEBOT_ID || TYPEBOT_ID === "YOUR_TYPEBOT_ID_HERE") {
+        alert("Ajoutez d’abord votre identifiant public Typebot dans le code.");
+        return;
       }
-      setTimeout(() => input.focus(), 80);
-    }
+      Typebot.open();
+    };
 
-    function celestClose() {
-      box.style.display = "none";
-      box.setAttribute("aria-hidden", "true");
-    }
+    if (TYPEBOT_ID && TYPEBOT_ID !== "YOUR_TYPEBOT_ID_HERE") {
+      Typebot.initBubble({
+        typebot: TYPEBOT_ID,
+        prefilledVariables: {
+          "Page URL": window.location.href,
+          "Language": document.documentElement.lang,
+        },
+        previewMessage: {
+          message: "Bonjour 👋 Lancez votre diagnostic gratuit",
+          autoShowDelay: 6000,
+        },
+        theme: {
+          placement: "right",
+          button: {
+            isHidden: true
+          },
+          previewMessage: {
+            backgroundColor: "#ffffff",
+            textColor: "#0f172a"
+          },
+          chatWindow: {
+            backgroundColor: "#ffffff",
+            maxWidth: "100%"
+          }
+        }
+      });
 
-    async function celestSend() {
-      const text = input.value.trim();
-      if (!text) return;
-
-      addMsg(text, "user");
-      input.value = "";
-
-      addMsg("...", "bot");
-
-      try {
-        const res = await fetch(CELEST_WEBHOOK_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            session_id: CELEST_SESSION_ID,
-            message: text,
-            page_url: window.location.href,
-            language: navigator.language || "fr-CH"
-          }),
+      if (ENABLE_STANDARD_EMBED) {
+        document.getElementById("typebot-embed-section")?.classList.remove("hidden");
+        Typebot.initStandard({
+          typebot: TYPEBOT_ID,
+          prefilledVariables: {
+            "Page URL": window.location.href,
+            "Language": document.documentElement.lang,
+          }
         });
-
-        const data = await res.json();
-
-        // Remove last typing bubble
-        const last = msgs.lastElementChild;
-        if (last && last.textContent.trim() === "...") last.remove();
-
-        addMsg(data.reply || "Désolé, je n’ai pas compris. Pouvez-vous reformuler ?", "bot");
-      } catch (e) {
-        const last = msgs.lastElementChild;
-        if (last && last.textContent.trim() === "...") last.remove();
-        addMsg("Oups… problème technique. Réessayez dans un instant.", "bot");
       }
     }
-
-    input.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        celestSend();
-      }
-    });
   </script>
 
 </body>
