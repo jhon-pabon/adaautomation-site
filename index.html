@@ -9,7 +9,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      scroll-behavior: smooth;
+    }
+
     .gold-text { color: #d4af37; }
     .bg-ada-blue { background-color: #1e3a8a; }
     .border-gold { border-color: #d4af37; }
@@ -55,50 +59,61 @@
       transform: translateY(-2px);
     }
 
-    /* Widget Typebot */
-    typebot-bubble::part(button) {
-      bottom: 84px;
-      right: 18px;
-      box-shadow: 0 16px 40px rgba(0,0,0,.18);
+    /* TYPEBOT */
+    typebot-bubble {
+      position: relative;
+      z-index: 10000 !important;
     }
 
-    typebot-bubble::part(bot) {
-      bottom: 160px;
-      right: 18px;
-      height: min(720px, calc(100% - 180px));
-      max-width: 420px;
-      border-radius: 20px;
-      overflow: hidden;
+    typebot-bubble::part(button) {
+      display: none !important;
     }
 
     typebot-bubble::part(preview-message) {
-      bottom: 160px;
+      display: none !important;
+    }
+
+    typebot-bubble::part(bot) {
+      position: fixed;
       right: 18px;
+      bottom: 95px;
+      width: 380px;
+      max-width: calc(100vw - 32px);
+      height: 560px;
+      max-height: 75vh;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,.18);
+      z-index: 10000 !important;
     }
 
     .ada-chat-launcher {
       position: fixed;
       right: 18px;
       bottom: 18px;
-      z-index: 9998;
+      z-index: 9999;
+    }
+
+    @media (max-width: 1024px) {
+      typebot-bubble::part(bot) {
+        width: 360px;
+        height: 540px;
+        max-height: 72vh;
+        right: 16px;
+        bottom: 90px;
+      }
     }
 
     @media (max-width: 768px) {
-      typebot-bubble::part(button) {
-        bottom: 76px;
-        right: 12px;
-      }
-
       typebot-bubble::part(bot) {
-        right: 12px;
         left: 12px;
-        max-width: none;
-        width: auto;
-        height: min(75vh, 680px);
-      }
-
-      typebot-bubble::part(preview-message) {
         right: 12px;
+        width: auto;
+        max-width: none;
+        bottom: 88px;
+        height: 62vh;
+        max-height: 62vh;
+        border-radius: 18px;
       }
 
       .ada-chat-launcher {
@@ -546,24 +561,28 @@
 
     let adaTypebotReady = false;
 
+    function wait(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
     async function initAdaTypebot() {
-      if (adaTypebotReady) return;
-      if (!TYPEBOT_ID || TYPEBOT_ID === "YOUR_TYPEBOT_ID_HERE") return;
+      if (adaTypebotReady) return true;
+      if (!TYPEBOT_ID || TYPEBOT_ID === "YOUR_TYPEBOT_ID_HERE") return false;
 
       Typebot.initBubble({
         typebot: TYPEBOT_ID,
         prefilledVariables: {
           "Page URL": window.location.href,
-          "Language": document.documentElement.lang,
+          "Language": document.documentElement.lang
         },
         previewMessage: {
           message: "Bonjour 👋 Lancez votre diagnostic gratuit",
-          autoShowDelay: 6000,
+          autoShowDelay: 6000
         },
         theme: {
           placement: "right",
           button: {
-            isHidden: false
+            isHidden: true
           },
           previewMessage: {
             backgroundColor: "#ffffff",
@@ -576,7 +595,29 @@
         }
       });
 
+      await wait(300);
       adaTypebotReady = true;
+      return true;
+    }
+
+    async function tryOpenTypebot() {
+      const bubble = document.querySelector("typebot-bubble");
+
+      if (bubble && typeof bubble.open === "function") {
+        bubble.open();
+        return true;
+      }
+
+      const internalButton =
+        bubble?.shadowRoot?.querySelector("button") ||
+        document.querySelector("typebot-bubble button");
+
+      if (internalButton) {
+        internalButton.click();
+        return true;
+      }
+
+      return false;
     }
 
     window.openAdaBot = async function () {
@@ -585,22 +626,19 @@
         return;
       }
 
-      await initAdaTypebot();
+      const ready = await initAdaTypebot();
+      if (!ready) return;
 
-      const bubble = document.querySelector("typebot-bubble");
+      let opened = await tryOpenTypebot();
 
-      if (bubble && typeof bubble.open === "function") {
-        bubble.open();
-        return;
+      if (!opened) {
+        await wait(400);
+        opened = await tryOpenTypebot();
       }
 
-      const shadowButton = bubble?.shadowRoot?.querySelector("button");
-      if (shadowButton) {
-        shadowButton.click();
-        return;
+      if (!opened) {
+        console.error("Impossible d’ouvrir Typebot.");
       }
-
-      console.error("Impossible d’ouvrir Typebot.");
     };
 
     initAdaTypebot();
@@ -611,7 +649,7 @@
         typebot: TYPEBOT_ID,
         prefilledVariables: {
           "Page URL": window.location.href,
-          "Language": document.documentElement.lang,
+          "Language": document.documentElement.lang
         }
       });
     }
