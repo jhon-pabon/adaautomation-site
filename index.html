@@ -59,24 +59,24 @@
       transform: translateY(-2px);
     }
 
-    /* TYPEBOT natif */
+    /* TYPEBOT NATIF */
     typebot-bubble {
       position: relative;
       z-index: 10000 !important;
     }
 
     typebot-bubble::part(button) {
-      bottom: 18px;
-      right: 18px;
+      bottom: 14px;
+      right: 14px;
       box-shadow: 0 16px 40px rgba(0,0,0,.18);
       z-index: 10001 !important;
     }
 
     typebot-bubble::part(bot) {
-      right: 18px;
-      bottom: 90px;
-      width: 380px;
-      max-width: calc(100vw - 32px);
+      right: 12px;
+      bottom: 84px;
+      width: 360px;
+      max-width: calc(100vw - 24px);
       height: 560px;
       max-height: 75vh;
       border-radius: 20px;
@@ -86,41 +86,19 @@
     }
 
     typebot-bubble::part(preview-message) {
-      right: 18px;
-      bottom: 95px;
+      right: 12px;
+      bottom: 90px;
       z-index: 10001 !important;
     }
 
     @media (max-width: 1024px) {
       typebot-bubble::part(bot) {
-        width: 360px;
-        height: 540px;
-        max-height: 72vh;
-        right: 16px;
-        bottom: 88px;
-      }
-
-      typebot-bubble::part(button) {
-        right: 16px;
-        bottom: 16px;
-      }
-
-      typebot-bubble::part(preview-message) {
-        right: 16px;
-        bottom: 92px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      typebot-bubble::part(bot) {
-        left: 12px;
         right: 12px;
-        width: auto;
-        max-width: none;
         bottom: 84px;
-        height: 62vh;
-        max-height: 62vh;
-        border-radius: 18px;
+        width: 340px;
+        max-width: calc(100vw - 24px);
+        height: 520px;
+        max-height: 72vh;
       }
 
       typebot-bubble::part(button) {
@@ -131,6 +109,29 @@
       typebot-bubble::part(preview-message) {
         right: 12px;
         bottom: 88px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      typebot-bubble::part(bot) {
+        left: 10px;
+        right: 10px;
+        width: auto;
+        max-width: none;
+        bottom: 80px;
+        height: 65vh;
+        max-height: 65vh;
+        border-radius: 16px;
+      }
+
+      typebot-bubble::part(button) {
+        right: 10px;
+        bottom: 10px;
+      }
+
+      typebot-bubble::part(preview-message) {
+        right: 10px;
+        bottom: 86px;
       }
     }
   </style>
