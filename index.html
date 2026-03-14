@@ -59,79 +59,29 @@
       transform: translateY(-2px);
     }
 
-    /* TYPEBOT NATIF */
-    typebot-bubble {
-      position: relative;
-      z-index: 10000 !important;
-    }
-
-    typebot-bubble::part(button) {
-      bottom: 14px;
-      right: 14px;
-      box-shadow: 0 16px 40px rgba(0,0,0,.18);
-      z-index: 10001 !important;
-    }
-
-    typebot-bubble::part(bot) {
-      right: 12px;
-      bottom: 84px;
-      width: 360px;
-      max-width: calc(100vw - 24px);
-      height: 560px;
-      max-height: 75vh;
-      border-radius: 20px;
+    .typebot-embed-shell {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 24px;
       overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0,0,0,.18);
-      z-index: 10001 !important;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08);
     }
 
-    typebot-bubble::part(preview-message) {
-      right: 12px;
-      bottom: 90px;
-      z-index: 10001 !important;
+    .typebot-embed-inner {
+      width: 100%;
+      height: 720px;
     }
 
     @media (max-width: 1024px) {
-      typebot-bubble::part(bot) {
-        right: 12px;
-        bottom: 84px;
-        width: 340px;
-        max-width: calc(100vw - 24px);
-        height: 520px;
-        max-height: 72vh;
-      }
-
-      typebot-bubble::part(button) {
-        right: 12px;
-        bottom: 12px;
-      }
-
-      typebot-bubble::part(preview-message) {
-        right: 12px;
-        bottom: 88px;
+      .typebot-embed-inner {
+        height: 680px;
       }
     }
 
     @media (max-width: 768px) {
-      typebot-bubble::part(bot) {
-        left: 10px;
-        right: 10px;
-        width: auto;
-        max-width: none;
-        bottom: 80px;
-        height: 65vh;
-        max-height: 65vh;
-        border-radius: 16px;
-      }
-
-      typebot-bubble::part(button) {
-        right: 10px;
-        bottom: 10px;
-      }
-
-      typebot-bubble::part(preview-message) {
-        right: 10px;
-        bottom: 86px;
+      .typebot-embed-inner {
+        height: 78vh;
+        min-height: 620px;
       }
     }
   </style>
@@ -451,7 +401,7 @@
         </div>
 
         <div class="mt-9">
-          <a href="#diagnostic" class="inline-block bg-ada-blue text-white px-10 py-4 rounded-xl text-lg font-bold hover:scale-105 transition-transform shadow-2xl">
+          <a href="#typebot-live" class="inline-block bg-ada-blue text-white px-10 py-4 rounded-xl text-lg font-bold hover:scale-105 transition-transform shadow-2xl">
             ✅ Commencer mon diagnostic gratuit
           </a>
           <p class="text-sm text-gray-400 mt-3 italic">
@@ -460,14 +410,16 @@
         </div>
 
         <div class="mt-12 text-left">
-          <div class="bg-gray-50 border border-dashed border-gray-300 rounded-3xl p-6">
-            <div class="font-bold text-lg">Zone prête pour un bot intégré dans la page</div>
-            <p class="text-sm text-gray-600 mt-2">
-              Si vous préférez afficher le bot directement dans cette section plutôt qu’en fenêtre flottante, laissez ce bloc et activez le code Typebot standard plus bas.
-            </p>
+          <div class="typebot-embed-shell">
+            <div class="p-6 border-b border-gray-100 bg-gray-50">
+              <div class="font-bold text-lg">Parlez avec Celest</div>
+              <p class="text-sm text-gray-600 mt-2">
+                Répondez à quelques questions simples pour découvrir ce qui peut être automatisé dans votre activité.
+              </p>
+            </div>
 
-            <div id="typebot-embed-section" class="mt-5 hidden">
-              <typebot-standard style="width: 100%; height: 620px;"></typebot-standard>
+            <div id="typebot-live" class="typebot-embed-inner">
+              <typebot-standard style="width: 100%; height: 100%;"></typebot-standard>
             </div>
           </div>
         </div>
@@ -557,51 +509,18 @@
     </div>
   </footer>
 
-  <!-- TYPEBOT PREP -->
   <script type="module">
     import Typebot from "https://cdn.jsdelivr.net/npm/@typebot.io/js@0/dist/web.js";
 
     const TYPEBOT_ID = "celest-v-1-7kv3w4t";
-    const ENABLE_STANDARD_EMBED = false;
 
-    if (TYPEBOT_ID && TYPEBOT_ID !== "YOUR_TYPEBOT_ID_HERE") {
-      Typebot.initBubble({
-        typebot: TYPEBOT_ID,
-        prefilledVariables: {
-          "Page URL": window.location.href,
-          "Language": document.documentElement.lang
-        },
-        previewMessage: {
-          message: "Bonjour 👋 Lancez votre diagnostic gratuit",
-          autoShowDelay: 6000
-        },
-        theme: {
-          placement: "right",
-          button: {
-            isHidden: false
-          },
-          previewMessage: {
-            backgroundColor: "#ffffff",
-            textColor: "#0f172a"
-          },
-          chatWindow: {
-            backgroundColor: "#ffffff",
-            maxWidth: "100%"
-          }
-        }
-      });
-
-      if (ENABLE_STANDARD_EMBED) {
-        document.getElementById("typebot-embed-section")?.classList.remove("hidden");
-        Typebot.initStandard({
-          typebot: TYPEBOT_ID,
-          prefilledVariables: {
-            "Page URL": window.location.href,
-            "Language": document.documentElement.lang
-          }
-        });
+    Typebot.initStandard({
+      typebot: TYPEBOT_ID,
+      prefilledVariables: {
+        "Page URL": window.location.href,
+        "Language": document.documentElement.lang
       }
-    }
+    });
   </script>
 
 </body>
