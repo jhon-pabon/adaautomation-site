@@ -55,6 +55,7 @@
       transform: translateY(-2px);
     }
 
+    /* Widget Typebot */
     typebot-bubble::part(button) {
       bottom: 84px;
       right: 18px;
@@ -543,21 +544,12 @@
     const TYPEBOT_ID = "celest-v-1-7kv3w4t";
     const ENABLE_STANDARD_EMBED = false;
 
-    window.openAdaBot = function () {
-       if (!TYPEBOT_ID || TYPEBOT_ID === "YOUR_TYPEBOT_ID_HERE") {
-         alert("Ajoutez d’abord votre identifiant public Typebot dans le code.");
-         return;
-       }
+    let adaTypebotReady = false;
 
-       const typebotButton = document.querySelector("typebot-bubble");
-       if (typebotButton) {
-         typebotButton.open();
-       } else {
-         console.error("Typebot bubble non trouvé.");
-       }
-     };
+    async function initAdaTypebot() {
+      if (adaTypebotReady) return;
+      if (!TYPEBOT_ID || TYPEBOT_ID === "YOUR_TYPEBOT_ID_HERE") return;
 
-    if (TYPEBOT_ID && TYPEBOT_ID !== "YOUR_TYPEBOT_ID_HERE") {
       Typebot.initBubble({
         typebot: TYPEBOT_ID,
         prefilledVariables: {
@@ -571,7 +563,7 @@
         theme: {
           placement: "right",
           button: {
-            isHidden: true
+            isHidden: false
           },
           previewMessage: {
             backgroundColor: "#ffffff",
@@ -584,16 +576,44 @@
         }
       });
 
-      if (ENABLE_STANDARD_EMBED) {
-        document.getElementById("typebot-embed-section")?.classList.remove("hidden");
-        Typebot.initStandard({
-          typebot: TYPEBOT_ID,
-          prefilledVariables: {
-            "Page URL": window.location.href,
-            "Language": document.documentElement.lang,
-          }
-        });
+      adaTypebotReady = true;
+    }
+
+    window.openAdaBot = async function () {
+      if (!TYPEBOT_ID || TYPEBOT_ID === "YOUR_TYPEBOT_ID_HERE") {
+        alert("Ajoutez d’abord votre identifiant public Typebot dans le code.");
+        return;
       }
+
+      await initAdaTypebot();
+
+      const bubble = document.querySelector("typebot-bubble");
+
+      if (bubble && typeof bubble.open === "function") {
+        bubble.open();
+        return;
+      }
+
+      const shadowButton = bubble?.shadowRoot?.querySelector("button");
+      if (shadowButton) {
+        shadowButton.click();
+        return;
+      }
+
+      console.error("Impossible d’ouvrir Typebot.");
+    };
+
+    initAdaTypebot();
+
+    if (ENABLE_STANDARD_EMBED) {
+      document.getElementById("typebot-embed-section")?.classList.remove("hidden");
+      Typebot.initStandard({
+        typebot: TYPEBOT_ID,
+        prefilledVariables: {
+          "Page URL": window.location.href,
+          "Language": document.documentElement.lang,
+        }
+      });
     }
   </script>
 
