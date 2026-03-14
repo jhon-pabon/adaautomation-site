@@ -59,24 +59,22 @@
       transform: translateY(-2px);
     }
 
-    /* TYPEBOT */
+    /* TYPEBOT natif */
     typebot-bubble {
       position: relative;
       z-index: 10000 !important;
     }
 
     typebot-bubble::part(button) {
-      display: none !important;
-    }
-
-    typebot-bubble::part(preview-message) {
-      display: none !important;
+      bottom: 18px;
+      right: 18px;
+      box-shadow: 0 16px 40px rgba(0,0,0,.18);
+      z-index: 10001 !important;
     }
 
     typebot-bubble::part(bot) {
-      position: fixed;
       right: 18px;
-      bottom: 95px;
+      bottom: 90px;
       width: 380px;
       max-width: calc(100vw - 32px);
       height: 560px;
@@ -84,14 +82,13 @@
       border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 20px 60px rgba(0,0,0,.18);
-      z-index: 10000 !important;
+      z-index: 10001 !important;
     }
 
-    .ada-chat-launcher {
-      position: fixed;
+    typebot-bubble::part(preview-message) {
       right: 18px;
-      bottom: 18px;
-      z-index: 9999;
+      bottom: 95px;
+      z-index: 10001 !important;
     }
 
     @media (max-width: 1024px) {
@@ -100,7 +97,17 @@
         height: 540px;
         max-height: 72vh;
         right: 16px;
-        bottom: 90px;
+        bottom: 88px;
+      }
+
+      typebot-bubble::part(button) {
+        right: 16px;
+        bottom: 16px;
+      }
+
+      typebot-bubble::part(preview-message) {
+        right: 16px;
+        bottom: 92px;
       }
     }
 
@@ -110,15 +117,20 @@
         right: 12px;
         width: auto;
         max-width: none;
-        bottom: 88px;
+        bottom: 84px;
         height: 62vh;
         max-height: 62vh;
         border-radius: 18px;
       }
 
-      .ada-chat-launcher {
+      typebot-bubble::part(button) {
         right: 12px;
         bottom: 12px;
+      }
+
+      typebot-bubble::part(preview-message) {
+        right: 12px;
+        bottom: 88px;
       }
     }
   </style>
@@ -146,7 +158,7 @@
         <a href="#contact" class="hover:text-blue-800 transition">Contact</a>
       </nav>
 
-      <a href="#" onclick="openAdaBot(); return false;" class="bg-ada-blue text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-700 transition shadow-lg">
+      <a href="#diagnostic" class="bg-ada-blue text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-700 transition shadow-lg">
         Diagnostic Gratuit
       </a>
 
@@ -184,7 +196,7 @@
         </div>
 
         <div class="pt-4 flex flex-col sm:flex-row gap-4">
-          <a href="#" onclick="openAdaBot(); return false;" class="inline-block bg-ada-blue text-white px-8 py-4 rounded-xl text-lg font-bold hover:scale-105 transition-transform shadow-2xl text-center">
+          <a href="#diagnostic" class="inline-block bg-ada-blue text-white px-8 py-4 rounded-xl text-lg font-bold hover:scale-105 transition-transform shadow-2xl text-center">
             🔵 Recevoir mon diagnostic gratuit
           </a>
           <a href="#services" class="inline-block bg-white text-slate-900 px-8 py-4 rounded-xl text-lg font-bold border border-gray-200 hover:border-blue-300 transition text-center">
@@ -327,7 +339,7 @@
       </div>
 
       <div class="text-center mt-10">
-        <a href="#" onclick="openAdaBot(); return false;" class="inline-block bg-ada-blue text-white px-8 py-4 rounded-xl text-lg font-bold hover:scale-105 transition-transform shadow-2xl">
+        <a href="#diagnostic" class="inline-block bg-ada-blue text-white px-8 py-4 rounded-xl text-lg font-bold hover:scale-105 transition-transform shadow-2xl">
           Découvrir ce qui peut être automatisé dans mon activité
         </a>
       </div>
@@ -353,7 +365,7 @@
           </div>
 
           <div class="mt-8">
-            <a href="#" onclick="openAdaBot(); return false;" class="inline-block bg-ada-blue text-white px-8 py-4 rounded-xl text-lg font-bold hover:scale-105 transition-transform shadow-2xl">
+            <a href="#diagnostic" class="inline-block bg-ada-blue text-white px-8 py-4 rounded-xl text-lg font-bold hover:scale-105 transition-transform shadow-2xl">
               Voir le diagnostic interactif
             </a>
           </div>
@@ -377,7 +389,7 @@
               Nous partons de votre réalité, pas d’un modèle standard. Le but est simple : alléger la gestion, mieux traiter les demandes et mettre en place un système utile pour votre activité.
             </p>
           </div>
-          <a href="#" onclick="openAdaBot(); return false;" class="bg-ada-blue text-white px-7 py-3 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg">
+          <a href="#diagnostic" class="bg-ada-blue text-white px-7 py-3 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg">
             Lancer mon diagnostic
           </a>
         </div>
@@ -438,7 +450,7 @@
         </div>
 
         <div class="mt-9">
-          <a href="#" onclick="openAdaBot(); return false;" class="inline-block bg-ada-blue text-white px-10 py-4 rounded-xl text-lg font-bold hover:scale-105 transition-transform shadow-2xl">
+          <a href="#diagnostic" class="inline-block bg-ada-blue text-white px-10 py-4 rounded-xl text-lg font-bold hover:scale-105 transition-transform shadow-2xl">
             ✅ Commencer mon diagnostic gratuit
           </a>
           <p class="text-sm text-gray-400 mt-3 italic">
@@ -528,14 +540,6 @@
     </div>
   </section>
 
-  <!-- CUSTOM ADA LAUNCHER -->
-  <div class="ada-chat-launcher">
-    <button onclick="openAdaBot(); return false;" class="bg-white p-4 rounded-2xl shadow-2xl border border-gray-100 flex items-center space-x-3 cursor-pointer hover:scale-105 transition">
-      <img src="operadora.jpg.PNG" alt="Celest ADA" class="w-10 h-10 rounded-full object-cover">
-      <p class="text-sm font-medium">Parler avec Celest</p>
-    </button>
-  </div>
-
   <footer class="py-10 bg-white border-t border-gray-100">
     <div class="container mx-auto px-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
       <div class="flex items-center gap-3">
@@ -559,16 +563,7 @@
     const TYPEBOT_ID = "celest-v-1-7kv3w4t";
     const ENABLE_STANDARD_EMBED = false;
 
-    let adaTypebotReady = false;
-
-    function wait(ms) {
-      return new Promise(resolve => setTimeout(resolve, ms));
-    }
-
-    async function initAdaTypebot() {
-      if (adaTypebotReady) return true;
-      if (!TYPEBOT_ID || TYPEBOT_ID === "YOUR_TYPEBOT_ID_HERE") return false;
-
+    if (TYPEBOT_ID && TYPEBOT_ID !== "YOUR_TYPEBOT_ID_HERE") {
       Typebot.initBubble({
         typebot: TYPEBOT_ID,
         prefilledVariables: {
@@ -582,7 +577,7 @@
         theme: {
           placement: "right",
           button: {
-            isHidden: true
+            isHidden: false
           },
           previewMessage: {
             backgroundColor: "#ffffff",
@@ -595,63 +590,16 @@
         }
       });
 
-      await wait(300);
-      adaTypebotReady = true;
-      return true;
-    }
-
-    async function tryOpenTypebot() {
-      const bubble = document.querySelector("typebot-bubble");
-
-      if (bubble && typeof bubble.open === "function") {
-        bubble.open();
-        return true;
+      if (ENABLE_STANDARD_EMBED) {
+        document.getElementById("typebot-embed-section")?.classList.remove("hidden");
+        Typebot.initStandard({
+          typebot: TYPEBOT_ID,
+          prefilledVariables: {
+            "Page URL": window.location.href,
+            "Language": document.documentElement.lang
+          }
+        });
       }
-
-      const internalButton =
-        bubble?.shadowRoot?.querySelector("button") ||
-        document.querySelector("typebot-bubble button");
-
-      if (internalButton) {
-        internalButton.click();
-        return true;
-      }
-
-      return false;
-    }
-
-    window.openAdaBot = async function () {
-      if (!TYPEBOT_ID || TYPEBOT_ID === "YOUR_TYPEBOT_ID_HERE") {
-        alert("Ajoutez d’abord votre identifiant public Typebot dans le code.");
-        return;
-      }
-
-      const ready = await initAdaTypebot();
-      if (!ready) return;
-
-      let opened = await tryOpenTypebot();
-
-      if (!opened) {
-        await wait(400);
-        opened = await tryOpenTypebot();
-      }
-
-      if (!opened) {
-        console.error("Impossible d’ouvrir Typebot.");
-      }
-    };
-
-    initAdaTypebot();
-
-    if (ENABLE_STANDARD_EMBED) {
-      document.getElementById("typebot-embed-section")?.classList.remove("hidden");
-      Typebot.initStandard({
-        typebot: TYPEBOT_ID,
-        prefilledVariables: {
-          "Page URL": window.location.href,
-          "Language": document.documentElement.lang
-        }
-      });
     }
   </script>
 
