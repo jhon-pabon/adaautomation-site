@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ADA | Systèmes automatiques pour entreprises de services</title>
+<title>ADA | Systèmes automatiques pour gagner du temps</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 
@@ -22,10 +21,6 @@ scroll-behavior:smooth;
 background:#1e3a8a;
 }
 
-.shadow-premium{
-box-shadow:0 10px 30px rgba(0,0,0,.06);
-}
-
 .gradient-soft{
 background:linear-gradient(135deg,#eff6ff 0%,#ffffff 55%,#f8fafc 100%);
 }
@@ -33,44 +28,37 @@ background:linear-gradient(135deg,#eff6ff 0%,#ffffff 55%,#f8fafc 100%);
 .section-pill{
 display:inline-flex;
 align-items:center;
-gap:.5rem;
 padding:.5rem 1rem;
 border-radius:999px;
 background:#eff6ff;
 color:#1e3a8a;
 font-weight:700;
 font-size:.8rem;
-letter-spacing:.04em;
-text-transform:uppercase;
 }
 
-.whatsapp-float{
-position:fixed;
-right:20px;
-bottom:20px;
-z-index:9999;
+.shadow-premium{
+box-shadow:0 10px 30px rgba(0,0,0,.06);
 }
+
+/* WHATSAPP FLOAT */
 
 .whatsapp-button{
-display:flex;
-align-items:center;
-gap:12px;
-background:white;
-border-radius:18px;
-padding:12px 16px;
-box-shadow:0 16px 40px rgba(0,0,0,.16);
-text-decoration:none;
-color:#111;
+position:fixed;
+bottom:20px;
+right:20px;
+z-index:999;
 }
 
-.whatsapp-icon{
-background:#25D366;
-width:42px;
-height:42px;
-border-radius:100%;
+.whatsapp-button a{
 display:flex;
 align-items:center;
-justify-content:center;
+gap:10px;
+background:#25D366;
+color:white;
+padding:14px 18px;
+border-radius:50px;
+font-weight:700;
+box-shadow:0 10px 25px rgba(0,0,0,.2);
 }
 
 </style>
@@ -91,31 +79,24 @@ justify-content:center;
 <img src="Logo_ada.PNG" class="h-11">
 
 <div class="hidden sm:block">
-
 <div class="font-bold">ADA</div>
-
-<div class="text-xs text-gray-500">Présence Lausanne • Automatisation pour services</div>
-
+<div class="text-xs text-gray-500">Présence à Lausanne</div>
 </div>
 
 </div>
 
-<nav class="hidden md:flex space-x-8 text-sm font-medium uppercase">
+<nav class="hidden md:flex space-x-8 text-sm uppercase">
 
 <a href="#top">Accueil</a>
-
+<a href="#benefices">Bénéfices</a>
 <a href="#services">Services</a>
-
-<a href="#celest">Diagnostic</a>
-
+<a href="#diagnostic">Diagnostic</a>
 <a href="#contact">Contact</a>
 
 </nav>
 
-<a href="#celest" class="bg-ada-blue text-white px-6 py-2 rounded-full font-semibold">
-
+<a href="#diagnostic" class="bg-ada-blue text-white px-6 py-2 rounded-full font-semibold">
 Diagnostic Gratuit
-
 </a>
 
 </div>
@@ -129,7 +110,6 @@ Diagnostic Gratuit
 
 <div class="container mx-auto flex flex-col md:flex-row items-center gap-10">
 
-
 <div class="md:w-1/2 space-y-6">
 
 <span class="section-pill">ADA • Automatisation</span>
@@ -139,30 +119,23 @@ Diagnostic Gratuit
 ADA met en place des systèmes pour
 
 <span class="text-blue-800">gagner du temps</span>
-
 et capter
-
 <span class="text-blue-800">plus d’opportunités</span>
 
 </h1>
 
 <p class="text-xl text-gray-600">
 
-Nous aidons les entreprises de services à automatiser certaines tâches répétitives et répondre plus rapidement aux prospects.
+Nous aidons les entreprises de services à automatiser certaines tâches et mieux gérer leurs demandes.
 
 </p>
 
-<div class="flex flex-col sm:flex-row gap-4 pt-4">
+<div class="pt-4">
 
-<a href="#celest" class="bg-ada-blue text-white px-8 py-4 rounded-xl text-lg font-bold shadow-2xl">
+<a href="#diagnostic"
+class="bg-ada-blue text-white px-8 py-4 rounded-xl text-lg font-bold shadow-2xl">
 
-🔵 Recevoir mon diagnostic gratuit
-
-</a>
-
-<a href="#services" class="bg-white px-8 py-4 rounded-xl border font-bold">
-
-Voir les systèmes ADA
+Recevoir mon diagnostic gratuit
 
 </a>
 
@@ -173,7 +146,8 @@ Voir les systèmes ADA
 
 <div class="md:w-1/2">
 
-<img src="hero.jpg.PNG" class="rounded-2xl shadow-premium">
+<img src="hero.jpg.PNG"
+class="rounded-2xl shadow-premium">
 
 </div>
 
@@ -181,6 +155,23 @@ Voir les systèmes ADA
 
 </section>
 
+
+<!-- BENEFICES -->
+
+<section id="benefices" class="py-16 bg-gray-50">
+
+<div class="container mx-auto px-6 text-center">
+
+<h2 class="text-3xl font-bold">
+
+Moins de charge mentale.
+Plus de temps.
+
+</h2>
+
+</div>
+
+</section>
 
 
 <!-- SERVICES -->
@@ -189,87 +180,41 @@ Voir les systèmes ADA
 
 <div class="container mx-auto px-6 text-center">
 
-<h2 class="text-3xl font-bold mb-10">
+<h2 class="text-3xl font-bold">
 
-Ce que ADA peut automatiser
+Ce que ADA automatise
 
 </h2>
-
-<div class="grid md:grid-cols-3 gap-6 text-left">
-
-<div class="bg-gray-50 p-8 rounded-3xl shadow-premium">
-
-<h3 class="font-bold text-xl">Collecte de leads</h3>
-
-<p class="mt-3 text-gray-600">
-
-Capture automatique des demandes clients.
-
-</p>
-
-</div>
-
-<div class="bg-gray-50 p-8 rounded-3xl shadow-premium">
-
-<h3 class="font-bold text-xl">Support client</h3>
-
-<p class="mt-3 text-gray-600">
-
-Réponses immédiates aux questions fréquentes.
-
-</p>
-
-</div>
-
-<div class="bg-gray-50 p-8 rounded-3xl shadow-premium">
-
-<h3 class="font-bold text-xl">Automatisation</h3>
-
-<p class="mt-3 text-gray-600">
-
-Relances, suivi client et organisation.
-
-</p>
-
-</div>
-
-</div>
 
 </div>
 
 </section>
 
 
+<!-- DIAGNOSTIC -->
 
-<!-- CELEST -->
+<section id="diagnostic" class="py-20 bg-gray-50">
 
-<section id="celest" class="py-20 bg-gray-50">
-
-<div class="container mx-auto px-6">
-
-<div class="bg-white rounded-3xl shadow-premium p-10 text-center max-w-4xl mx-auto">
+<div class="container mx-auto px-6 text-center">
 
 <h2 class="text-4xl font-bold">
 
-Recevez votre diagnostic avec Celest
+Recevez votre diagnostic gratuit
 
 </h2>
 
-<div class="mt-6 text-lg text-gray-700 space-y-2">
+<p class="text-gray-600 mt-4">
 
-<p>Bonjour 👋</p>
+Discutez avec Celest sur WhatsApp pour découvrir
+ce que vous pouvez automatiser.
 
-<p>Je suis <strong>Celest</strong>, l’assistante d’ADA.</p>
+</p>
 
-<p>Je peux analyser votre activité et vous montrer ce que vous pourriez automatiser.</p>
+<div class="mt-8">
 
-<p>🎁 Diagnostic gratuit en quelques minutes.</p>
-
-</div>
-
-<a href="https://wa.me/TU_NUMERO_WHATSAPP?text=Bonjour%20Celest%2C%20je%20souhaite%20recevoir%20mon%20diagnostic." target="_blank"
-
-class="mt-8 inline-block bg-green-500 text-white px-10 py-4 rounded-2xl text-lg font-bold">
+<a href="https://wa.me/TU_NUMERO_WHATSAPP?text=Bonjour%20Celest%20je%20souhaite%20un%20diagnostic%20ADA"
+target="_blank"
+class="bg-green-500 text-white px-10 py-4 rounded-xl text-lg font-bold shadow-xl">
 
 Commencer sur WhatsApp
 
@@ -282,72 +227,66 @@ Commencer sur WhatsApp
 </section>
 
 
-
 <!-- CONTACT -->
 
-<section id="contact" class="py-16 bg-white">
+<section id="contact" class="py-20 bg-white">
 
-<div class="container mx-auto px-6 text-center">
+<div class="container mx-auto px-6">
 
-<h2 class="text-3xl font-bold">
+<h2 class="text-3xl font-bold text-center">
 
 Contact
 
 </h2>
-
-<p class="text-gray-600 mt-4">
-
-Vous pouvez aussi nous laisser votre email.
-
-</p>
 
 </div>
 
 </section>
 
 
+<!-- FOOTER -->
 
-<!-- FLOAT WHATSAPP -->
+<footer class="py-10 bg-white border-t border-gray-100">
 
-<div class="whatsapp-float">
+<div class="container mx-auto px-6 flex justify-between">
 
-<a href="https://wa.me/TU_NUMERO_WHATSAPP?text=Bonjour%20Celest%2C%20je%20souhaite%20recevoir%20mon%20diagnostic."
+<div class="flex items-center gap-3">
 
-class="whatsapp-button">
-
-<div class="whatsapp-icon">
-
-<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 24 24">
-
-<path d="M20.52 3.48A11.86 11.86 0 0 0 12.06 0C5.54 0 .24 5.3.24 11.82c0 2.08.54 4.12 1.58 5.93L0 24l6.45-1.69a11.77 11.77 0 0 0 5.61 1.43h.01c6.52 0 11.82-5.3 11.82-11.82 0-3.15-1.23-6.11-3.37-8.44Z"/>
-
-</svg>
-
-</div>
+<img src="Logo_ada.PNG" class="h-10">
 
 <div>
 
-<strong>Diagnostic gratuit</strong>
-
-<div class="text-xs text-gray-500">Parler avec Celest</div>
+<div class="font-bold">ADA</div>
+<div class="text-xs text-slate-500">Lausanne</div>
 
 </div>
+
+</div>
+
+<div class="text-sm text-slate-600">
+
+© ADA 2026
+
+</div>
+
+</div>
+
+</footer>
+
+
+<!-- WHATSAPP FLOAT BUTTON -->
+
+<div class="whatsapp-button">
+
+<a href="https://wa.me/TU_NUMERO_WHATSAPP?text=Bonjour%20Celest%20je%20souhaite%20un%20diagnostic%20ADA"
+target="_blank">
+
+💬 WhatsApp
 
 </a>
 
 </div>
 
-
-
-<footer class="py-10 bg-white border-t">
-
-<div class="container mx-auto px-6 text-center text-sm text-gray-500">
-
-© ADA 2026 — Tous droits réservés
-
-</div>
-
-</footer>
 
 </body>
 </html>
