@@ -3,13 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ADA | Temps, Sérénité & Liberté (Lausanne)</title>
+  <title>ADA | Systèmes automatiques pour gagner du temps et capter plus d’opportunités</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      scroll-behavior: smooth;
+    }
+
     .gold-text { color: #d4af37; }
     .bg-ada-blue { background-color: #1e3a8a; }
     .border-gold { border-color: #d4af37; }
@@ -43,68 +47,16 @@
       display: inline-block;
     }
 
-    .feature-card:hover,
-    .pain-card:hover,
-    .step-card:hover {
-      transform: translateY(-2px);
-    }
-
     .feature-card,
     .pain-card,
-    .step-card {
+    .service-card {
       transition: all .2s ease;
     }
 
-    /* Typebot bubble position customization */
-    typebot-bubble::part(button) {
-      bottom: 84px;
-      right: 18px;
-      box-shadow: 0 16px 40px rgba(0,0,0,.18);
-    }
-
-    typebot-bubble::part(bot) {
-      bottom: 160px;
-      right: 18px;
-      height: min(720px, calc(100% - 180px));
-      max-width: 420px;
-      border-radius: 20px;
-      overflow: hidden;
-    }
-
-    typebot-bubble::part(preview-message) {
-      bottom: 160px;
-      right: 18px;
-    }
-
-    .ada-chat-launcher {
-      position: fixed;
-      right: 18px;
-      bottom: 18px;
-      z-index: 9998;
-    }
-
-    @media (max-width: 768px) {
-      typebot-bubble::part(button) {
-        bottom: 76px;
-        right: 12px;
-      }
-
-      typebot-bubble::part(bot) {
-        right: 12px;
-        left: 12px;
-        max-width: none;
-        width: auto;
-        height: min(75vh, 680px);
-      }
-
-      typebot-bubble::part(preview-message) {
-        right: 12px;
-      }
-
-      .ada-chat-launcher {
-        right: 12px;
-        bottom: 12px;
-      }
+    .feature-card:hover,
+    .pain-card:hover,
+    .service-card:hover {
+      transform: translateY(-2px);
     }
   </style>
 </head>
@@ -119,18 +71,19 @@
         <img src="Logo_ada.PNG" alt="ADA Logo" class="h-11 w-auto" />
         <div class="hidden sm:block leading-tight">
           <div class="font-bold tracking-wide">ADA</div>
-          <div class="text-xs text-gray-500 -mt-0.5">Présence à Lausanne • Solutions simples</div>
+          <div class="text-xs text-gray-500 -mt-0.5">Présence à Lausanne • Solutions simples pour entreprises de services</div>
         </div>
       </div>
 
       <nav class="hidden md:flex space-x-8 font-medium text-sm uppercase tracking-wide">
         <a href="#top" class="hover:text-blue-800 transition">Accueil</a>
         <a href="#benefices" class="hover:text-blue-800 transition">Bénéfices</a>
-        <a href="#fonctionnement" class="hover:text-blue-800 transition">Fonctionnement</a>
+        <a href="#services" class="hover:text-blue-800 transition">Services</a>
         <a href="#diagnostic" class="hover:text-blue-800 transition">Diagnostic</a>
-        
+        <a href="#contact" class="hover:text-blue-800 transition">Contact</a>
+      </nav>
 
-      <a href="#" onclick="openAdaBot(); return false;" class="bg-ada-blue text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-700 transition shadow-lg">
+      <a href="#diagnostic" class="bg-ada-blue text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-700 transition shadow-lg">
         Diagnostic Gratuit
       </a>
 
@@ -142,38 +95,37 @@
     <div class="container mx-auto flex flex-col md:flex-row items-center gap-10">
 
       <div class="md:w-1/2 space-y-6">
-        <span class="section-pill">ADA • Automatisation pour entreprises de services</span>
+        <span class="section-pill">ADA • Systèmes automatiques pour entreprises de services</span>
 
         <h1 class="text-4xl md:text-6xl font-bold leading-tight">
-          Et si votre entreprise <span class="text-blue-800">répondait</span>,
-          <span class="text-blue-800">organisait</span> et <span class="text-blue-800">relançait</span>
-          même quand vous êtes occupé ?
+          ADA met en place des systèmes qui vous aident à
+          <span class="text-blue-800">gagner du temps</span>,
+          mieux <span class="text-blue-800">gérer vos demandes</span>
+          et capter <span class="text-blue-800">plus d’opportunités</span>.
         </h1>
 
         <p class="text-xl text-gray-600 max-w-xl">
-          ADA met en place un système simple qui vous aide à <b>répondre plus vite</b>,
-          <b>capturer plus de demandes</b> et <b>réduire la gestion manuelle</b> —
-          pour que vous retrouviez du temps, de l’ordre et plus de sérénité.
+          Nous aidons les entreprises de services à réduire la gestion manuelle, répondre plus vite aux prospects et automatiser certaines tâches répétitives — pour travailler plus sereinement et avancer plus efficacement.
         </p>
 
         <div class="flex flex-wrap gap-3 pt-1">
           <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-100 shadow-sm text-sm text-gray-700">
-            ✅ Présence à Lausanne
+            ✅ Plus de temps
           </span>
           <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-100 shadow-sm text-sm text-gray-700">
-            ✅ Pour professions de service
+            ✅ Moins de gestion manuelle
           </span>
           <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-100 shadow-sm text-sm text-gray-700">
-            ✅ Diagnostic simple et rapide
+            ✅ Plus d’opportunités captées
           </span>
         </div>
 
         <div class="pt-4 flex flex-col sm:flex-row gap-4">
-          <a href="#" onclick="openAdaBot(); return false;" class="inline-block bg-ada-blue text-white px-8 py-4 rounded-xl text-lg font-bold hover:scale-105 transition-transform shadow-2xl text-center">
+          <a href="#diagnostic" class="inline-block bg-ada-blue text-white px-8 py-4 rounded-xl text-lg font-bold hover:scale-105 transition-transform shadow-2xl text-center">
             🔵 Recevoir mon diagnostic gratuit
           </a>
-          <a href="#fonctionnement" class="inline-block bg-white text-slate-900 px-8 py-4 rounded-xl text-lg font-bold border border-gray-200 hover:border-blue-300 transition text-center">
-            Voir comment ça fonctionne
+          <a href="#services" class="inline-block bg-white text-slate-900 px-8 py-4 rounded-xl text-lg font-bold border border-gray-200 hover:border-blue-300 transition text-center">
+            Voir ce que ADA automatise
           </a>
         </div>
 
@@ -193,28 +145,28 @@
   <!-- DOULEURS -->
   <section class="py-16 bg-white">
     <div class="container mx-auto px-6 text-center">
-      <h2 class="text-3xl font-bold mb-4">Si ça vous parle… vous n’êtes pas seul.</h2>
+      <h2 class="text-3xl font-bold mb-4">Si cela vous parle… vous n’êtes pas seul.</h2>
       <p class="text-gray-600 max-w-2xl mx-auto mb-10">
-        Beaucoup de professionnels travaillent dur, mais restent bloqués dans la gestion quotidienne. ADA vous aide à remettre de l’ordre — sans complexité inutile.
+        Beaucoup de professionnels travaillent dur, mais restent coincés dans la gestion du quotidien. ADA vous aide à remettre de l’ordre, à automatiser ce qui se répète et à avancer avec plus de sérénité.
       </p>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
         <div class="pain-card p-8 border border-gray-100 rounded-2xl shadow-premium hover:border-blue-200 bg-white">
           <span class="text-blue-600 text-2xl">⏳</span>
           <h3 class="font-bold mt-4">Trop de gestion manuelle</h3>
-          <p class="text-gray-600 mt-2">Messages, confirmations, relances… cela prend une place énorme dans vos journées.</p>
+          <p class="text-gray-600 mt-2">Messages, confirmations, relances, suivi… cela prend une place énorme dans vos journées.</p>
         </div>
 
         <div class="pain-card p-8 border border-gray-100 rounded-2xl shadow-premium hover:border-blue-200 bg-white">
           <span class="text-blue-600 text-2xl">📵</span>
           <h3 class="font-bold mt-4">Des réponses trop tardives</h3>
-          <p class="text-gray-600 mt-2">Quand vous êtes en prestation, la demande attend — et parfois le client part ailleurs.</p>
+          <p class="text-gray-600 mt-2">Quand vous êtes occupé, certaines demandes attendent — et parfois le prospect part ailleurs.</p>
         </div>
 
         <div class="pain-card p-8 border border-gray-100 rounded-2xl shadow-premium hover:border-blue-200 bg-white">
           <span class="text-blue-600 text-2xl">🔁</span>
-          <h3 class="font-bold mt-4">Tout repose sur vous</h3>
-          <p class="text-gray-600 mt-2">Sans système, chaque demande dépend de votre présence, de votre temps et de votre énergie.</p>
+          <h3 class="font-bold mt-4">Toujours les mêmes tâches</h3>
+          <p class="text-gray-600 mt-2">Les mêmes questions, les mêmes relances, les mêmes petites actions qui reviennent sans cesse.</p>
         </div>
       </div>
     </div>
@@ -225,9 +177,9 @@
     <div class="container mx-auto px-6">
       <div class="text-center mb-10">
         <span class="section-pill">Ce que vous gagnez</span>
-        <h2 class="text-3xl md:text-4xl font-bold mt-4">Un système pensé pour vous faire gagner du temps — et ne plus laisser passer les opportunités.</h2>
+        <h2 class="text-3xl md:text-4xl font-bold mt-4">Moins de charge mentale. Plus de temps. Plus de clarté.</h2>
         <p class="text-gray-600 max-w-3xl mx-auto mt-4">
-          L’objectif n’est pas d’ajouter un outil de plus. L’objectif est de mettre en place un système simple qui répond, organise et prépare vos demandes clients automatiquement.
+          L’objectif n’est pas d’ajouter un outil de plus. L’objectif est de mettre en place un système utile qui vous aide à mieux gérer les demandes et à ne plus laisser passer les opportunités.
         </p>
       </div>
 
@@ -236,61 +188,85 @@
           <div class="text-3xl">⚡</div>
           <h3 class="font-bold text-xl mt-4">Répondre plus vite</h3>
           <p class="text-gray-600 mt-3">
-            Vos prospects obtiennent une première réponse immédiatement, même quand vous êtes occupé.
+            Vos prospects reçoivent une première réponse plus rapidement, même quand vous êtes déjà pris par votre activité.
           </p>
         </div>
 
         <div class="feature-card bg-white rounded-3xl border border-gray-100 shadow-premium p-8">
           <div class="text-3xl">🎯</div>
-          <h3 class="font-bold text-xl mt-4">Capturer plus de demandes</h3>
+          <h3 class="font-bold text-xl mt-4">Capturer plus d’opportunités</h3>
           <p class="text-gray-600 mt-3">
-            Chaque visiteur peut être guidé, qualifié et transformé en contact concret.
+            Chaque visiteur peut être guidé, compris et transformé en contact plus concret et mieux qualifié.
           </p>
         </div>
 
         <div class="feature-card bg-white rounded-3xl border border-gray-100 shadow-premium p-8">
-          <div class="text-3xl">🗂️</div>
-          <h3 class="font-bold text-xl mt-4">Mieux organiser vos leads</h3>
+          <div class="text-3xl">💼</div>
+          <h3 class="font-bold text-xl mt-4">Libérer du temps utile</h3>
           <p class="text-gray-600 mt-3">
-            Les demandes arrivent de façon plus claire, plus propre, et avec les bonnes informations dès le départ.
+            Moins d’oublis, moins de dispersion, moins de tâches répétitives : plus de temps pour votre vraie activité.
           </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- COMMENT CA FONCTIONNE -->
-  <section id="fonctionnement" class="py-16 bg-white">
+  <!-- SERVICES -->
+  <section id="services" class="py-16 bg-white">
     <div class="container mx-auto px-6">
-      <div class="text-center mb-10">
-        <span class="section-pill">Comment ça fonctionne</span>
-        <h2 class="text-3xl md:text-4xl font-bold mt-4">Un parcours simple, clair et efficace pour transformer plus de visiteurs en contacts qualifiés.</h2>
+      <div class="text-center mb-12">
+        <span class="section-pill">Ce que ADA peut faire pour vous</span>
+        <h2 class="text-3xl md:text-4xl font-bold mt-4">Nous créons des systèmes simples qui soutiennent votre activité au quotidien.</h2>
+        <p class="text-gray-600 max-w-3xl mx-auto mt-4">
+          ADA conçoit des systèmes automatiques pensés pour les entreprises de services qui veulent mieux gérer leurs demandes, gagner du temps et travailler plus sereinement.
+        </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
-        <div class="step-card p-6 rounded-3xl border border-gray-100 bg-gray-50 shadow-premium">
-          <div class="text-xs uppercase tracking-widest text-gray-500 font-semibold">Étape 1</div>
-          <div class="font-bold mt-2 text-lg">Le visiteur démarre</div>
-          <div class="text-sm text-gray-600 mt-2">Il arrive sur votre site et lance le diagnostic en quelques secondes.</div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="service-card bg-gray-50 rounded-3xl border border-gray-100 shadow-premium p-8">
+          <div class="text-3xl">🧲</div>
+          <h3 class="font-bold text-2xl mt-4">Collecte de leads</h3>
+          <p class="text-gray-600 mt-3">
+            Votre site peut accueillir les visiteurs, poser quelques questions utiles et récupérer automatiquement leurs coordonnées.
+          </p>
+          <div class="mt-5 space-y-2 text-sm text-gray-700">
+            <div>✅ Réponse immédiate au visiteur</div>
+            <div>✅ Demande mieux qualifiée</div>
+            <div>✅ Capture d’email ou WhatsApp</div>
+          </div>
         </div>
 
-        <div class="step-card p-6 rounded-3xl border border-gray-100 bg-gray-50 shadow-premium">
-          <div class="text-xs uppercase tracking-widest text-gray-500 font-semibold">Étape 2</div>
-          <div class="font-bold mt-2 text-lg">Le système pose les bonnes questions</div>
-          <div class="text-sm text-gray-600 mt-2">Il comprend le besoin du client et identifie rapidement sa situation.</div>
+        <div class="service-card bg-gray-50 rounded-3xl border border-gray-100 shadow-premium p-8">
+          <div class="text-3xl">💬</div>
+          <h3 class="font-bold text-2xl mt-4">Attention & support client</h3>
+          <p class="text-gray-600 mt-3">
+            Un assistant peut répondre aux questions fréquentes, orienter le client et réduire la charge de messages répétitifs.
+          </p>
+          <div class="mt-5 space-y-2 text-sm text-gray-700">
+            <div>✅ Réponses plus rapides</div>
+            <div>✅ Informations claires sur vos services</div>
+            <div>✅ Moins de stress au quotidien</div>
+          </div>
         </div>
 
-        <div class="step-card p-6 rounded-3xl border border-gray-100 bg-gray-50 shadow-premium">
-          <div class="text-xs uppercase tracking-widest text-gray-500 font-semibold">Étape 3</div>
-          <div class="font-bold mt-2 text-lg">Les coordonnées sont capturées</div>
-          <div class="text-sm text-gray-600 mt-2">Le prospect laisse son WhatsApp ou son email pour recevoir la suite.</div>
+        <div class="service-card bg-gray-50 rounded-3xl border border-gray-100 shadow-premium p-8">
+          <div class="text-3xl">⚙️</div>
+          <h3 class="font-bold text-2xl mt-4">Automatisation des tâches répétitives</h3>
+          <p class="text-gray-600 mt-3">
+            Certaines actions peuvent être automatisées pour vous faire gagner du temps chaque semaine.
+          </p>
+          <div class="mt-5 space-y-2 text-sm text-gray-700">
+            <div>✅ Relances automatiques</div>
+            <div>✅ Organisation des demandes</div>
+            <div>✅ Moins d’oublis et plus de régularité</div>
+          </div>
         </div>
+      </div>
 
-        <div class="step-card p-6 rounded-3xl border border-gray-100 bg-gray-50 shadow-premium">
-          <div class="text-xs uppercase tracking-widest text-gray-500 font-semibold">Étape 4</div>
-          <div class="font-bold mt-2 text-lg">Vous avancez plus vite</div>
-          <div class="text-sm text-gray-600 mt-2">Vous recevez un lead mieux préparé, plus simple à traiter et plus facile à convertir.</div>
-        </div>
+      <div class="text-center mt-10">
+        <a href="#diagnostic" class="inline-block bg-ada-blue text-white px-8 py-4 rounded-xl text-lg font-bold hover:scale-105 transition-transform shadow-2xl">
+          Découvrir ce qui peut être automatisé dans mon activité
+        </a>
       </div>
     </div>
   </section>
@@ -301,27 +277,27 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
         <div>
           <span class="demo-badge">Exemple concret</span>
-          <h2 class="text-3xl md:text-4xl font-bold mt-4">Voilà à quoi peut ressembler votre système ADA.</h2>
+          <h2 class="text-3xl md:text-4xl font-bold mt-4">Un système ADA peut vous aider à transformer plus de visiteurs en opportunités.</h2>
           <p class="text-gray-600 text-lg mt-4">
-            Le visiteur est guidé automatiquement, ses besoins sont clarifiés, ses coordonnées sont récupérées et vous recevez une opportunité mieux qualifiée.
+            Le visiteur est guidé simplement, ses besoins sont clarifiés, ses coordonnées sont récupérées et vous recevez une demande plus claire et plus facile à traiter.
           </p>
 
           <div class="mt-6 space-y-3 text-gray-700">
-            <div>✅ Accueil immédiat du prospect</div>
-            <div>✅ Questions simples pour comprendre le besoin</div>
-            <div>✅ Capture de WhatsApp ou email</div>
-            <div>✅ Plus d’opportunités, moins de gestion manuelle</div>
+            <div>✅ Le visiteur est accueilli immédiatement</div>
+            <div>✅ Le besoin est clarifié en quelques étapes simples</div>
+            <div>✅ Les coordonnées sont récupérées automatiquement</div>
+            <div>✅ Vous gagnez du temps et laissez passer moins d’opportunités</div>
           </div>
 
           <div class="mt-8">
-            <a href="#" onclick="openAdaBot(); return false;" class="inline-block bg-ada-blue text-white px-8 py-4 rounded-xl text-lg font-bold hover:scale-105 transition-transform shadow-2xl">
+            <a href="#diagnostic" class="inline-block bg-ada-blue text-white px-8 py-4 rounded-xl text-lg font-bold hover:scale-105 transition-transform shadow-2xl">
               Voir le diagnostic interactif
             </a>
           </div>
         </div>
 
         <div class="bg-white border border-gray-100 rounded-3xl shadow-premium p-4">
-          <img src="Ada-process.PNG" alt="Exemple de démonstration ADA" class="rounded-2xl w-full object-cover" />
+          <img src="Servicios.PNG" alt="Exemple de système ADA" class="rounded-2xl w-full object-cover" />
         </div>
       </div>
     </div>
@@ -335,10 +311,10 @@
           <div>
             <h2 class="text-3xl font-bold">La méthode ADA</h2>
             <p class="text-gray-600 mt-3 max-w-2xl">
-              On part de votre réalité, pas d’un modèle standard. L’objectif est simple : alléger la gestion, mieux traiter les demandes et vous faire gagner du temps.
+              Nous partons de votre réalité, pas d’un modèle standard. Le but est simple : alléger la gestion, mieux traiter les demandes et mettre en place un système utile pour votre activité.
             </p>
           </div>
-          <a href="#" onclick="openAdaBot(); return false;" class="bg-ada-blue text-white px-7 py-3 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg">
+          <a href="#diagnostic" class="bg-ada-blue text-white px-7 py-3 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg">
             Lancer mon diagnostic
           </a>
         </div>
@@ -347,22 +323,22 @@
           <div class="p-5 rounded-2xl border border-gray-100 bg-white">
             <div class="text-xs uppercase tracking-widest text-gray-500 font-semibold">Étape 1</div>
             <div class="font-bold mt-2">Analyse</div>
-            <div class="text-sm text-gray-600 mt-1">On comprend comment vous travaillez aujourd’hui.</div>
+            <div class="text-sm text-gray-600 mt-1">Nous comprenons comment vous gérez aujourd’hui vos demandes.</div>
           </div>
           <div class="p-5 rounded-2xl border border-gray-100 bg-white">
             <div class="text-xs uppercase tracking-widest text-gray-500 font-semibold">Étape 2</div>
             <div class="font-bold mt-2">Diagnostic</div>
-            <div class="text-sm text-gray-600 mt-1">On identifie où se perdent le temps et les opportunités.</div>
+            <div class="text-sm text-gray-600 mt-1">Nous identifions où vous perdez du temps et des opportunités.</div>
           </div>
           <div class="p-5 rounded-2xl border border-gray-100 bg-white">
             <div class="text-xs uppercase tracking-widest text-gray-500 font-semibold">Étape 3</div>
             <div class="font-bold mt-2">Mise en place</div>
-            <div class="text-sm text-gray-600 mt-1">On installe un système simple et adapté à votre activité.</div>
+            <div class="text-sm text-gray-600 mt-1">Nous installons un système simple et adapté à votre activité.</div>
           </div>
           <div class="p-5 rounded-2xl border border-gray-100 bg-white">
             <div class="text-xs uppercase tracking-widest text-gray-500 font-semibold">Étape 4</div>
             <div class="font-bold mt-2">Optimisation</div>
-            <div class="text-sm text-gray-600 mt-1">On affine selon les résultats et les retours terrain.</div>
+            <div class="text-sm text-gray-600 mt-1">Nous ajustons selon les résultats et les besoins réels du terrain.</div>
           </div>
         </div>
       </div>
@@ -376,62 +352,105 @@
         <span class="section-pill">Diagnostic interactif</span>
 
         <h2 class="text-3xl md:text-4xl font-bold mt-4">
-          En 2 minutes, découvrez où vous pouvez récupérer du temps.
+          En 2 minutes, découvrez ce que vous pourriez automatiser pour gagner du temps.
         </h2>
 
         <p class="text-gray-600 text-lg mt-4 max-w-2xl mx-auto">
-          Vous recevez une recommandation claire : quoi améliorer en premier pour répondre plus vite, mieux organiser vos demandes et ne plus laisser passer d’opportunités.
+          Vous recevez une recommandation claire sur ce qui peut être automatisé en priorité pour mieux répondre, mieux organiser vos demandes et avancer plus sereinement.
         </p>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 text-left">
           <div class="p-5 rounded-2xl bg-gray-50 border border-gray-100">
-            <div class="font-semibold">✅ Où vous perdez du temps</div>
-            <div class="text-sm text-gray-600 mt-1">Les tâches répétitives qui reviennent chaque semaine.</div>
+            <div class="font-semibold">✅ Ce qui vous fait perdre du temps</div>
+            <div class="text-sm text-gray-600 mt-1">Les tâches répétitives et les demandes encore traitées à la main.</div>
           </div>
           <div class="p-5 rounded-2xl bg-gray-50 border border-gray-100">
-            <div class="font-semibold">✅ Ce qui freine vos demandes</div>
-            <div class="text-sm text-gray-600 mt-1">Réponses tardives, suivi irrégulier, gestion dispersée.</div>
+            <div class="font-semibold">✅ Ce qui freine vos opportunités</div>
+            <div class="text-sm text-gray-600 mt-1">Réponses tardives, suivi irrégulier, organisation dispersée.</div>
           </div>
           <div class="p-5 rounded-2xl bg-gray-50 border border-gray-100">
-            <div class="font-semibold">✅ Le levier le plus simple à activer</div>
-            <div class="text-sm text-gray-600 mt-1">Une première amélioration claire, concrète et réaliste.</div>
+            <div class="font-semibold">✅ Le premier levier à activer</div>
+            <div class="text-sm text-gray-600 mt-1">Une première automatisation simple, claire et utile.</div>
           </div>
         </div>
 
         <div class="mt-9">
-          <a href="#" onclick="openAdaBot(); return false;" class="inline-block bg-ada-blue text-white px-10 py-4 rounded-xl text-lg font-bold hover:scale-105 transition-transform shadow-2xl">
+          <a href="#contact" class="inline-block bg-ada-blue text-white px-10 py-4 rounded-xl text-lg font-bold hover:scale-105 transition-transform shadow-2xl">
             ✅ Commencer mon diagnostic gratuit
           </a>
           <p class="text-sm text-gray-400 mt-3 italic">
-            Vous pouvez laisser autant d’infos que vous voulez — le minimum suffit.
+            Vous pouvez laisser autant d’informations que vous voulez — le minimum suffit.
           </p>
-        </div>
-
-        <!-- Standard Typebot optional area -->
-        <div class="mt-12 text-left">
-          <div class="bg-gray-50 border border-dashed border-gray-300 rounded-3xl p-6">
-            <div class="font-bold text-lg">Zone prête pour un bot intégré dans la page</div>
-            <p class="text-sm text-gray-600 mt-2">
-              Si vous préférez afficher le bot directement dans cette section plutôt qu’en fenêtre flottante, laissez ce bloc et activez le code Typebot standard plus bas.
-            </p>
-
-            <div id="typebot-embed-section" class="mt-5 hidden">
-              <typebot-standard style="width: 100%; height: 620px;"></typebot-standard>
-            </div>
-          </div>
         </div>
       </div>
     </div>
   </section>
 
-  
-  <!-- CUSTOM ADA LAUNCHER -->
-  <div class="ada-chat-launcher">
-    <button onclick="openAdaBot(); return false;" class="bg-white p-4 rounded-2xl shadow-2xl border border-gray-100 flex items-center space-x-3 cursor-pointer hover:scale-105 transition">
-      <img src="operadora.jpg.PNG" alt="Celest ADA" class="w-10 h-10 rounded-full object-cover">
-      <p class="text-sm font-medium">Parler avec Celest</p>
-    </button>
-  </div>
+  <!-- CONTACT -->
+  <section id="contact" class="py-18 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+
+        <div>
+          <h2 class="text-3xl font-bold">Contact</h2>
+          <p class="text-gray-600 mt-3">
+            Laissez-nous votre situation. Plus vous donnez d’informations, plus la recommandation sera précise — mais tout reste optionnel.
+          </p>
+
+          <div class="mt-6 space-y-3 text-sm text-gray-600">
+            <div>📍 <b>Présence :</b> Lausanne & Suisse romande</div>
+            <div>💬 <b>Canaux :</b> WhatsApp / Email</div>
+          </div>
+        </div>
+
+        <form class="bg-gray-50 border border-gray-100 rounded-3xl p-8 shadow-premium">
+          <div class="grid grid-cols-1 gap-4">
+
+            <div>
+              <label class="text-sm font-semibold">Votre email (obligatoire)</label>
+              <input required class="mt-1 w-full rounded-xl border border-gray-200 p-3 bg-white" placeholder="vous@email.com" />
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="text-sm font-semibold">Nom (optionnel)</label>
+                <input class="mt-1 w-full rounded-xl border border-gray-200 p-3 bg-white" placeholder="Votre nom" />
+              </div>
+              <div>
+                <label class="text-sm font-semibold">Téléphone / WhatsApp (optionnel)</label>
+                <input class="mt-1 w-full rounded-xl border border-gray-200 p-3 bg-white" placeholder="+41 ..." />
+              </div>
+            </div>
+
+            <div>
+              <label class="text-sm font-semibold">Activité (optionnel)</label>
+              <input class="mt-1 w-full rounded-xl border border-gray-200 p-3 bg-white" placeholder="Ex : cabinet, salon, coaching, esthétique..." />
+            </div>
+
+            <div>
+              <label class="text-sm font-semibold">Ville (optionnel)</label>
+              <input class="mt-1 w-full rounded-xl border border-gray-200 p-3 bg-white" placeholder="Lausanne, Vevey, Montreux..." />
+            </div>
+
+            <div>
+              <label class="text-sm font-semibold">Votre situation (optionnel mais conseillé)</label>
+              <textarea class="mt-1 w-full rounded-xl border border-gray-200 p-3 bg-white" rows="4"
+                placeholder="Ex : Je reçois beaucoup de demandes, mais je réponds tard. Je veux une organisation plus simple et gagner du temps."></textarea>
+            </div>
+
+            <button type="button" class="bg-ada-blue text-white px-6 py-3 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg">
+              Envoyer
+            </button>
+
+            <p class="text-xs text-slate-500">
+              Formulaire prêt à être connecté à votre système plus tard.
+            </p>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </section>
 
   <footer class="py-10 bg-white border-t border-gray-100">
     <div class="container mx-auto px-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
@@ -439,7 +458,7 @@
         <img src="Logo_ada.PNG" alt="ADA Logo" class="h-10 w-auto" />
         <div>
           <div class="font-bold">ADA</div>
-          <div class="text-xs text-slate-500">Temps • Argent • Sérénité • Lausanne</div>
+          <div class="text-xs text-slate-500">Temps • Sérénité • Opportunités • Lausanne</div>
         </div>
       </div>
       <div class="text-sm text-slate-600 text-center">
@@ -449,69 +468,18 @@
     </div>
   </footer>
 
-  <!-- TYPEBOT PREP -->
+  <!-- TYPEBOT OFFICIAL MINIMAL TEST -->
   <script type="module">
     import Typebot from "https://cdn.jsdelivr.net/npm/@typebot.io/js@0/dist/web.js";
 
-    /*
-      1) Remplacez YOUR_TYPEBOT_ID_HERE par l’identifiant public de votre bot
-      2) Si vous voulez un bot flottant + vos propres boutons ADA :
-         - laissez initBubble
-         - gardez theme.button.isHidden: true
-         - utilisez openAdaBot() sur vos CTA
-      3) Si vous voulez afficher le bot directement dans la section diagnostic :
-         - passez ENABLE_STANDARD_EMBED à true
-    */
-
-    const TYPEBOT_ID = "YOUR_TYPEBOT_ID_HERE";
-    const ENABLE_STANDARD_EMBED = false;
-
-    window.openAdaBot = function () {
-      if (!TYPEBOT_ID || TYPEBOT_ID === "YOUR_TYPEBOT_ID_HERE") {
-        alert("Ajoutez d’abord votre identifiant public Typebot dans le code.");
-        return;
-      }
-      Typebot.open();
-    };
-
-    if (TYPEBOT_ID && TYPEBOT_ID !== "YOUR_TYPEBOT_ID_HERE") {
-      Typebot.initBubble({
-        typebot: TYPEBOT_ID,
-        prefilledVariables: {
-          "Page URL": window.location.href,
-          "Language": document.documentElement.lang,
-        },
-        previewMessage: {
-          message: "Bonjour 👋 Lancez votre diagnostic gratuit",
-          autoShowDelay: 6000,
-        },
-        theme: {
-          placement: "right",
-          button: {
-            isHidden: true
-          },
-          previewMessage: {
-            backgroundColor: "#ffffff",
-            textColor: "#0f172a"
-          },
-          chatWindow: {
-            backgroundColor: "#ffffff",
-            maxWidth: "100%"
-          }
+    Typebot.initBubble({
+      typebot: "celest-v-1-7kv3w4t",
+      theme: {
+        button: {
+          backgroundColor: "#1e3a8a"
         }
-      });
-
-      if (ENABLE_STANDARD_EMBED) {
-        document.getElementById("typebot-embed-section")?.classList.remove("hidden");
-        Typebot.initStandard({
-          typebot: TYPEBOT_ID,
-          prefilledVariables: {
-            "Page URL": window.location.href,
-            "Language": document.documentElement.lang,
-          }
-        });
       }
-    }
+    });
   </script>
 
 </body>
