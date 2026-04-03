@@ -3,628 +3,1016 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ADA — Répondez à chaque lead en moins de 30 secondes</title>
+  <title>ADA Response System — Répondez en moins de 30 secondes, automatiquement</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-    * { font-family: 'Inter', sans-serif; }
+    *, *::before, *::after { font-family: 'Inter', sans-serif; box-sizing: border-box; }
 
-    .gradient-hero {
-      background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #0d1117 100%);
+    :root {
+      --bg-base: #0b0f19;
+      --bg-surface: #0f1421;
+      --bg-elevated: #141929;
+      --border: rgba(255,255,255,0.07);
+      --border-accent: rgba(99,102,241,0.25);
+      --indigo: #6366f1;
+      --purple: #8b5cf6;
+      --text-muted: rgba(255,255,255,0.45);
+      --text-secondary: rgba(255,255,255,0.65);
     }
-    .gradient-accent {
-      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg-base); color: #f1f5f9; overflow-x: hidden; }
+
+    /* ── Typography ── */
     .gradient-text {
-      background: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      background: linear-gradient(135deg, #818cf8 0%, #c084fc 60%, #e879f9 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
-    .gradient-cta {
-      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-      transition: all 0.3s ease;
+    .gradient-text-subtle {
+      background: linear-gradient(135deg, #a5b4fc 0%, #c084fc 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
-    .gradient-cta:hover {
-      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-      transform: translateY(-2px);
-      box-shadow: 0 20px 40px rgba(99, 102, 241, 0.4);
+
+    /* ── Backgrounds ── */
+    .bg-surface { background: var(--bg-surface); }
+    .bg-elevated { background: var(--bg-elevated); }
+    .gradient-hero-bg {
+      background: radial-gradient(ellipse 120% 80% at 50% -10%, rgba(99,102,241,0.12) 0%, transparent 60%),
+                  radial-gradient(ellipse 60% 50% at 80% 50%, rgba(139,92,246,0.06) 0%, transparent 50%),
+                  var(--bg-base);
     }
-    .card-glass {
+
+    /* ── Glassmorphism ── */
+    .glass {
       background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
     }
-    .card-glass:hover {
-      background: rgba(255,255,255,0.07);
-      border-color: rgba(99,102,241,0.3);
-      transform: translateY(-4px);
-      transition: all 0.3s ease;
+    .glass-accent {
+      background: rgba(99,102,241,0.06);
+      border: 1px solid var(--border-accent);
+      backdrop-filter: blur(16px);
     }
-    .pulse-dot {
-      animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+    .glass-hover {
+      transition: all 0.25s ease;
     }
-    @keyframes pulse-ring {
-      0% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.6); }
-      70% { box-shadow: 0 0 0 12px rgba(99, 102, 241, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
-    }
-    .timer-count {
-      font-variant-numeric: tabular-nums;
-    }
-    .chat-bubble-enter {
-      animation: slideInUp 0.4s ease forwards;
-      opacity: 0;
-    }
-    @keyframes slideInUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .bento-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 20px;
-      padding: 2rem;
-      transition: all 0.3s ease;
-    }
-    .bento-card:hover {
-      background: rgba(99,102,241,0.08);
-      border-color: rgba(99,102,241,0.25);
+    .glass-hover:hover {
+      background: rgba(255,255,255,0.065);
+      border-color: rgba(99,102,241,0.35);
       transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.35);
     }
-    .problem-stat {
-      border-left: 3px solid #ef4444;
+
+    /* ── Buttons ── */
+    .btn-primary {
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      color: white; font-weight: 700;
+      border-radius: 14px; padding: 14px 28px;
+      display: inline-flex; align-items: center; gap: 10px;
+      transition: all 0.25s ease; position: relative; overflow: hidden;
+      box-shadow: 0 4px 20px rgba(99,102,241,0.25);
     }
-    .noise-overlay {
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-      opacity: 0.03;
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
+    .btn-primary::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+      opacity: 0; transition: opacity 0.25s ease;
     }
-    .step-line::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: calc(100% + 8px);
-      width: calc(100% - 16px);
-      height: 1px;
-      background: linear-gradient(90deg, rgba(99,102,241,0.4), transparent);
-    }
-    @media (max-width: 768px) {
-      .step-line::after { display: none; }
-    }
-    .demo-widget {
-      background: linear-gradient(135deg, #0f0f23, #1a1a3e);
-      border: 1px solid rgba(99,102,241,0.2);
-      border-radius: 24px;
-    }
-    .typing-dots span {
-      display: inline-block;
-      width: 6px; height: 6px;
-      background: #818cf8;
-      border-radius: 50%;
-      animation: typing 1.4s infinite ease-in-out;
-    }
-    .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
-    .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
-    @keyframes typing {
-      0%, 60%, 100% { transform: translateY(0); }
-      30% { transform: translateY(-6px); }
-    }
-    .price-card {
-      background: rgba(255,255,255,0.03);
+    .btn-primary:hover::before { opacity: 1; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(99,102,241,0.45); }
+    .btn-primary span { position: relative; z-index: 1; }
+    .btn-primary svg { position: relative; z-index: 1; }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 24px;
-      transition: all 0.3s ease;
+      color: rgba(255,255,255,0.8); font-weight: 600;
+      border-radius: 14px; padding: 14px 28px;
+      display: inline-flex; align-items: center; gap: 10px;
+      transition: all 0.25s ease;
     }
-    .price-card.featured {
-      background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(139,92,246,0.1));
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
+      color: white;
+    }
+
+    .btn-ghost {
+      background: rgba(99,102,241,0.08);
+      border: 1px solid rgba(99,102,241,0.2);
+      color: #a5b4fc; font-weight: 600;
+      border-radius: 14px; padding: 14px 28px;
+      display: inline-flex; align-items: center; gap: 10px;
+      transition: all 0.25s ease;
+    }
+    .btn-ghost:hover {
+      background: rgba(99,102,241,0.14);
       border-color: rgba(99,102,241,0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(99,102,241,0.2);
     }
-    .scrollbar-hide::-webkit-scrollbar { display: none; }
-    .counter-number {
-      font-size: 3.5rem;
-      font-weight: 900;
-      line-height: 1;
+
+    /* ── Pulse audit CTA ── */
+    .btn-audit-pulse {
+      animation: audit-pulse 3s ease-in-out infinite;
+    }
+    @keyframes audit-pulse {
+      0%, 100% { box-shadow: 0 4px 20px rgba(99,102,241,0.2); }
+      50% { box-shadow: 0 4px 32px rgba(99,102,241,0.45), 0 0 0 6px rgba(99,102,241,0.06); }
+    }
+
+    /* ── Badges ── */
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.02em;
+      padding: 6px 14px; border-radius: 100px;
+    }
+    .badge-indigo {
+      background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.2);
+      color: #a5b4fc;
+    }
+    .badge-green {
+      background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2);
+      color: #6ee7b7;
+    }
+    .badge-amber {
+      background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.2);
+      color: #fcd34d;
+    }
+    .badge-red {
+      background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.18);
+      color: #fca5a5;
+    }
+
+    /* ── Pulse dot ── */
+    .pulse-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      animation: pdot 2s cubic-bezier(0.455,0.03,0.515,0.955) infinite;
+    }
+    .pulse-dot-indigo { background: #818cf8; animation: pdot-i 2s ease infinite; }
+    .pulse-dot-green  { background: #34d399; animation: pdot-g 2s ease infinite; }
+    @keyframes pdot-i {
+      0%   { box-shadow: 0 0 0 0 rgba(129,140,248,0.6); }
+      70%  { box-shadow: 0 0 0 8px rgba(129,140,248,0); }
+      100% { box-shadow: 0 0 0 0 rgba(129,140,248,0); }
+    }
+    @keyframes pdot-g {
+      0%   { box-shadow: 0 0 0 0 rgba(52,211,153,0.6); }
+      70%  { box-shadow: 0 0 0 8px rgba(52,211,153,0); }
+      100% { box-shadow: 0 0 0 0 rgba(52,211,153,0); }
+    }
+
+    /* ── Typing dots ── */
+    .typing-dot {
+      display: inline-block; width: 5px; height: 5px;
+      background: #818cf8; border-radius: 50%;
+      animation: tdot 1.4s ease-in-out infinite;
+    }
+    .typing-dot:nth-child(2) { animation-delay: 0.18s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.36s; }
+    @keyframes tdot {
+      0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+      30% { transform: translateY(-5px); opacity: 1; }
+    }
+
+    /* ── Bento ── */
+    .bento { border-radius: 20px; padding: 28px; transition: all 0.25s ease; }
+    .bento:hover { transform: translateY(-3px); }
+
+    /* ── Calendly skeleton ── */
+    .skeleton-line {
+      height: 10px; border-radius: 6px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.04) 25%, rgba(255,255,255,0.09) 50%, rgba(255,255,255,0.04) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.8s infinite;
+    }
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    .cal-glow {
+      background: radial-gradient(ellipse 70% 50% at 50% 50%, rgba(99,102,241,0.08) 0%, transparent 70%);
+    }
+
+    /* ── Problem stat ── */
+    .stat-border-l { border-left: 2px solid rgba(239,68,68,0.4); padding-left: 20px; }
+
+    /* ── Divider ── */
+    .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); }
+
+    /* ── Section label ── */
+    .section-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: #818cf8;
+    }
+
+    /* ── Timer font ── */
+    .font-mono-tab { font-variant-numeric: tabular-nums; font-family: 'SF Mono', 'Fira Code', monospace; }
+
+    /* ── Fade in on scroll ── */
+    .fade-in { opacity: 0; transform: translateY(18px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Noise ── */
+    .noise::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.025;
+    }
+
+    /* ── Grid line decoration ── */
+    .grid-line-h {
+      position: absolute; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(99,102,241,0.12) 20%, rgba(99,102,241,0.12) 80%, transparent 100%);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .btn-primary, .btn-secondary, .btn-ghost { width: 100%; justify-content: center; }
     }
   </style>
 </head>
-<body class="bg-[#0d1117] text-white overflow-x-hidden">
+<body>
 
-  <!-- ===== NAVBAR ===== -->
-  <nav class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 bg-[#0d1117]/80 backdrop-blur-xl border-b border-white/5">
-    <div class="flex items-center gap-2">
-      <div class="w-8 h-8 rounded-lg gradient-accent flex items-center justify-center">
-        <span class="text-white font-black text-sm">A</span>
-      </div>
-      <span class="font-bold text-lg tracking-tight">ADA</span>
+  <!-- ═══════════════════════════════════════════════
+       NAVBAR
+  ═══════════════════════════════════════════════ -->
+  <nav class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4"
+       style="background: rgba(11,15,25,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);">
+    <div class="flex items-center">
+      <img src="logo-ada.png" alt="ADA" class="h-8 w-auto object-contain" />
     </div>
-    <div class="hidden md:flex items-center gap-8 text-sm text-white/60">
-      <a href="#probleme" class="hover:text-white transition-colors">Le Problème</a>
-      <a href="#solution" class="hover:text-white transition-colors">La Solution</a>
-      <a href="#tarifs" class="hover:text-white transition-colors">Tarifs</a>
+    <div class="hidden md:flex items-center gap-8 text-sm" style="color: var(--text-muted);">
+      <a href="#probleme"  class="hover:text-white transition-colors duration-200">Problème</a>
+      <a href="#solution"  class="hover:text-white transition-colors duration-200">Solution</a>
+      <a href="#tarifs"    class="hover:text-white transition-colors duration-200">Tarifs</a>
+      <a href="#faq"       class="hover:text-white transition-colors duration-200">FAQ</a>
     </div>
-    <a href="#contact" class="gradient-cta px-5 py-2.5 rounded-xl text-sm font-semibold shadow-lg shadow-indigo-500/20">
-      Réserver une Démo
+    <a href="#reservation" class="btn-primary text-sm py-2.5 px-5">
+      <span>Réserver une Démo</span>
     </a>
   </nav>
 
-  <!-- ===== HERO ===== -->
-  <section class="relative gradient-hero min-h-screen flex items-center pt-20 overflow-hidden">
-    <div class="noise-overlay"></div>
 
-    <!-- Background glow -->
-    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none"></div>
-    <div class="absolute top-1/3 left-1/4 w-[300px] h-[300px] bg-purple-600/8 rounded-full blur-[100px] pointer-events-none"></div>
+  <!-- ═══════════════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════════════ -->
+  <section class="relative gradient-hero-bg noise min-h-screen flex items-center pt-20 overflow-hidden">
 
-    <div class="relative max-w-6xl mx-auto px-6 py-24 text-center">
+    <!-- Grid decoration -->
+    <div class="grid-line-h" style="top: 40%;"></div>
 
-      <!-- Badge -->
-      <div class="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/20 rounded-full px-4 py-2 text-sm font-medium text-indigo-300 mb-8">
-        <span class="w-2 h-2 bg-indigo-400 rounded-full pulse-dot"></span>
-        Nouveau : Réponse automatique en &lt;30s
+    <!-- Glow blobs -->
+    <div class="absolute pointer-events-none" style="top:-5%;left:50%;transform:translateX(-50%);width:700px;height:500px;background:radial-gradient(ellipse,rgba(99,102,241,0.13) 0%,transparent 65%);"></div>
+    <div class="absolute pointer-events-none" style="top:30%;right:-5%;width:400px;height:400px;background:radial-gradient(ellipse,rgba(139,92,246,0.07) 0%,transparent 60%);"></div>
+
+    <div class="relative max-w-6xl mx-auto px-6 py-28 text-center">
+
+      <!-- Product name -->
+      <div class="mb-5">
+        <span class="badge badge-indigo">
+          <span class="pulse-dot pulse-dot-indigo"></span>
+          ADA Response System
+        </span>
       </div>
 
+      <!-- Tagline -->
+      <p class="text-sm font-semibold tracking-widest uppercase mb-8" style="color:#818cf8; letter-spacing:0.14em;">
+        Capture &nbsp;·&nbsp; Réponse &nbsp;·&nbsp; Conversion &nbsp;—&nbsp; Tout en automatique.
+      </p>
+
       <!-- Headline -->
-      <h1 class="text-5xl md:text-7xl font-black leading-[1.05] mb-6 tracking-tight">
-        Répondez à chaque lead<br/>
-        <span class="gradient-text">en moins de 30 secondes</span><br/>
+      <h1 class="text-5xl md:text-[68px] font-black leading-[1.04] tracking-tight mb-7">
+        Répondez à chaque opportunité<br class="hidden md:block"/>
+        <span class="gradient-text">en moins de 30 secondes</span><br class="hidden md:block"/>
         — automatiquement.
       </h1>
 
       <!-- Sub -->
-      <p class="text-xl md:text-2xl text-white/60 max-w-2xl mx-auto mb-12 leading-relaxed font-light">
-        Chaque prospect qui attend est un client perdu.<br/>
-        Notre système répond, relance et transforme vos leads en rendez-vous.
+      <p class="text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed" style="color:var(--text-secondary);">
+        Un prospect non contacté dans les 5 minutes perd jusqu'à <strong class="text-white">80% de sa valeur.</strong><br/>
+        ADA récupère votre ROI publicitaire instantanément.
       </p>
 
-      <!-- CTA Group -->
+      <!-- CTAs -->
       <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-        <a href="#demo" class="gradient-cta px-8 py-4 rounded-2xl text-base font-bold shadow-xl shadow-indigo-500/30 flex items-center gap-3 w-full sm:w-auto justify-center">
-          <i data-lucide="play-circle" class="w-5 h-5"></i>
-          Voir la Démo en Direct
+        <a href="#reservation" class="btn-primary text-base px-8 py-4">
+          <i data-lucide="calendar" class="w-5 h-5"></i>
+          <span>Réserver une Démo</span>
         </a>
-        <a href="#contact" class="px-8 py-4 rounded-2xl text-base font-semibold border border-white/10 hover:border-white/20 hover:bg-white/5 transition-all flex items-center gap-3 w-full sm:w-auto justify-center">
-          <i data-lucide="calendar" class="w-5 h-5 text-indigo-400"></i>
-          Réserver un appel gratuit
+        <a href="#audit" class="btn-ghost text-base px-8 py-4 btn-audit-pulse">
+          <i data-lucide="activity" class="w-5 h-5"></i>
+          Audit de Réactivité Gratuit
         </a>
       </div>
 
-      <!-- Social proof numbers -->
-      <div class="flex flex-col sm:flex-row gap-8 justify-center items-center text-center">
+      <!-- Stats row -->
+      <div class="flex flex-col sm:flex-row gap-10 justify-center items-center text-center">
         <div>
-          <div class="counter-number gradient-text">30s</div>
-          <div class="text-white/40 text-sm mt-1">Temps de réponse</div>
+          <div class="text-4xl font-black gradient-text-subtle mb-1">&lt;30s</div>
+          <div class="text-xs" style="color:var(--text-muted);">Temps de réponse</div>
         </div>
-        <div class="hidden sm:block w-px h-12 bg-white/10"></div>
+        <div class="hidden sm:block w-px h-10" style="background:var(--border);"></div>
         <div>
-          <div class="counter-number gradient-text">3×</div>
-          <div class="text-white/40 text-sm mt-1">Plus de rendez-vous</div>
+          <div class="text-4xl font-black gradient-text-subtle mb-1">24/7</div>
+          <div class="text-xs" style="color:var(--text-muted);">Disponibilité</div>
         </div>
-        <div class="hidden sm:block w-px h-12 bg-white/10"></div>
+        <div class="hidden sm:block w-px h-10" style="background:var(--border);"></div>
         <div>
-          <div class="counter-number gradient-text">7j</div>
-          <div class="text-white/40 text-sm mt-1">Suivi automatique</div>
+          <div class="text-4xl font-black gradient-text-subtle mb-1">7j</div>
+          <div class="text-xs" style="color:var(--text-muted);">Suivi automatique</div>
+        </div>
+        <div class="hidden sm:block w-px h-10" style="background:var(--border);"></div>
+        <div>
+          <div class="text-4xl font-black gradient-text-subtle mb-1">0</div>
+          <div class="text-xs" style="color:var(--text-muted);">Action requise de votre part</div>
         </div>
       </div>
+
     </div>
   </section>
 
-  <!-- ===== PROBLÈME ===== -->
-  <section id="probleme" class="py-28 px-6 bg-[#0d1117]">
+
+  <!-- ═══════════════════════════════════════════════
+       PROBLÈME
+  ═══════════════════════════════════════════════ -->
+  <section id="probleme" class="py-28 px-6 bg-surface">
     <div class="max-w-5xl mx-auto">
 
-      <div class="text-center mb-16">
-        <span class="text-red-400 text-sm font-semibold uppercase tracking-widest mb-4 block">Le vrai problème</span>
+      <div class="text-center mb-16 fade-in">
+        <p class="section-label mb-4">Le coût réel de l'attente</p>
         <h2 class="text-4xl md:text-5xl font-black leading-tight">
-          Vous perdez des clients<br/>
-          <span class="text-red-400">à chaque minute de retard.</span>
+          Chaque minute sans réponse<br/>
+          <span style="color:#f87171;">est un revenu perdu.</span>
         </h2>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-6 mb-16">
+      <div class="grid md:grid-cols-3 gap-5 mb-14">
 
-        <div class="card-glass rounded-2xl p-8 problem-stat pl-8">
-          <div class="text-5xl font-black text-red-400 mb-3">60%</div>
-          <p class="text-white/70 text-base leading-relaxed">
-            des leads choisissent <strong class="text-white">le premier qui répond</strong> — pas le meilleur. Le plus rapide.
+        <div class="glass glass-hover rounded-2xl p-8 stat-border-l fade-in">
+          <div class="text-5xl font-black mb-4" style="color:#f87171;">+50%</div>
+          <p class="text-sm leading-relaxed" style="color:var(--text-secondary);">
+            des prospects choisissent <strong class="text-white">le premier professionnel qui répond</strong> — pas forcément le meilleur.
           </p>
         </div>
 
-        <div class="card-glass rounded-2xl p-8 problem-stat pl-8">
-          <div class="text-5xl font-black text-red-400 mb-3">10×</div>
-          <p class="text-white/70 text-base leading-relaxed">
-            Après 5 minutes, la probabilité de convertir un lead <strong class="text-white">chute de 10 fois</strong>. Après 1h : il est parti.
+        <div class="glass glass-hover rounded-2xl p-8 stat-border-l fade-in">
+          <div class="text-5xl font-black mb-4" style="color:#f87171;">5 min</div>
+          <p class="text-sm leading-relaxed" style="color:var(--text-secondary);">
+            Au-delà de 5 minutes sans réponse, <strong class="text-white">la probabilité de conversion chute drastiquement.</strong> Après 1h : il est parti.
           </p>
         </div>
 
-        <div class="card-glass rounded-2xl p-8 problem-stat pl-8">
-          <div class="text-5xl font-black text-red-400 mb-3">0</div>
-          <p class="text-white/70 text-base leading-relaxed">
-            Aucun suivi = aucun client. <strong class="text-white">80% des leads</strong> nécessitent 5 relances. Qui les fait ?
+        <div class="glass glass-hover rounded-2xl p-8 stat-border-l fade-in">
+          <div class="text-5xl font-black mb-4" style="color:#f87171;">80%</div>
+          <p class="text-sm leading-relaxed" style="color:var(--text-secondary);">
+            des leads nécessitent plusieurs relances pour convertir. <strong class="text-white">Qui les envoie — et à quelle heure ?</strong>
           </p>
         </div>
 
       </div>
 
-      <!-- Pain narrative -->
-      <div class="bg-red-950/20 border border-red-500/15 rounded-3xl p-8 md:p-12 text-center">
-        <p class="text-xl md:text-2xl text-white/80 leading-relaxed max-w-3xl mx-auto">
+      <div class="rounded-3xl p-8 md:p-12 text-center fade-in" style="background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.12);">
+        <p class="text-xl md:text-2xl leading-relaxed max-w-3xl mx-auto" style="color:rgba(255,255,255,0.8);">
           Pendant que vous êtes en consultation, en déplacement, ou simplement occupé —<br/>
           <strong class="text-white">vos prospects remplissent le formulaire d'un concurrent.</strong>
         </p>
-        <p class="text-white/40 mt-4 text-base">Ce n'est pas un problème de produit. C'est un problème de vitesse.</p>
+        <p class="mt-4 text-sm" style="color:var(--text-muted);">Ce n'est pas un problème de qualité. C'est un problème de réactivité.</p>
       </div>
 
     </div>
   </section>
 
-  <!-- ===== SOLUTION ===== -->
-  <section id="solution" class="py-28 px-6 bg-[#080b10]">
-    <div class="max-w-5xl mx-auto">
 
-      <div class="text-center mb-20">
-        <span class="text-indigo-400 text-sm font-semibold uppercase tracking-widest mb-4 block">Comment ça marche</span>
+  <!-- ═══════════════════════════════════════════════
+       SOLUTION — BENTO GRID
+  ═══════════════════════════════════════════════ -->
+  <section id="solution" class="py-28 px-6 bg-elevated">
+    <div class="max-w-6xl mx-auto">
+
+      <div class="text-center mb-20 fade-in">
+        <p class="section-label mb-4">Comment ça fonctionne</p>
         <h2 class="text-4xl md:text-5xl font-black">
-          Simple. Rapide.<br/>
-          <span class="gradient-text">Totalement automatique.</span>
+          Un système complet.<br/>
+          <span class="gradient-text">Clé en main.</span>
         </h2>
+        <p class="mt-5 max-w-xl mx-auto text-base" style="color:var(--text-muted);">
+          Installation clé en main par nos experts.<br/>
+          <strong class="text-white">Aucune compétence technique requise de votre part.</strong>
+        </p>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-6 relative">
+      <!-- Bento Grid 2×2 + 1 wide -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
 
-        <!-- Step 1 -->
-        <div class="relative flex flex-col items-center text-center p-8 card-glass rounded-2xl">
-          <div class="w-16 h-16 gradient-accent rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-indigo-500/30">
-            <i data-lucide="file-text" class="w-7 h-7 text-white"></i>
+        <!-- 1 — Landing -->
+        <div class="md:col-span-5 bento glass glass-hover fade-in" style="background:rgba(99,102,241,0.05);border:1px solid rgba(99,102,241,0.15);">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6" style="background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.2);">
+            <i data-lucide="layout" class="w-5 h-5" style="color:#818cf8;"></i>
           </div>
-          <div class="text-xs text-indigo-400 font-bold uppercase tracking-widest mb-2">Étape 1</div>
-          <h3 class="text-xl font-bold mb-3">Formulaire rempli</h3>
-          <p class="text-white/55 text-sm leading-relaxed">Un prospect remplit votre formulaire de contact, que ce soit à 14h ou à 23h.</p>
-        </div>
-
-        <!-- Arrow -->
-        <div class="hidden md:flex absolute top-1/2 left-[33%] -translate-y-1/2 z-10">
-          <i data-lucide="chevron-right" class="w-6 h-6 text-indigo-400/40"></i>
-        </div>
-
-        <!-- Step 2 -->
-        <div class="relative flex flex-col items-center text-center p-8 card-glass rounded-2xl border-indigo-500/20">
-          <div class="w-16 h-16 gradient-accent rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-indigo-500/30">
-            <i data-lucide="zap" class="w-7 h-7 text-white"></i>
+          <div class="section-label mb-2">01</div>
+          <h3 class="text-xl font-bold mb-3">Capture optimisée</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--text-muted);">
+            Votre formulaire est connecté au système. Chaque soumission déclenche immédiatement une séquence de réponse — sans délai, sans exception.
+          </p>
+          <div class="mt-5">
+            <span class="badge badge-indigo text-xs">Intégration en 48h</span>
           </div>
-          <div class="text-xs text-indigo-400 font-bold uppercase tracking-widest mb-2">Étape 2</div>
-          <h3 class="text-xl font-bold mb-3">Réponse immédiate</h3>
-          <p class="text-white/55 text-sm leading-relaxed">En <strong class="text-white">moins de 30 secondes</strong>, votre prospect reçoit une réponse personnalisée.</p>
-          <span class="mt-4 bg-green-500/10 text-green-400 text-xs font-bold px-3 py-1 rounded-full border border-green-500/20">⚡ 00:28s</span>
         </div>
 
-        <!-- Arrow -->
-        <div class="hidden md:flex absolute top-1/2 left-[66%] -translate-y-1/2 z-10">
-          <i data-lucide="chevron-right" class="w-6 h-6 text-indigo-400/40"></i>
-        </div>
-
-        <!-- Step 3 -->
-        <div class="relative flex flex-col items-center text-center p-8 card-glass rounded-2xl">
-          <div class="w-16 h-16 gradient-accent rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-indigo-500/30">
-            <i data-lucide="calendar-check" class="w-7 h-7 text-white"></i>
+        <!-- 2 — Réponse -->
+        <div class="md:col-span-7 bento glass glass-hover fade-in" style="background:rgba(16,185,129,0.04);border:1px solid rgba(16,185,129,0.12);">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6" style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);">
+            <i data-lucide="zap" class="w-5 h-5" style="color:#34d399;"></i>
           </div>
-          <div class="text-xs text-indigo-400 font-bold uppercase tracking-widest mb-2">Étape 3</div>
-          <h3 class="text-xl font-bold mb-3">Rendez-vous réservé</h3>
-          <p class="text-white/55 text-sm leading-relaxed">Un lien d'agenda est envoyé. Le prospect réserve. Le suivi démarre si besoin.</p>
+          <div class="section-label mb-2" style="color:#34d399;">02</div>
+          <h3 class="text-xl font-bold mb-3">Réponse automatique instantanée</h3>
+          <p class="text-sm leading-relaxed mb-5" style="color:var(--text-muted);">
+            En moins de 30 secondes, votre prospect reçoit un message personnalisé qui engage la conversation et envoie un lien d'agenda — à n'importe quelle heure, n'importe quel jour.
+          </p>
+          <div class="flex items-center gap-3">
+            <span class="font-mono-tab text-3xl font-black" style="color:#34d399;">00:28</span>
+            <span class="text-xs" style="color:var(--text-muted);">temps de réponse moyen constaté</span>
+          </div>
+        </div>
+
+        <!-- 3 — Agenda -->
+        <div class="md:col-span-7 bento glass glass-hover fade-in" style="background:rgba(139,92,246,0.04);border:1px solid rgba(139,92,246,0.12);">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6" style="background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.2);">
+            <i data-lucide="calendar-check" class="w-5 h-5" style="color:#c084fc;"></i>
+          </div>
+          <div class="section-label mb-2" style="color:#c084fc;">03</div>
+          <h3 class="text-xl font-bold mb-3">Prise de rendez-vous automatisée</h3>
+          <p class="text-sm leading-relaxed mb-5" style="color:var(--text-muted);">
+            Le prospect reçoit votre agenda directement dans la réponse. Il réserve en autonomie. Vous recevez une confirmation — sans interaction de votre part.
+          </p>
+          <div class="flex gap-2 flex-wrap">
+            <span class="badge" style="background:rgba(139,92,246,0.08);border-color:rgba(139,92,246,0.2);color:#c084fc;">Calendly</span>
+            <span class="badge" style="background:rgba(139,92,246,0.08);border-color:rgba(139,92,246,0.2);color:#c084fc;">Cal.com</span>
+            <span class="badge" style="background:rgba(139,92,246,0.08);border-color:rgba(139,92,246,0.2);color:#c084fc;">Google Calendar</span>
+          </div>
+        </div>
+
+        <!-- 4 — Suivi -->
+        <div class="md:col-span-5 bento glass glass-hover fade-in" style="background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.12);">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6" style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);">
+            <i data-lucide="refresh-cw" class="w-5 h-5" style="color:#fbbf24;"></i>
+          </div>
+          <div class="section-label mb-2" style="color:#fbbf24;">04</div>
+          <h3 class="text-xl font-bold mb-3">Suivi automatique 7 jours</h3>
+          <p class="text-sm leading-relaxed mb-5" style="color:var(--text-muted);">
+            Si un prospect ne répond pas, le système relance intelligemment. Aucun lead ne tombe dans l'oubli.
+          </p>
+          <div class="flex flex-wrap gap-2">
+            <span class="badge badge-amber">J+1</span>
+            <span class="badge badge-amber">J+3</span>
+            <span class="badge badge-amber">J+7</span>
+          </div>
         </div>
 
       </div>
+
+      <!-- Scalability note -->
+      <div class="mt-8 rounded-2xl p-6 text-center fade-in" style="background:rgba(99,102,241,0.04);border:1px solid rgba(99,102,241,0.1);">
+        <p class="text-sm" style="color:var(--text-muted);">
+          <i data-lucide="layers" class="w-4 h-4 inline-block mr-2 -mb-0.5" style="color:#818cf8;"></i>
+          Ce système est une première étape. Nous développons ensuite des automatisations plus avancées selon votre activité.
+        </p>
+      </div>
+
     </div>
   </section>
 
-  <!-- ===== DÉMO VISUELLE ===== -->
-  <section id="demo" class="py-28 px-6 bg-[#0d1117]">
+
+  <!-- ═══════════════════════════════════════════════
+       DÉMO VISUELLE
+  ═══════════════════════════════════════════════ -->
+  <section class="py-28 px-6 bg-surface">
     <div class="max-w-5xl mx-auto">
 
-      <div class="text-center mb-16">
-        <span class="text-indigo-400 text-sm font-semibold uppercase tracking-widest mb-4 block">Démo en direct</span>
+      <div class="text-center mb-16 fade-in">
+        <p class="section-label mb-4">Démo en direct</p>
         <h2 class="text-4xl md:text-5xl font-black">
-          Regardez ce qui se passe<br/>
+          Ce qui se passe<br/>
           <span class="gradient-text">dans les 30 premières secondes</span>
         </h2>
       </div>
 
-      <div class="demo-widget p-6 md:p-10 max-w-2xl mx-auto shadow-2xl shadow-indigo-900/30">
+      <div class="max-w-2xl mx-auto rounded-3xl overflow-hidden shadow-2xl fade-in"
+           style="background:linear-gradient(145deg,#0f1421,#141929);border:1px solid rgba(99,102,241,0.18);">
 
-        <!-- Lead comes in -->
-        <div class="mb-6">
-          <div class="flex items-center gap-2 mb-3">
-            <span class="w-2 h-2 bg-blue-400 rounded-full"></span>
-            <span class="text-white/40 text-xs uppercase tracking-widest">Nouveau lead reçu</span>
-            <span class="ml-auto text-white/30 text-xs">00:00</span>
-          </div>
-          <div class="bg-white/5 border border-white/8 rounded-xl p-4">
-            <p class="text-sm text-white/70">📥 <strong class="text-white">Sophie M.</strong> a rempli votre formulaire de contact</p>
-            <p class="text-white/40 text-xs mt-1">« Bonjour, je cherche à optimiser mon cabinet. »</p>
-          </div>
+        <!-- Header bar -->
+        <div class="flex items-center gap-2 px-6 py-4" style="border-bottom:1px solid var(--border);">
+          <span class="w-3 h-3 rounded-full bg-red-500/60"></span>
+          <span class="w-3 h-3 rounded-full bg-yellow-500/60"></span>
+          <span class="w-3 h-3 rounded-full bg-green-500/60"></span>
+          <span class="ml-4 text-xs font-medium" style="color:var(--text-muted);">ADA Response System — Live</span>
+          <span class="ml-auto">
+            <span class="badge badge-green text-xs"><span class="pulse-dot pulse-dot-green"></span>Actif</span>
+          </span>
         </div>
 
-        <!-- Processing -->
-        <div class="mb-6">
-          <div class="flex items-center gap-2 mb-3">
-            <span class="w-2 h-2 bg-yellow-400 rounded-full pulse-dot"></span>
-            <span class="text-white/40 text-xs uppercase tracking-widest">Traitement en cours...</span>
-            <span class="ml-auto text-yellow-400 text-xs font-mono timer-count">00:08</span>
-          </div>
-          <div class="bg-yellow-500/5 border border-yellow-500/10 rounded-xl p-4 flex items-center gap-3">
-            <div class="typing-dots flex gap-1">
-              <span></span><span></span><span></span>
+        <div class="p-6 space-y-5">
+
+          <!-- Lead in -->
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
+              <span class="text-xs uppercase tracking-widest" style="color:var(--text-muted);">Lead entrant</span>
+              <span class="ml-auto font-mono-tab text-xs" style="color:var(--text-muted);">00:00</span>
             </div>
-            <span class="text-white/40 text-sm">Génération de la réponse personnalisée...</span>
+            <div class="rounded-xl p-4" style="background:rgba(255,255,255,0.04);border:1px solid var(--border);">
+              <p class="text-sm" style="color:var(--text-secondary);">📥 <strong class="text-white">Sophie M.</strong> a rempli votre formulaire de contact</p>
+              <p class="text-xs mt-1.5" style="color:var(--text-muted);">« Bonjour, je cherche à optimiser mon cabinet dentaire. »</p>
+            </div>
           </div>
-        </div>
 
-        <!-- Response sent -->
-        <div class="mb-6">
-          <div class="flex items-center gap-2 mb-3">
-            <span class="w-2 h-2 bg-green-400 rounded-full"></span>
-            <span class="text-white/40 text-xs uppercase tracking-widest">Réponse envoyée</span>
-            <span class="ml-auto text-green-400 text-xs font-mono font-bold timer-count">00:28 ✓</span>
+          <!-- Processing -->
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-yellow-400 pulse-dot" style="animation-name:pdot-g;"></span>
+              <span class="text-xs uppercase tracking-widest" style="color:var(--text-muted);">Traitement</span>
+              <span class="ml-auto font-mono-tab text-xs" style="color:#fbbf24;">00:08</span>
+            </div>
+            <div class="rounded-xl p-4 flex items-center gap-3" style="background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.1);">
+              <div class="flex gap-1">
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+              </div>
+              <span class="text-xs" style="color:var(--text-muted);">Génération de la réponse personnalisée...</span>
+            </div>
           </div>
-          <div class="bg-green-500/5 border border-green-500/15 rounded-xl p-4">
-            <p class="text-sm text-white/80 leading-relaxed">
-              « Bonjour Sophie, merci pour votre message. Je suis disponible pour en discuter — voici mon agenda : <span class="text-indigo-400 underline">ada-solutions.ch/cal</span> »
-            </p>
-          </div>
-        </div>
 
-        <!-- Booking confirmed -->
-        <div class="mb-6">
-          <div class="flex items-center gap-2 mb-3">
-            <span class="w-2 h-2 bg-purple-400 rounded-full"></span>
-            <span class="text-white/40 text-xs uppercase tracking-widest">Rendez-vous confirmé</span>
-            <span class="ml-auto text-white/30 text-xs">04:12</span>
+          <!-- Response sent -->
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-green-400"></span>
+              <span class="text-xs uppercase tracking-widest" style="color:var(--text-muted);">Réponse envoyée</span>
+              <span class="ml-auto font-mono-tab text-xs font-bold" style="color:#34d399;">00:28 ✓</span>
+            </div>
+            <div class="rounded-xl p-4" style="background:rgba(16,185,129,0.04);border:1px solid rgba(16,185,129,0.12);">
+              <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.8);">
+                « Bonjour Sophie, merci pour votre message. Je serais ravi d'échanger avec vous — voici mon agenda : <span style="color:#818cf8;text-decoration:underline;">adaautomation.ch/cal</span> »
+              </p>
+            </div>
           </div>
-          <div class="bg-purple-500/8 border border-purple-500/15 rounded-xl p-4">
-            <p class="text-sm text-white/80">📅 <strong class="text-white">Sophie M.</strong> a réservé un rendez-vous — Jeudi 10 avril, 14h00</p>
+
+          <!-- RDV confirmed -->
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
+              <span class="text-xs uppercase tracking-widest" style="color:var(--text-muted);">Rendez-vous confirmé</span>
+              <span class="ml-auto text-xs" style="color:var(--text-muted);">04:17</span>
+            </div>
+            <div class="rounded-xl p-4" style="background:rgba(139,92,246,0.06);border:1px solid rgba(139,92,246,0.15);">
+              <p class="text-sm" style="color:rgba(255,255,255,0.8);">📅 <strong class="text-white">Sophie M.</strong> a réservé — Jeudi 9 avril, 14h00</p>
+            </div>
           </div>
-        </div>
 
-        <!-- Follow-up footer -->
-        <div class="bg-white/3 rounded-xl p-3 flex items-center gap-3 border border-white/5">
-          <i data-lucide="refresh-cw" class="w-4 h-4 text-indigo-400 shrink-0"></i>
-          <span class="text-white/40 text-xs">Suivi automatique activé sur 7 jours — si Sophie ne répond pas, une relance sera envoyée.</span>
-        </div>
+          <!-- Follow-up -->
+          <div class="rounded-xl p-3 flex items-center gap-3" style="background:rgba(255,255,255,0.02);border:1px solid var(--border);">
+            <i data-lucide="refresh-cw" class="w-4 h-4 shrink-0" style="color:#818cf8;"></i>
+            <span class="text-xs" style="color:var(--text-muted);">Suivi automatique activé — relance si aucune réponse dans 24h.</span>
+          </div>
 
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== BÉNÉFICES (BENTO) ===== -->
-  <section class="py-28 px-6 bg-[#080b10]">
-    <div class="max-w-5xl mx-auto">
 
-      <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl font-black">
-          Tout ce que vous gagnez,<br/>
-          <span class="gradient-text">dès le premier jour.</span>
-        </h2>
-      </div>
-
-      <!-- Bento Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
-
-        <!-- Large card -->
-        <div class="md:col-span-7 bento-card">
-          <div class="w-12 h-12 bg-green-500/15 rounded-xl flex items-center justify-center mb-5 border border-green-500/20">
-            <i data-lucide="zap" class="w-6 h-6 text-green-400"></i>
-          </div>
-          <h3 class="text-2xl font-bold mb-3">Réponse instantanée, 24h/24</h3>
-          <p class="text-white/50 leading-relaxed text-base">Votre système répond en moins de 30 secondes — à minuit, le dimanche, pendant vos vacances. Chaque lead est pris en charge immédiatement, sans action de votre part.</p>
-          <div class="mt-6 flex items-center gap-3">
-            <span class="text-green-400 font-mono text-3xl font-black">00:28</span>
-            <span class="text-white/30 text-sm">temps de réponse moyen</span>
-          </div>
-        </div>
-
-        <!-- Small card -->
-        <div class="md:col-span-5 bento-card">
-          <div class="w-12 h-12 bg-indigo-500/15 rounded-xl flex items-center justify-center mb-5 border border-indigo-500/20">
-            <i data-lucide="trending-up" class="w-6 h-6 text-indigo-400"></i>
-          </div>
-          <h3 class="text-xl font-bold mb-3">Plus de rendez-vous</h3>
-          <p class="text-white/50 text-sm leading-relaxed">Chaque lead reçoit un lien d'agenda personnalisé. Plus de friction. Plus d'excuses pour ne pas réserver.</p>
-          <div class="mt-5 text-4xl font-black gradient-text">+3×</div>
-          <div class="text-white/30 text-xs mt-1">taux de conversion moyen</div>
-        </div>
-
-        <!-- Bottom left -->
-        <div class="md:col-span-5 bento-card">
-          <div class="w-12 h-12 bg-purple-500/15 rounded-xl flex items-center justify-center mb-5 border border-purple-500/20">
-            <i data-lucide="settings" class="w-6 h-6 text-purple-400"></i>
-          </div>
-          <h3 class="text-xl font-bold mb-3">Automatisation complète</h3>
-          <p class="text-white/50 text-sm leading-relaxed">Zéro tâche manuelle. Le système tourne seul. Vous vous concentrez sur vos clients — pas sur leur acquisition.</p>
-        </div>
-
-        <!-- Bottom right large -->
-        <div class="md:col-span-7 bento-card">
-          <div class="w-12 h-12 bg-orange-500/15 rounded-xl flex items-center justify-center mb-5 border border-orange-500/20">
-            <i data-lucide="bell" class="w-6 h-6 text-orange-400"></i>
-          </div>
-          <h3 class="text-2xl font-bold mb-3">Suivi automatique 7 jours</h3>
-          <p class="text-white/50 leading-relaxed text-base">Si un prospect ne répond pas, le système relance automatiquement — J+1, J+3, J+7. Aucun lead ne tombe dans l'oubli.</p>
-          <div class="mt-5 flex gap-2">
-            <span class="bg-orange-500/10 border border-orange-500/20 rounded-lg px-3 py-1 text-xs text-orange-300 font-medium">J+1 Relance</span>
-            <span class="bg-orange-500/10 border border-orange-500/20 rounded-lg px-3 py-1 text-xs text-orange-300 font-medium">J+3 Relance</span>
-            <span class="bg-orange-500/10 border border-orange-500/20 rounded-lg px-3 py-1 text-xs text-orange-300 font-medium">J+7 Relance</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== TARGET ===== -->
-  <section class="py-28 px-6 bg-[#0d1117]">
+  <!-- ═══════════════════════════════════════════════
+       POUR QUI
+  ═══════════════════════════════════════════════ -->
+  <section class="py-28 px-6 bg-elevated">
     <div class="max-w-5xl mx-auto text-center">
 
-      <span class="text-indigo-400 text-sm font-semibold uppercase tracking-widest mb-4 block">Pour qui</span>
-      <h2 class="text-4xl md:text-5xl font-black mb-6">
-        Conçu pour les professionnels<br/>
-        <span class="gradient-text">dont chaque RDV a de la valeur.</span>
-      </h2>
-      <p class="text-white/50 max-w-xl mx-auto mb-16 text-lg">Si un seul client supplémentaire par mois peut couvrir votre investissement — ce système est fait pour vous.</p>
+      <div class="fade-in">
+        <p class="section-label mb-4">Pour qui</p>
+        <h2 class="text-4xl md:text-5xl font-black mb-5">
+          Conçu pour les professionnels<br/>
+          <span class="gradient-text">dont chaque RDV a de la valeur.</span>
+        </h2>
+        <p class="max-w-lg mx-auto mb-14 text-base" style="color:var(--text-muted);">
+          Si un seul client supplémentaire par mois couvre votre investissement — ce système est fait pour vous.
+        </p>
+      </div>
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
 
-        <div class="card-glass rounded-2xl p-8 flex flex-col items-center gap-4">
-          <div class="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center border border-blue-500/20">
-            <i data-lucide="brain" class="w-7 h-7 text-blue-400"></i>
+        <div class="glass glass-hover rounded-2xl p-8 flex flex-col items-center gap-4 fade-in">
+          <div class="w-13 h-13 w-12 h-12 rounded-2xl flex items-center justify-center" style="background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.2);">
+            <i data-lucide="brain" class="w-6 h-6" style="color:#60a5fa;"></i>
           </div>
-          <span class="font-semibold text-lg">Coachs</span>
-          <p class="text-white/40 text-xs text-center">Développement personnel & business</p>
+          <span class="font-semibold text-base">Coachs</span>
+          <p class="text-xs text-center" style="color:var(--text-muted);">Développement personnel & business</p>
         </div>
 
-        <div class="card-glass rounded-2xl p-8 flex flex-col items-center gap-4">
-          <div class="w-14 h-14 bg-green-500/10 rounded-2xl flex items-center justify-center border border-green-500/20">
-            <i data-lucide="heart" class="w-7 h-7 text-green-400"></i>
+        <div class="glass glass-hover rounded-2xl p-8 flex flex-col items-center gap-4 fade-in">
+          <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);">
+            <i data-lucide="heart" class="w-6 h-6" style="color:#34d399;"></i>
           </div>
-          <span class="font-semibold text-lg">Thérapeutes</span>
-          <p class="text-white/40 text-xs text-center">Psychologues, praticiens, bien-être</p>
+          <span class="font-semibold text-base">Thérapeutes</span>
+          <p class="text-xs text-center" style="color:var(--text-muted);">Psychologues, praticiens, bien-être</p>
         </div>
 
-        <div class="card-glass rounded-2xl p-8 flex flex-col items-center gap-4">
-          <div class="w-14 h-14 bg-purple-500/10 rounded-2xl flex items-center justify-center border border-purple-500/20">
-            <i data-lucide="stethoscope" class="w-7 h-7 text-purple-400"></i>
+        <div class="glass glass-hover rounded-2xl p-8 flex flex-col items-center gap-4 fade-in">
+          <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.2);">
+            <i data-lucide="stethoscope" class="w-6 h-6" style="color:#c084fc;"></i>
           </div>
-          <span class="font-semibold text-lg">Dentistes</span>
-          <p class="text-white/40 text-xs text-center">Cabinets médicaux & spécialisés</p>
+          <span class="font-semibold text-base">Dentistes</span>
+          <p class="text-xs text-center" style="color:var(--text-muted);">Cabinets médicaux & spécialisés</p>
         </div>
 
-        <div class="card-glass rounded-2xl p-8 flex flex-col items-center gap-4">
-          <div class="w-14 h-14 bg-orange-500/10 rounded-2xl flex items-center justify-center border border-orange-500/20">
-            <i data-lucide="briefcase" class="w-7 h-7 text-orange-400"></i>
+        <div class="glass glass-hover rounded-2xl p-8 flex flex-col items-center gap-4 fade-in">
+          <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);">
+            <i data-lucide="briefcase" class="w-6 h-6" style="color:#fbbf24;"></i>
           </div>
-          <span class="font-semibold text-lg">Consultants</span>
-          <p class="text-white/40 text-xs text-center">Indépendants & agences B2B</p>
+          <span class="font-semibold text-base">Consultants</span>
+          <p class="text-xs text-center" style="color:var(--text-muted);">Indépendants & agences B2B</p>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- ===== PRICING ===== -->
-  <section id="tarifs" class="py-28 px-6 bg-[#080b10]">
+
+  <!-- ═══════════════════════════════════════════════
+       PRICING
+  ═══════════════════════════════════════════════ -->
+  <section id="tarifs" class="py-28 px-6 bg-surface">
     <div class="max-w-4xl mx-auto">
 
-      <div class="text-center mb-16">
-        <span class="text-indigo-400 text-sm font-semibold uppercase tracking-widest mb-4 block">Investissement</span>
+      <div class="text-center mb-16 fade-in">
+        <p class="section-label mb-4">Investissement</p>
         <h2 class="text-4xl md:text-5xl font-black">
           Un seul client récupéré<br/>
           <span class="gradient-text">couvre plusieurs mois.</span>
         </h2>
-        <p class="text-white/40 mt-4 text-lg">Pas de commission. Pas d'engagement annuel. Vous payez ce que vous utilisez.</p>
+        <p class="mt-4 text-base" style="color:var(--text-muted);">Pas de commission. Pas d'engagement annuel. Vous payez ce que vous utilisez.</p>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-5 max-w-2xl mx-auto fade-in">
 
-        <!-- Setup -->
-        <div class="price-card p-8">
-          <div class="text-white/50 text-sm font-semibold uppercase tracking-widest mb-4">Installation</div>
-          <div class="flex items-end gap-2 mb-2">
-            <span class="text-5xl font-black">800</span>
-            <span class="text-2xl text-white/50 mb-1">CHF</span>
+        <!-- Installation -->
+        <div class="rounded-3xl p-8" style="background:rgba(255,255,255,0.03);border:1px solid var(--border);">
+          <div class="text-xs font-bold uppercase tracking-widest mb-5" style="color:var(--text-muted);">Installation</div>
+          <div class="flex items-end gap-2 mb-1">
+            <span class="text-6xl font-black">490</span>
+            <span class="text-2xl mb-1" style="color:var(--text-muted);">CHF</span>
           </div>
-          <div class="text-white/30 text-sm mb-6">paiement unique</div>
-          <ul class="space-y-3 text-sm text-white/60">
-            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-green-400 shrink-0"></i>Mise en place complète du système</li>
-            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-green-400 shrink-0"></i>Intégration à votre formulaire existant</li>
-            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-green-400 shrink-0"></i>Calendrier connecté & personnalisé</li>
-            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-green-400 shrink-0"></i>Tests & mise en ligne</li>
+          <div class="text-sm mb-7" style="color:var(--text-muted);">paiement unique</div>
+          <ul class="space-y-3 text-sm" style="color:var(--text-secondary);">
+            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 shrink-0" style="color:#34d399;"></i>Mise en place complète du système</li>
+            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 shrink-0" style="color:#34d399;"></i>Intégration à votre formulaire existant</li>
+            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 shrink-0" style="color:#34d399;"></i>Calendrier connecté & personnalisé</li>
+            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 shrink-0" style="color:#34d399;"></i>Tests & mise en production</li>
           </ul>
         </div>
 
         <!-- Maintenance -->
-        <div class="price-card featured p-8 relative overflow-hidden">
-          <div class="absolute top-4 right-4">
-            <span class="bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 text-xs font-bold px-3 py-1 rounded-full">Recommandé</span>
+        <div class="rounded-3xl p-8 relative overflow-hidden" style="background:linear-gradient(135deg,rgba(99,102,241,0.1),rgba(139,92,246,0.06));border:1px solid rgba(99,102,241,0.3);">
+          <div class="absolute top-5 right-5">
+            <span class="badge badge-indigo">Recommandé</span>
           </div>
-          <div class="text-white/50 text-sm font-semibold uppercase tracking-widest mb-4">Maintenance</div>
-          <div class="flex items-end gap-2 mb-2">
-            <span class="text-5xl font-black">250</span>
-            <span class="text-2xl text-white/50 mb-1">CHF</span>
+          <div class="text-xs font-bold uppercase tracking-widest mb-5" style="color:var(--text-muted);">Maintenance</div>
+          <div class="flex items-end gap-2 mb-1">
+            <span class="text-6xl font-black">150</span>
+            <span class="text-2xl mb-1" style="color:var(--text-muted);">CHF</span>
           </div>
-          <div class="text-white/30 text-sm mb-6">par mois</div>
-          <ul class="space-y-3 text-sm text-white/60">
-            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-indigo-400 shrink-0"></i>Système actif 24h/24, 7j/7</li>
-            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-indigo-400 shrink-0"></i>Mises à jour et optimisations</li>
-            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-indigo-400 shrink-0"></i>Suivi des performances</li>
-            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-indigo-400 shrink-0"></i>Support prioritaire</li>
+          <div class="text-sm mb-7" style="color:var(--text-muted);">par mois</div>
+          <ul class="space-y-3 text-sm" style="color:var(--text-secondary);">
+            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 shrink-0" style="color:#818cf8;"></i>Système actif 24h/24, 7j/7</li>
+            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 shrink-0" style="color:#818cf8;"></i>Mises à jour et optimisations</li>
+            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 shrink-0" style="color:#818cf8;"></i>Suivi des performances</li>
+            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 shrink-0" style="color:#818cf8;"></i>Support prioritaire</li>
           </ul>
         </div>
 
       </div>
 
-      <!-- ROI block -->
-      <div class="mt-10 bg-white/3 border border-white/8 rounded-2xl p-6 md:p-8 text-center">
-        <p class="text-white/60 text-base mb-2">💡 <strong class="text-white">Un seul client supplémentaire</strong> à CHF 300–1500/mois couvre votre investissement.</p>
-        <p class="text-white/30 text-sm">Le système travaille pour vous — même quand vous dormez.</p>
+      <!-- Launch badge -->
+      <div class="mt-7 text-center fade-in">
+        <span class="badge badge-amber">
+          <i data-lucide="tag" class="w-3.5 h-3.5"></i>
+          Offre de lancement — limitée à 5 entreprises
+        </span>
+      </div>
+
+      <!-- ROI -->
+      <div class="mt-5 rounded-2xl p-6 text-center fade-in" style="background:rgba(255,255,255,0.025);border:1px solid var(--border);">
+        <p class="text-base" style="color:var(--text-secondary);">
+          💡 <strong class="text-white">Un seul client récupéré</strong> peut couvrir plusieurs mois de service.
+        </p>
+        <p class="text-sm mt-1.5" style="color:var(--text-muted);">Le système travaille pour vous — même quand vous dormez.</p>
+      </div>
+
+      <!-- Pricing CTA -->
+      <div class="mt-7 text-center fade-in">
+        <a href="#reservation" class="btn-ghost inline-flex">
+          <i data-lucide="search" class="w-5 h-5"></i>
+          Voir si ce système peut s'installer sur mon site
+        </a>
       </div>
 
     </div>
   </section>
 
-  <!-- ===== CTA FINAL ===== -->
-  <section id="contact" class="py-28 px-6 relative overflow-hidden" style="background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 100%);">
 
-    <div class="absolute inset-0 bg-indigo-600/5 pointer-events-none"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-indigo-600/8 rounded-full blur-[100px] pointer-events-none"></div>
+  <!-- ═══════════════════════════════════════════════
+       RÉSERVATION (CALENDLY PLACEHOLDER)
+  ═══════════════════════════════════════════════ -->
+  <section id="reservation" class="py-28 px-6 bg-elevated">
+    <div class="max-w-3xl mx-auto">
 
-    <div class="relative max-w-3xl mx-auto text-center">
+      <div class="text-center mb-14 fade-in">
+        <p class="section-label mb-4">Réservation</p>
+        <h2 class="text-4xl md:text-5xl font-black">
+          Réservez un appel<br/>
+          <span class="gradient-text">en 30 secondes</span>
+        </h2>
+        <p class="mt-4 text-base" style="color:var(--text-muted);">Sans engagement. On vous montre le système sur votre cas concret.</p>
+      </div>
 
-      <div class="inline-flex items-center gap-2 bg-green-500/10 border border-green-500/20 rounded-full px-4 py-2 text-sm font-medium text-green-300 mb-8">
-        <span class="w-2 h-2 bg-green-400 rounded-full pulse-dot"></span>
-        Places limitées — nous travaillons avec un nombre restreint de clients
+      <!-- Calendly container -->
+      <div id="calendly-container" class="rounded-3xl overflow-hidden fade-in"
+           style="background:rgba(255,255,255,0.03);border:1px solid rgba(99,102,241,0.2);min-height:520px;position:relative;box-shadow:0 24px 60px rgba(0,0,0,0.35);">
+
+        <!-- Glow background -->
+        <div class="cal-glow absolute inset-0 pointer-events-none"></div>
+
+        <!-- Header bar simulation -->
+        <div class="relative flex items-center gap-3 px-6 py-4" style="border-bottom:1px solid var(--border);">
+          <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.2);">
+            <i data-lucide="calendar" class="w-4 h-4" style="color:#818cf8;"></i>
+          </div>
+          <div>
+            <div class="text-sm font-semibold">ADA — Démo 20 minutes</div>
+            <div class="text-xs" style="color:var(--text-muted);">Sélectionnez un créneau disponible</div>
+          </div>
+          <div class="ml-auto">
+            <span class="badge badge-green"><span class="pulse-dot pulse-dot-green"></span>Disponible</span>
+          </div>
+        </div>
+
+        <!-- Skeleton body -->
+        <div class="relative p-8">
+
+          <!-- Month nav skeleton -->
+          <div class="flex items-center justify-between mb-7">
+            <div class="skeleton-line w-24 h-5 rounded"></div>
+            <div class="flex gap-3">
+              <div class="skeleton-line w-8 h-8 rounded-lg"></div>
+              <div class="skeleton-line w-8 h-8 rounded-lg"></div>
+            </div>
+          </div>
+
+          <!-- Days grid -->
+          <div class="grid grid-cols-7 gap-2 mb-4">
+            <div class="text-xs text-center mb-2" style="color:var(--text-muted);">L</div>
+            <div class="text-xs text-center mb-2" style="color:var(--text-muted);">M</div>
+            <div class="text-xs text-center mb-2" style="color:var(--text-muted);">M</div>
+            <div class="text-xs text-center mb-2" style="color:var(--text-muted);">J</div>
+            <div class="text-xs text-center mb-2" style="color:var(--text-muted);">V</div>
+            <div class="text-xs text-center mb-2" style="color:var(--text-muted);">S</div>
+            <div class="text-xs text-center mb-2" style="color:var(--text-muted);">D</div>
+            <!-- Skeleton day cells -->
+            <div class="skeleton-line h-9 rounded-lg col-span-1"></div>
+            <div class="skeleton-line h-9 rounded-lg"></div>
+            <div class="skeleton-line h-9 rounded-lg" style="background:rgba(99,102,241,0.12);animation:none;border:1px solid rgba(99,102,241,0.3);"></div>
+            <div class="skeleton-line h-9 rounded-lg"></div>
+            <div class="skeleton-line h-9 rounded-lg"></div>
+            <div class="h-9 rounded-lg" style="background:rgba(255,255,255,0.02);border:1px solid var(--border);"></div>
+            <div class="h-9 rounded-lg" style="background:rgba(255,255,255,0.02);border:1px solid var(--border);"></div>
+            <div class="skeleton-line h-9 rounded-lg"></div>
+            <div class="skeleton-line h-9 rounded-lg" style="background:rgba(99,102,241,0.08);animation:none;"></div>
+            <div class="skeleton-line h-9 rounded-lg"></div>
+            <div class="skeleton-line h-9 rounded-lg"></div>
+            <div class="skeleton-line h-9 rounded-lg"></div>
+            <div class="h-9 rounded-lg" style="background:rgba(255,255,255,0.02);border:1px solid var(--border);"></div>
+            <div class="h-9 rounded-lg" style="background:rgba(255,255,255,0.02);border:1px solid var(--border);"></div>
+          </div>
+
+          <!-- Loading indicator -->
+          <div class="flex flex-col items-center justify-center py-8 gap-3">
+            <div class="relative w-10 h-10">
+              <div class="absolute inset-0 rounded-full" style="border:2px solid rgba(99,102,241,0.15);"></div>
+              <div class="absolute inset-0 rounded-full" style="border:2px solid transparent;border-top-color:#818cf8;animation:spin 1s linear infinite;"></div>
+            </div>
+            <p class="text-xs" style="color:var(--text-muted);">Chargement des disponibilités...</p>
+          </div>
+
+          <!-- CTA below -->
+          <div class="text-center mt-2">
+            <p class="text-sm mb-4" style="color:var(--text-muted);">Ou contactez-nous directement :</p>
+            <a href="mailto:hello@ada-solutions.ch" class="btn-ghost text-sm py-2.5 px-5 inline-flex">
+              <i data-lucide="mail" class="w-4 h-4"></i>
+              hello@ada-solutions.ch
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════
+       AUDIT DE RÉACTIVITÉ
+  ═══════════════════════════════════════════════ -->
+  <section id="audit" class="py-28 px-6 bg-surface">
+    <div class="max-w-3xl mx-auto">
+
+      <div class="text-center mb-14 fade-in">
+        <p class="section-label mb-4">Diagnostic gratuit</p>
+        <h2 class="text-4xl md:text-5xl font-black">
+          Audit de Réactivité<br/>
+          <span class="gradient-text">Gratuit</span>
+        </h2>
+        <p class="mt-5 text-base max-w-lg mx-auto" style="color:var(--text-muted);">
+          Testez en direct si vous perdez des opportunités à cause de votre temps de réponse.
+        </p>
+      </div>
+
+      <!-- Bot container -->
+      <div class="rounded-3xl overflow-hidden fade-in"
+           style="background:rgba(255,255,255,0.03);border:1px solid var(--border);box-shadow:0 24px 60px rgba(0,0,0,0.3);">
+
+        <!-- Header -->
+        <div class="flex items-center gap-3 px-6 py-4" style="border-bottom:1px solid var(--border);">
+          <div class="w-9 h-9 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);">
+            <i data-lucide="activity" class="w-4 h-4 text-white"></i>
+          </div>
+          <div>
+            <div class="text-sm font-semibold">Assistant ADA</div>
+            <div class="text-xs" style="color:var(--text-muted);">Analyse de réactivité</div>
+          </div>
+          <span class="ml-auto badge badge-green"><span class="pulse-dot pulse-dot-green"></span>En ligne</span>
+        </div>
+
+        <!-- Chat area -->
+        <div class="p-6 space-y-4">
+
+          <!-- Bot message -->
+          <div class="flex items-start gap-3">
+            <div class="w-8 h-8 rounded-xl shrink-0 flex items-center justify-center" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);">
+              <i data-lucide="zap" class="w-3.5 h-3.5 text-white"></i>
+            </div>
+            <div class="rounded-2xl rounded-tl-none px-4 py-3 max-w-xs" style="background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.15);">
+              <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.85);">Bonjour 👋 En combien de temps répondez-vous habituellement à vos nouveaux prospects ?</p>
+            </div>
+          </div>
+
+          <!-- Options placeholder -->
+          <div class="flex flex-wrap gap-2 pl-11">
+            <button class="text-xs px-4 py-2 rounded-xl transition-all hover:border-indigo-400/40 hover:bg-indigo-500/8" style="background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--text-secondary);">Moins de 5 min</button>
+            <button class="text-xs px-4 py-2 rounded-xl transition-all hover:border-indigo-400/40 hover:bg-indigo-500/8" style="background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--text-secondary);">Quelques heures</button>
+            <button class="text-xs px-4 py-2 rounded-xl transition-all hover:border-indigo-400/40 hover:bg-indigo-500/8" style="background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--text-secondary);">Le lendemain ou plus</button>
+          </div>
+
+          <!-- Typing indicator -->
+          <div class="flex items-center gap-3 pl-11">
+            <div class="flex gap-1">
+              <span class="typing-dot"></span>
+              <span class="typing-dot"></span>
+              <span class="typing-dot"></span>
+            </div>
+            <span class="text-xs" style="color:var(--text-muted);">En attente de votre réponse...</span>
+          </div>
+
+        </div>
+
+        <!-- CTA -->
+        <div class="px-6 pb-6">
+          <a href="#contact" class="btn-primary w-full justify-center text-base py-4 btn-audit-pulse">
+            <span>Lancer mon audit</span>
+            <i data-lucide="arrow-right" class="w-5 h-5"></i>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════
+       FAQ
+  ═══════════════════════════════════════════════ -->
+  <section id="faq" class="py-28 px-6 bg-elevated">
+    <div class="max-w-3xl mx-auto">
+
+      <div class="text-center mb-14 fade-in">
+        <p class="section-label mb-4">Questions fréquentes</p>
+        <h2 class="text-4xl font-black">
+          Vous avez des doutes ?<br/>
+          <span class="gradient-text">C'est normal.</span>
+        </h2>
+      </div>
+
+      <div class="space-y-4">
+
+        <div class="glass glass-hover rounded-2xl p-7 fade-in">
+          <div class="flex items-start gap-4">
+            <div class="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5" style="background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2);">
+              <i data-lucide="help-circle" class="w-4 h-4" style="color:#818cf8;"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-base mb-2">Est-ce que cela fonctionne avec mon site actuel ?</h3>
+              <p class="text-sm leading-relaxed" style="color:var(--text-muted);">Oui. Nous nous connectons à votre formulaire existant — que ce soit WordPress, Wix, Squarespace ou un site sur mesure. Aucune refonte nécessaire.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass glass-hover rounded-2xl p-7 fade-in">
+          <div class="flex items-start gap-4">
+            <div class="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5" style="background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2);">
+              <i data-lucide="help-circle" class="w-4 h-4" style="color:#818cf8;"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-base mb-2">Est-ce compliqué à mettre en place ?</h3>
+              <p class="text-sm leading-relaxed" style="color:var(--text-muted);">Non. Nous gérons l'installation complète. Votre rôle : valider le message de réponse et connecter votre agenda. Le reste, c'est nous.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass glass-hover rounded-2xl p-7 fade-in">
+          <div class="flex items-start gap-4">
+            <div class="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5" style="background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2);">
+              <i data-lucide="help-circle" class="w-4 h-4" style="color:#818cf8;"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-base mb-2">Et si je réponds déjà à mes leads ?</h3>
+              <p class="text-sm leading-relaxed" style="color:var(--text-muted);">Parfait — ça veut dire que vous avez déjà une bonne base. Ce système vous libère de cette tâche et assure une réponse immédiate même quand vous n'êtes pas disponible. Aucun lead ne tombe entre les mailles.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════
+       CTA FINAL
+  ═══════════════════════════════════════════════ -->
+  <section id="contact" class="py-28 px-6 relative overflow-hidden noise"
+           style="background:radial-gradient(ellipse 100% 80% at 50% 100%, rgba(99,102,241,0.1) 0%, transparent 60%), var(--bg-base);">
+
+    <div class="absolute inset-0 pointer-events-none" style="background:radial-gradient(ellipse 60% 60% at 50% 50%, rgba(99,102,241,0.06) 0%, transparent 70%);"></div>
+
+    <div class="relative max-w-3xl mx-auto text-center fade-in">
+
+      <div class="mb-8">
+        <span class="badge badge-green">
+          <span class="pulse-dot pulse-dot-green"></span>
+          Places limitées — 5 entreprises maximum
+        </span>
       </div>
 
       <h2 class="text-4xl md:text-6xl font-black mb-6 leading-tight">
-        Prêt à ne plus perdre<br/>
-        <span class="gradient-text">un seul lead ?</span>
+        Ne perdez plus<br/>
+        <span class="gradient-text">une seule opportunité.</span>
       </h2>
 
-      <p class="text-white/55 text-xl mb-12 leading-relaxed">
-        Réservez une démo de 20 minutes. On vous montre le système en direct<br/>
-        sur votre cas concret — sans engagement.
+      <p class="text-xl mb-12 leading-relaxed" style="color:var(--text-secondary);">
+        Réservez un appel de 20 minutes. On vous montre le système en direct<br class="hidden md:block"/>
+        sur votre situation concrète — sans engagement.
       </p>
 
       <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-        <a href="https://ada-solutions.ch/calendly" class="gradient-cta px-10 py-5 rounded-2xl text-base font-bold shadow-2xl shadow-indigo-500/30 flex items-center gap-3 w-full sm:w-auto justify-center">
+        <a href="#reservation" class="btn-primary text-base px-10 py-4">
           <i data-lucide="calendar" class="w-5 h-5"></i>
-          Réserver une Démo Gratuite
+          <span>Réserver une démo</span>
         </a>
-        <a href="mailto:hello@ada-solutions.ch" class="px-10 py-5 rounded-2xl text-base font-semibold border border-white/10 hover:border-white/20 hover:bg-white/5 transition-all flex items-center gap-3 w-full sm:w-auto justify-center">
-          <i data-lucide="mail" class="w-5 h-5 text-indigo-400"></i>
-          Tester le système
+        <a href="#audit" class="btn-ghost text-base px-10 py-4 btn-audit-pulse">
+          <i data-lucide="activity" class="w-5 h-5"></i>
+          Lancer un audit
         </a>
       </div>
 
-      <p class="text-white/25 text-sm">
+      <p class="text-sm" style="color:var(--text-muted);">
         Aucun engagement. Aucune carte de crédit. Résultats visibles dès la première semaine.
       </p>
 
     </div>
   </section>
 
-  <!-- ===== FOOTER ===== -->
-  <footer class="py-8 px-6 border-t border-white/5 bg-[#0d1117]">
+
+  <!-- ═══════════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════════ -->
+  <footer class="py-8 px-6" style="background:var(--bg-base);border-top:1px solid var(--border);">
     <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-      <div class="flex items-center gap-2">
-        <div class="w-7 h-7 rounded-lg gradient-accent flex items-center justify-center">
-          <span class="text-white font-black text-xs">A</span>
-        </div>
-        <span class="font-bold text-base">ADA</span>
-        <span class="text-white/30 text-sm ml-2">— Automatisation intelligente, Suisse</span>
+      <div class="flex items-center gap-3">
+        <img src="logo-ada.png" alt="ADA" class="h-7 w-auto object-contain" style="opacity:0.75;" />
+        <span class="text-sm" style="color:var(--text-muted);">— Automatisation intelligente, Suisse</span>
       </div>
-      <div class="flex items-center gap-6 text-white/30 text-sm">
+      <div class="flex flex-wrap items-center gap-6 text-sm justify-center" style="color:var(--text-muted);">
         <a href="mailto:hello@ada-solutions.ch" class="hover:text-white transition-colors">hello@ada-solutions.ch</a>
         <span>Zurich · Lausanne</span>
         <span>© 2025 ADA Solutions</span>
@@ -632,59 +1020,59 @@
     </div>
   </footer>
 
-  <!-- ===== STICKY CTA (mobile) ===== -->
-  <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 md:hidden w-[calc(100%-3rem)]">
-    <a href="#contact" class="gradient-cta w-full py-4 rounded-2xl text-base font-bold shadow-2xl shadow-indigo-500/40 flex items-center gap-3 justify-center">
+
+  <!-- ═══════════════════════════════════════════════
+       STICKY CTA — MOBILE
+  ═══════════════════════════════════════════════ -->
+  <div class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 md:hidden w-[calc(100%-2.5rem)]">
+    <a href="#reservation" class="btn-primary w-full py-4 text-base rounded-2xl justify-center shadow-2xl" style="box-shadow:0 12px 40px rgba(99,102,241,0.4);">
       <i data-lucide="calendar" class="w-5 h-5"></i>
-      Réserver une Démo — Gratuit
+      <span>Réserver une Démo — Gratuit</span>
     </a>
   </div>
 
+
+  <style>
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+
   <script>
-    // Init Lucide icons
     lucide.createIcons();
 
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Fade-in on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(el => {
+        if (el.isIntersecting) {
+          el.target.classList.add('visible');
+          observer.unobserve(el.target);
         }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function(e) {
+        const t = document.querySelector(this.getAttribute('href'));
+        if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
       });
     });
 
-    // Animated timer in hero demo widget
-    const timerEls = document.querySelectorAll('.timer-count');
-    let elapsed = 8;
-    const interval = setInterval(() => {
-      elapsed += 1;
-      if (elapsed > 28) {
-        clearInterval(interval);
-        return;
+    // Navbar shrink on scroll
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        nav.style.paddingTop = '10px';
+        nav.style.paddingBottom = '10px';
+      } else {
+        nav.style.paddingTop = '16px';
+        nav.style.paddingBottom = '16px';
       }
-      timerEls.forEach(el => {
-        const sec = String(elapsed).padStart(2, '0');
-        el.textContent = `00:${sec}`;
-      });
-    }, 400);
+    });
 
-    // Intersection observer for fade-in cards
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.bento-card, .card-glass, .price-card').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(20px)';
-      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-      observer.observe(el);
+    // FAQ accordion toggle
+    document.querySelectorAll('#faq .glass-hover').forEach(card => {
+      card.style.cursor = 'pointer';
     });
   </script>
 
