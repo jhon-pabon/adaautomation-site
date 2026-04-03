@@ -3,557 +3,767 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ADA Automation — Système complet pour obtenir plus de rendez-vous</title>
-  <meta name="description" content="ADA installe un système complet pour transformer les visiteurs de votre site en rendez-vous: landing de conversion, agenda intégré, vidéo de vente et assistant intelligent." />
+  <title>ADA | Ne perdez plus de clients faute de réponse rapide</title>
+  <meta
+    name="description"
+    content="ADA installe des assistants commerciaux qui répondent, qualifient et aident à convertir vos clients sur WhatsApp. Pensé pour les entreprises de services à Lausanne et en Suisse."
+  />
+
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
   <style>
-    * { font-family: 'Inter', sans-serif; }
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      background: #020617;
-      color: #f8fafc;
+      font-family: 'Inter', sans-serif;
+      background: #f8fafc;
+      color: #0f172a;
+      overflow-x: hidden;
     }
-    .bg-main {
+
+    .bg-ada-blue { background-color: #1e3a8a; }
+    .text-ada-blue { color: #1e3a8a; }
+    .border-ada-blue { border-color: #1e3a8a; }
+
+    .shadow-premium {
+      box-shadow: 0 14px 35px rgba(15, 23, 42, 0.08);
+    }
+
+    .shadow-cta {
+      box-shadow:
+        0 18px 40px rgba(34, 197, 94, 0.20),
+        0 8px 20px rgba(15, 23, 42, 0.10);
+    }
+
+    .gradient-soft {
       background:
-        radial-gradient(circle at top left, rgba(99,102,241,0.18), transparent 28%),
-        radial-gradient(circle at bottom right, rgba(16,185,129,0.10), transparent 24%),
-        linear-gradient(180deg, #020617 0%, #0b1120 50%, #020617 100%);
+        radial-gradient(circle at top left, rgba(219, 234, 254, 0.9), transparent 30%),
+        radial-gradient(circle at right center, rgba(187, 247, 208, 0.35), transparent 26%),
+        linear-gradient(135deg, #eff6ff 0%, #ffffff 55%, #f8fafc 100%);
     }
-    .glass {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+
+    .section-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .55rem 1rem;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #1e3a8a;
+      font-weight: 800;
+      font-size: .78rem;
+      letter-spacing: .05em;
+      text-transform: uppercase;
     }
-    .glass-strong {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(99,102,241,0.18);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+
+    .benefit-badge {
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      padding: 1rem 1.1rem;
+      border-radius: 1rem;
+      background: #14532d;
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.12rem;
+      line-height: 1.2;
+      box-shadow: 0 12px 30px rgba(20, 83, 45, 0.18);
     }
-    .btn-primary {
-      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-      box-shadow: 0 18px 45px rgba(79,70,229,0.32);
-      transition: all .25s ease;
+
+    .card-hover {
+      transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
     }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 22px 55px rgba(79,70,229,0.42);
+
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.10);
     }
-    .btn-secondary {
-      transition: all .25s ease;
+
+    .pulse-cta {
+      animation: pulseGlow 2.2s infinite;
     }
-    .btn-secondary:hover {
-      transform: translateY(-2px);
-      background: rgba(255,255,255,0.08);
-      border-color: rgba(255,255,255,0.20);
+
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.35); }
+      70% { box-shadow: 0 0 0 16px rgba(37, 211, 102, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
     }
-    .pulse-soft {
-      animation: pulseSoft 2s infinite;
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .7s ease, transform .7s ease;
     }
-    @keyframes pulseSoft {
-      0% { box-shadow: 0 0 0 0 rgba(99,102,241,0.30); }
-      70% { box-shadow: 0 0 0 14px rgba(99,102,241,0); }
-      100% { box-shadow: 0 0 0 0 rgba(99,102,241,0); }
+
+    .fade-up.show {
+      opacity: 1;
+      transform: translateY(0);
     }
+
     .typing-dots span {
-      width: 7px;
-      height: 7px;
+      width: 8px;
+      height: 8px;
+      background: #94a3b8;
       border-radius: 999px;
       display: inline-block;
-      background: #818cf8;
-      animation: blink 1.25s infinite ease-in-out;
+      animation: blink 1.2s infinite ease-in-out;
     }
-    .typing-dots span:nth-child(2){ animation-delay:.15s; }
-    .typing-dots span:nth-child(3){ animation-delay:.3s; }
+
+    .typing-dots span:nth-child(2) { animation-delay: .2s; }
+    .typing-dots span:nth-child(3) { animation-delay: .4s; }
+
     @keyframes blink {
-      0%, 80%, 100% { opacity: .35; transform: translateY(0); }
-      40% { opacity: 1; transform: translateY(-4px); }
+      0%, 80%, 100% { transform: scale(.8); opacity: .45; }
+      40% { transform: scale(1); opacity: 1; }
     }
-    .section-title {
-      line-height: 1.05;
-      letter-spacing: -0.03em;
+
+    .hero-title span {
+      position: relative;
+      display: inline-block;
     }
-    .badge {
-      background: rgba(99,102,241,0.10);
-      color: #c7d2fe;
-      border: 1px solid rgba(99,102,241,0.20);
+
+    .hero-title span::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 8px;
+      width: 100%;
+      height: 14px;
+      background: rgba(34, 197, 94, 0.18);
+      z-index: -1;
+      border-radius: 10px;
     }
-    .grid-border {
-      border: 1px solid rgba(255,255,255,0.08);
+
+    .whatsapp-float-exact {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 9999;
     }
-    .logo-wrap img {
+
+    .whatsapp-float-exact a {
+      width: 84px;
+      height: 84px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #63d86b 0%, #58cf61 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow:
+        0 18px 40px rgba(37, 211, 102, 0.28),
+        0 8px 18px rgba(0, 0, 0, 0.16);
+      text-decoration: none;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .whatsapp-float-exact a:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow:
+        0 22px 48px rgba(37, 211, 102, 0.34),
+        0 10px 22px rgba(0, 0, 0, 0.18);
+    }
+
+    .whatsapp-float-exact svg {
+      width: 42px;
+      height: 42px;
       display: block;
-      height: auto;
-      max-height: 60px;
-      width: auto;
     }
+
     @media (max-width: 768px) {
-      .logo-wrap img {
-        max-height: 56px;
+      .whatsapp-float-exact {
+        right: 14px;
+        bottom: 14px;
+      }
+
+      .whatsapp-float-exact a {
+        width: 74px;
+        height: 74px;
+      }
+
+      .whatsapp-float-exact svg {
+        width: 36px;
+        height: 36px;
+      }
+
+      .benefit-badge {
+        font-size: 1rem;
       }
     }
   </style>
 </head>
-<body class="bg-main">
 
-  <!-- NAV -->
-  <header class="sticky top-0 z-50 border-b border-white/5 bg-slate-950/70 backdrop-blur-xl">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
-      <a href="#top" class="logo-wrap flex items-center shrink-0">
-        <img src="Logo_ada.PNG" alt="ADA Automation" class="w-auto" />
-      </a>
+<body class="bg-gray-50 text-slate-900">
 
-      <nav class="hidden md:flex items-center gap-8 text-sm text-slate-300">
-        <a href="#offre" class="hover:text-white transition">Offre</a>
-        <a href="#fonctionne" class="hover:text-white transition">Comment ça marche</a>
-        <a href="#reservation" class="hover:text-white transition">Réservation</a>
-        <a href="#tarifs" class="hover:text-white transition">Tarifs</a>
+  <!-- HEADER -->
+  <header class="fixed top-0 w-full bg-white/85 backdrop-blur-md z-50 border-b border-gray-100">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center gap-6">
+      <div class="flex items-center gap-3 min-w-0">
+        <img src="Logo_ada.PNG" alt="ADA Logo" class="h-11 w-auto shrink-0" />
+        <div class="hidden sm:block leading-tight min-w-0">
+          <div class="font-bold tracking-wide">ADA</div>
+          <div class="text-xs text-gray-500 -mt-0.5 truncate">
+            Lausanne • Assistants commerciaux pour entreprises de services
+          </div>
+        </div>
+      </div>
+
+      <nav class="hidden md:flex space-x-8 font-medium text-sm uppercase tracking-wide">
+        <a href="#top" class="hover:text-blue-800 transition">Accueil</a>
+        <a href="#benefits" class="hover:text-blue-800 transition">Bénéfices</a>
+        <a href="#solutions" class="hover:text-blue-800 transition">Solutions</a>
+        <a href="#diagnostic" class="hover:text-blue-800 transition">Diagnostic</a>
       </nav>
 
-      <a href="#reservation" class="btn-primary text-white text-sm font-bold px-5 py-3 rounded-2xl whitespace-nowrap">
-        Réserver une démo
+      <a
+        href="#diagnostic"
+        class="bg-green-500 text-white px-6 py-2.5 rounded-full font-semibold hover:bg-green-600 transition shadow-lg whitespace-nowrap pulse-cta"
+      >
+        Voir mon cas
       </a>
     </div>
   </header>
 
   <!-- HERO -->
-  <section id="top" class="pt-14 pb-20 px-4 sm:px-6">
-    <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-      <div>
-        <div class="inline-flex items-center gap-2 badge rounded-full px-4 py-2 text-sm font-semibold mb-6">
-          <span class="w-2 h-2 rounded-full bg-indigo-400 pulse-soft"></span>
-          Offre de lancement — système clé en main
-        </div>
+  <section id="top" class="pt-32 pb-20 px-6 gradient-soft">
+    <div class="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div class="space-y-7">
+        <span class="section-pill fade-up">ADA • Lausanne • Systèmes qui répondent avant que vos clients partent</span>
 
-        <p class="text-indigo-300 font-bold uppercase tracking-[0.22em] text-xs mb-4">
-          ADA Automation
-        </p>
-
-        <h1 class="section-title text-4xl sm:text-5xl lg:text-6xl font-black mb-6">
-          On vous installe un système complet pour obtenir plus de rendez-vous automatiquement.
+        <h1 class="hero-title text-4xl md:text-6xl font-black leading-tight fade-up">
+          Ne perdez plus de clients
+          <span>faute de réponse rapide</span>
         </h1>
 
-        <p class="text-lg sm:text-xl text-slate-300 leading-relaxed max-w-2xl mb-8">
-          Nous créons pour votre entreprise une landing de conversion, un système de prise de rendez-vous, une vidéo de vente et un assistant intelligent qui répond aux questions de vos prospects.
+        <p class="text-xl text-slate-600 max-w-2xl fade-up">
+          ADA installe des assistants commerciaux qui répondent à vos clients, qualifient les demandes
+          et aident à transformer plus de conversations en opportunités réelles.
         </p>
 
-        <div class="grid sm:grid-cols-2 gap-3 mb-8">
-          <div class="glass rounded-2xl px-4 py-4 text-sm text-slate-200">✅ Landing de conversion prête à vendre</div>
-          <div class="glass rounded-2xl px-4 py-4 text-sm text-slate-200">✅ Réservation automatique de rendez-vous</div>
-          <div class="glass rounded-2xl px-4 py-4 text-sm text-slate-200">✅ Assistant qui répond et rassure</div>
-          <div class="glass rounded-2xl px-4 py-4 text-sm text-slate-200">✅ Notification immédiate quand un client réserve</div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 fade-up">
+          <div class="inline-flex items-center gap-2 px-4 py-3 rounded-2xl bg-white border border-gray-100 shadow-sm text-sm text-gray-700">
+            ✅ Répond même quand vous êtes occupé
+          </div>
+          <div class="inline-flex items-center gap-2 px-4 py-3 rounded-2xl bg-white border border-gray-100 shadow-sm text-sm text-gray-700">
+            ✅ Qualifie les clients automatiquement
+          </div>
+          <div class="inline-flex items-center gap-2 px-4 py-3 rounded-2xl bg-white border border-gray-100 shadow-sm text-sm text-gray-700">
+            ✅ Réduit les opportunités perdues
+          </div>
+          <div class="inline-flex items-center gap-2 px-4 py-3 rounded-2xl bg-white border border-gray-100 shadow-sm text-sm text-gray-700">
+            ✅ Vous aide à mieux convertir
+          </div>
         </div>
 
-        <div class="flex flex-col sm:flex-row gap-4">
-          <a href="#reservation" class="btn-primary inline-flex items-center justify-center px-7 py-4 rounded-2xl font-bold text-white">
-            Réserver une démo
+        <div class="flex flex-col sm:flex-row gap-4 pt-1 fade-up">
+          <a
+            href="#diagnostic"
+            class="inline-flex items-center justify-center bg-green-500 text-white px-8 py-4 rounded-2xl text-lg font-bold hover:scale-[1.02] hover:bg-green-600 transition-transform shadow-cta text-center pulse-cta"
+          >
+            Voir si ADA peut m’aider
           </a>
-          <a href="#audit" class="btn-secondary inline-flex items-center justify-center px-7 py-4 rounded-2xl font-semibold border border-white/10 text-white">
-            Lancer un audit gratuit
+
+          <a
+            href="#solutions"
+            class="inline-flex items-center justify-center bg-white text-slate-900 px-8 py-4 rounded-2xl text-lg font-bold border border-gray-200 hover:border-green-300 transition text-center"
+          >
+            Voir ce que le système fait
           </a>
         </div>
 
-        <p class="text-sm text-slate-400 mt-5">
-          Installation clé en main par nos experts. Aucune compétence technique requise de votre part.
+        <div class="fade-up">
+          <p class="text-sm text-slate-500 italic">
+            Présence locale à Lausanne • Standards de confidentialité Suisse & Europe
+          </p>
+        </div>
+      </div>
+
+      <div class="relative fade-up">
+        <div class="absolute -top-4 -left-4 w-24 h-24 rounded-3xl bg-green-100 blur-2xl opacity-80"></div>
+
+        <div class="bg-white rounded-3xl p-5 shadow-premium border border-gray-100 relative overflow-hidden">
+          <div class="flex items-center justify-between pb-4 border-b border-gray-100">
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-full bg-green-500 text-white flex items-center justify-center font-bold">
+                C
+              </div>
+              <div>
+                <div class="font-bold">Céleste • ADA</div>
+                <div class="text-sm text-green-600">En ligne</div>
+              </div>
+            </div>
+            <div class="text-xs text-slate-400">Assistant commercial</div>
+          </div>
+
+          <div class="pt-5 space-y-4">
+            <div class="flex justify-end">
+              <div class="max-w-[78%] bg-slate-100 rounded-2xl rounded-br-md px-4 py-3 text-sm text-slate-700">
+                Bonjour, j’aimerais savoir si vous pouvez m’aider à mieux répondre à mes clients.
+              </div>
+            </div>
+
+            <div class="flex justify-start">
+              <div class="max-w-[80%] bg-green-500 text-white rounded-2xl rounded-bl-md px-4 py-3 text-sm">
+                Bonjour 👋 Oui. ADA peut installer un assistant commercial qui répond à vos clients, qualifie les demandes et vous aide à ne plus laisser des opportunités se perdre.
+              </div>
+            </div>
+
+            <div class="flex justify-start">
+              <div class="max-w-[70%] bg-white border border-gray-200 rounded-2xl rounded-bl-md px-4 py-3 text-sm text-slate-700 shadow-sm">
+                <div class="typing-dots flex gap-1">
+                  <span></span><span></span><span></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 gap-3 pt-2">
+              <div class="benefit-badge">💸 Aide à mieux convertir</div>
+              <div class="benefit-badge">📅 Oriente vers un rendez-vous</div>
+              <div class="benefit-badge">❓ Répond aux questions fréquentes</div>
+              <div class="benefit-badge">👥 Qualifie les clients</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN BENEFITS -->
+  <section id="benefits" class="py-18 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-12 fade-up">
+        <span class="section-pill">Le vrai bénéfice</span>
+        <h2 class="text-3xl md:text-5xl font-bold mt-4">
+          Vos clients n’attendent pas. Vos concurrents non plus.
+        </h2>
+        <p class="text-gray-600 max-w-3xl mx-auto mt-4 text-lg">
+          Quand une demande reste sans réponse, l’opportunité refroidit. ADA vous aide à répondre plus vite, mieux guider le client et récupérer des ventes que vous laissiez partir.
         </p>
       </div>
 
-      <div class="glass-strong rounded-[28px] p-5 sm:p-6">
-        <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-5">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="card-hover fade-up bg-slate-50 rounded-3xl border border-gray-100 p-8 shadow-premium">
+          <div class="text-4xl">💰</div>
+          <h3 class="font-bold text-2xl mt-4">Aider à vendre vos services</h3>
+          <p class="text-slate-600 mt-3">
+            L’assistant présente votre offre, rassure le visiteur et guide le client vers l’étape suivante au lieu de laisser la conversation s’éteindre.
+          </p>
+        </div>
+
+        <div class="card-hover fade-up bg-slate-50 rounded-3xl border border-gray-100 p-8 shadow-premium">
+          <div class="text-4xl">📅</div>
+          <h3 class="font-bold text-2xl mt-4">Transformer des demandes en rendez-vous</h3>
+          <p class="text-slate-600 mt-3">
+            Idéal pour les entreprises qui veulent faire avancer la conversation vers une prise de rendez-vous, une demande ou une proposition.
+          </p>
+        </div>
+
+        <div class="card-hover fade-up bg-slate-50 rounded-3xl border border-gray-100 p-8 shadow-premium">
+          <div class="text-4xl">❓</div>
+          <h3 class="font-bold text-2xl mt-4">Répondre sans vous répéter</h3>
+          <p class="text-slate-600 mt-3">
+            Horaires, services, fonctionnement, disponibilité, questions fréquentes : moins de répétition pour vous, plus de clarté pour le client.
+          </p>
+        </div>
+
+        <div class="card-hover fade-up bg-slate-50 rounded-3xl border border-gray-100 p-8 shadow-premium">
+          <div class="text-4xl">👥</div>
+          <h3 class="font-bold text-2xl mt-4">Filtrer les clients les plus intéressants</h3>
+          <p class="text-slate-600 mt-3">
+            Le système vous aide à distinguer les vrais prospects des simples curieux en récupérant les informations utiles dès le premier contact.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM / TRANSFORMATION -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <div class="fade-up">
+          <span class="section-pill">Le vrai problème</span>
+          <h2 class="text-3xl md:text-4xl font-bold mt-4">
+            Beaucoup d’entreprises perdent des clients avant même d’avoir commencé à vendre.
+          </h2>
+          <p class="text-slate-600 text-lg mt-4">
+            Messages en attente, prospects mal suivis, questions répétitives, demandes qui restent sans suite… pendant ce temps, le client avance ailleurs.
+          </p>
+
+          <div class="mt-6 space-y-3 text-slate-700">
+            <div>❌ Trop de messages à gérer</div>
+            <div>❌ Réponses trop lentes</div>
+            <div>❌ Prospects mal suivis</div>
+            <div>❌ Opportunités perdues chaque semaine</div>
+          </div>
+        </div>
+
+        <div class="fade-up bg-white rounded-3xl border border-gray-100 shadow-premium p-8">
+          <span class="section-pill">La transformation</span>
+          <h3 class="text-2xl font-bold mt-4">Avec ADA, votre WhatsApp devient un assistant commercial qui ne dort jamais.</h3>
+
+          <div class="mt-6 space-y-4">
+            <div class="flex gap-3">
+              <div class="text-green-500 text-xl">✅</div>
+              <div>
+                <div class="font-semibold">Réponse immédiate</div>
+                <div class="text-slate-600 text-sm">Le client reçoit une première réponse avant de partir ailleurs.</div>
+              </div>
+            </div>
+
+            <div class="flex gap-3">
+              <div class="text-green-500 text-xl">✅</div>
+              <div>
+                <div class="font-semibold">Qualification automatique</div>
+                <div class="text-slate-600 text-sm">Le système comprend le besoin et récupère les bonnes informations.</div>
+              </div>
+            </div>
+
+            <div class="flex gap-3">
+              <div class="text-green-500 text-xl">✅</div>
+              <div>
+                <div class="font-semibold">Moins de chaos</div>
+                <div class="text-slate-600 text-sm">Moins d’oublis, moins de dispersion, plus de clarté dans vos demandes.</div>
+              </div>
+            </div>
+
+            <div class="flex gap-3">
+              <div class="text-green-500 text-xl">✅</div>
+              <div>
+                <div class="font-semibold">Plus d’opportunités récupérées</div>
+                <div class="text-slate-600 text-sm">Vous laissez moins de conversations intéressantes se perdre.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTIONS -->
+  <section id="solutions" class="py-18 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-12 fade-up">
+        <span class="section-pill">Le système ADA</span>
+        <h2 class="text-3xl md:text-5xl font-bold mt-4">
+          Un assistant commercial installé dans votre WhatsApp
+        </h2>
+        <p class="text-gray-600 max-w-3xl mx-auto mt-4 text-lg">
+          ADA installe un système simple, clair et utile qui répond, oriente, filtre et prépare la suite de la conversation.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="card-hover fade-up bg-gray-50 rounded-3xl border border-gray-100 shadow-premium p-8">
+          <div class="text-3xl">💬</div>
+          <h3 class="font-bold text-2xl mt-4">Répondre sans attendre</h3>
+          <p class="text-gray-600 mt-3">
+            Votre assistant répond aux premières demandes, rassure le client et évite qu’il reste sans réponse.
+          </p>
+          <div class="mt-5 space-y-2 text-sm text-gray-700">
+            <div>✅ Réactivité immédiate</div>
+            <div>✅ Questions fréquentes</div>
+            <div>✅ Présence 24/7</div>
+          </div>
+        </div>
+
+        <div class="card-hover fade-up bg-gray-50 rounded-3xl border border-gray-100 shadow-premium p-8">
+          <div class="text-3xl">🎯</div>
+          <h3 class="font-bold text-2xl mt-4">Qualifier les demandes</h3>
+          <p class="text-gray-600 mt-3">
+            Le système pose les bonnes questions pour vous aider à savoir qui est prêt à avancer.
+          </p>
+          <div class="mt-5 space-y-2 text-sm text-gray-700">
+            <div>✅ Filtrage intelligent</div>
+            <div>✅ Informations utiles</div>
+            <div>✅ Conversations mieux préparées</div>
+          </div>
+        </div>
+
+        <div class="card-hover fade-up bg-gray-50 rounded-3xl border border-gray-100 shadow-premium p-8">
+          <div class="text-3xl">📲</div>
+          <h3 class="font-bold text-2xl mt-4">Pousser vers l’action</h3>
+          <p class="text-gray-600 mt-3">
+            Selon votre activité, l’assistant peut orienter vers un rendez-vous, une demande qualifiée ou une proposition.
+          </p>
+          <div class="mt-5 space-y-2 text-sm text-gray-700">
+            <div>✅ Rendez-vous</div>
+            <div>✅ Demandes qualifiées</div>
+            <div>✅ Meilleure conversion</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-10 fade-up">
+        <a
+          href="#diagnostic"
+          class="inline-flex items-center justify-center bg-green-500 text-white px-8 py-4 rounded-2xl text-lg font-bold hover:scale-[1.02] hover:bg-green-600 transition-transform shadow-cta pulse-cta"
+        >
+          Voir si ce système peut récupérer plus d’opportunités
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOR WHO -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-12 fade-up">
+        <span class="section-pill">Pour qui ?</span>
+        <h2 class="text-3xl md:text-4xl font-bold mt-4">
+          Pensé pour les entreprises de services qui reçoivent des demandes clients
+        </h2>
+        <p class="text-gray-600 max-w-3xl mx-auto mt-4">
+          Si vos clients vous écrivent sur WhatsApp, téléphone, formulaire ou Instagram, il y a souvent de l’argent qui se perd simplement faute de réponse ou de suivi.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="fade-up bg-white rounded-2xl border border-gray-100 p-5 text-center shadow-sm">Cabinets & conseils</div>
+        <div class="fade-up bg-white rounded-2xl border border-gray-100 p-5 text-center shadow-sm">Immobilier</div>
+        <div class="fade-up bg-white rounded-2xl border border-gray-100 p-5 text-center shadow-sm">Bien-être & soins</div>
+        <div class="fade-up bg-white rounded-2xl border border-gray-100 p-5 text-center shadow-sm">Coaching</div>
+        <div class="fade-up bg-white rounded-2xl border border-gray-100 p-5 text-center shadow-sm">Agences</div>
+        <div class="fade-up bg-white rounded-2xl border border-gray-100 p-5 text-center shadow-sm">Métiers locaux</div>
+        <div class="fade-up bg-white rounded-2xl border border-gray-100 p-5 text-center shadow-sm">Formation</div>
+        <div class="fade-up bg-white rounded-2xl border border-gray-100 p-5 text-center shadow-sm">Autres services</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXAMPLE -->
+  <section class="py-18 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div class="fade-up">
+          <span class="section-pill">Cas concret</span>
+          <h2 class="text-3xl md:text-4xl font-bold mt-4">
+            Un client écrit. Votre assistant répond, guide et prépare la suite.
+          </h2>
+          <p class="text-gray-600 text-lg mt-4">
+            Au lieu de laisser la demande refroidir, le système répond immédiatement, comprend le besoin et aide à transformer la conversation en vraie opportunité commerciale.
+          </p>
+
+          <div class="mt-6 space-y-3 text-gray-700">
+            <div>✅ Réponse instantanée sur WhatsApp</div>
+            <div>✅ Questions simples et utiles</div>
+            <div>✅ Qualification du prospect</div>
+            <div>✅ Orientation vers le bon prochain pas</div>
+          </div>
+
+          <div class="mt-8">
+            <a
+              href="#welcome-whatsapp"
+              class="inline-flex items-center justify-center bg-green-500 text-white px-8 py-4 rounded-2xl text-lg font-bold hover:scale-[1.02] hover:bg-green-600 transition-transform shadow-cta"
+            >
+              Je veux voir ça pour mon activité
+            </a>
+          </div>
+        </div>
+
+        <div class="fade-up bg-white border border-gray-100 rounded-3xl shadow-premium p-4">
+          <img src="Servicios.PNG" alt="Exemple de système ADA" class="rounded-2xl w-full object-cover" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process" class="py-16 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="bg-gray-50 border border-gray-100 rounded-3xl p-8 md:p-10 shadow-premium fade-up">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div>
-            <p class="text-white font-bold text-lg">Ce que vous recevez</p>
-            <p class="text-slate-400 text-sm">Un package complet, pas juste une page web</p>
+            <h2 class="text-3xl font-bold">Comment ça fonctionne</h2>
+            <p class="text-gray-600 mt-3 max-w-2xl">
+              Nous analysons votre activité, définissons le rôle utile pour votre assistant commercial, puis nous installons un système simple, clair et orienté résultats.
+            </p>
           </div>
-          <span class="text-xs font-bold uppercase tracking-widest text-emerald-300">
-            Plug & Play
-          </span>
+
+          <a
+            href="#diagnostic"
+            class="bg-green-500 text-white px-7 py-3 rounded-2xl font-bold hover:bg-green-600 transition shadow-lg"
+          >
+            Lancer mon diagnostic
+          </a>
         </div>
 
-        <div class="grid gap-4">
-          <div class="glass rounded-2xl p-4">
-            <p class="font-bold text-white mb-1">1. Landing de conversion</p>
-            <p class="text-sm text-slate-300">Une page claire, premium et pensée pour transformer les visiteurs en demandes concrètes.</p>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8 text-left">
+          <div class="fade-up p-5 rounded-2xl border border-gray-100 bg-white">
+            <div class="text-xs uppercase tracking-widest text-gray-500 font-semibold">Étape 1</div>
+            <div class="font-bold mt-2">Comprendre</div>
+            <div class="text-sm text-gray-600 mt-1">Nous regardons comment vos clients vous contactent aujourd’hui.</div>
           </div>
-
-          <div class="glass rounded-2xl p-4">
-            <p class="font-bold text-white mb-1">2. Agenda intégré</p>
-            <p class="text-sm text-slate-300">Vos prospects peuvent réserver directement un appel ou un rendez-vous avec vous.</p>
+          <div class="fade-up p-5 rounded-2xl border border-gray-100 bg-white">
+            <div class="text-xs uppercase tracking-widest text-gray-500 font-semibold">Étape 2</div>
+            <div class="font-bold mt-2">Définir</div>
+            <div class="text-sm text-gray-600 mt-1">Nous choisissons ce que le système doit faire : répondre, filtrer, orienter ou préparer la suite.</div>
           </div>
-
-          <div class="glass rounded-2xl p-4">
-            <p class="font-bold text-white mb-1">3. Vidéo de vente</p>
-            <p class="text-sm text-slate-300">Une vidéo courte qui explique votre offre, rassure et pousse à l’action.</p>
+          <div class="fade-up p-5 rounded-2xl border border-gray-100 bg-white">
+            <div class="text-xs uppercase tracking-widest text-gray-500 font-semibold">Étape 3</div>
+            <div class="font-bold mt-2">Installer</div>
+            <div class="text-sm text-gray-600 mt-1">Nous mettons en place votre assistant dans WhatsApp et adaptons le flux à votre activité.</div>
           </div>
-
-          <div class="glass rounded-2xl p-4">
-            <p class="font-bold text-white mb-1">4. Assistant intelligent</p>
-            <p class="text-sm text-slate-300">Il répond aux questions, explique vos services, vos tarifs et oriente le prospect vers la réservation.</p>
-          </div>
-
-          <div class="glass rounded-2xl p-4">
-            <p class="font-bold text-white mb-1">5. Notification automatique</p>
-            <p class="text-sm text-slate-300">Vous recevez une alerte dès qu’un prospect réserve un créneau ou manifeste un intérêt.</p>
+          <div class="fade-up p-5 rounded-2xl border border-gray-100 bg-white">
+            <div class="text-xs uppercase tracking-widest text-gray-500 font-semibold">Étape 4</div>
+            <div class="font-bold mt-2">Optimiser</div>
+            <div class="text-sm text-gray-600 mt-1">Nous ajustons selon les vraies conversations et les vrais résultats obtenus.</div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PAIN -->
-  <section class="px-4 sm:px-6 pb-20">
-    <div class="max-w-7xl mx-auto glass rounded-[32px] p-8 sm:p-10">
-      <div class="max-w-4xl">
-        <p class="text-indigo-300 font-bold uppercase tracking-[0.22em] text-xs mb-4">Le problème</p>
-        <h2 class="section-title text-3xl sm:text-4xl font-black mb-5">
-          Beaucoup d’entreprises ont déjà un site… mais ce site ne transforme pas les visiteurs en clients.
+  <!-- DIAGNOSTIC -->
+  <section id="diagnostic" class="py-18 bg-gray-50">
+    <div class="container mx-auto px-6">
+      <div class="rounded-3xl bg-white border border-gray-100 shadow-premium p-10 md:p-14 text-center fade-up">
+        <span class="section-pill">Diagnostic WhatsApp</span>
+
+        <h2 class="text-3xl md:text-4xl font-bold mt-4">
+          En 2 minutes, voyez si vous perdez des clients faute de réponse ou de suivi.
         </h2>
-        <p class="text-slate-300 text-lg leading-relaxed mb-8">
-          Un prospect arrive, regarde, hésite, puis part. Personne ne lui répond, personne ne le guide, personne ne lui propose un rendez-vous. Résultat: vous perdez des opportunités alors que vous avez déjà fait l’effort d’exister en ligne.
+
+        <p class="text-gray-600 text-lg mt-4 max-w-2xl mx-auto">
+          Vous recevez une première recommandation claire pour savoir comment utiliser votre WhatsApp de façon plus utile, plus organisée et plus rentable.
         </p>
-      </div>
 
-      <div class="grid md:grid-cols-3 gap-4">
-        <div class="glass rounded-2xl p-5">
-          <p class="text-4xl font-black text-red-400 mb-2">1</p>
-          <p class="font-bold mb-2">Pas de page pensée pour convertir</p>
-          <p class="text-sm text-slate-300">Le visiteur comprend votre activité, mais ne passe pas à l’action.</p>
-        </div>
-        <div class="glass rounded-2xl p-5">
-          <p class="text-4xl font-black text-amber-400 mb-2">2</p>
-          <p class="font-bold mb-2">Pas de système de réservation</p>
-          <p class="text-sm text-slate-300">Le client est obligé d’écrire, attendre ou appeler plus tard.</p>
-        </div>
-        <div class="glass rounded-2xl p-5">
-          <p class="text-4xl font-black text-indigo-400 mb-2">3</p>
-          <p class="font-bold mb-2">Pas d’assistant qui répond</p>
-          <p class="text-sm text-slate-300">Les questions restent sans réponse et l’intérêt retombe.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- OFFER -->
-  <section id="offre" class="px-4 sm:px-6 pb-20">
-    <div class="max-w-7xl mx-auto">
-      <div class="text-center max-w-4xl mx-auto mb-12">
-        <p class="text-indigo-300 font-bold uppercase tracking-[0.22em] text-xs mb-4">Ce que nous vendons</p>
-        <h2 class="section-title text-3xl sm:text-5xl font-black mb-5">
-          Un système complet de captation et de conversion, livré clé en main.
-        </h2>
-        <p class="text-lg text-slate-300 leading-relaxed">
-          Nous ne vous vendons pas juste une landing. Nous vous installons un système complet pour capter l’attention, répondre aux questions et transformer les visiteurs en rendez-vous.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
-        <div class="glass rounded-[26px] p-6">
-          <p class="text-sm font-bold text-indigo-300 mb-3">LANDING</p>
-          <h3 class="text-xl font-bold mb-3">Page de conversion personnalisée</h3>
-          <p class="text-slate-300 text-sm leading-relaxed">
-            Une page claire, moderne et conçue pour vendre votre service à votre place.
-          </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 text-left">
+          <div class="fade-up p-5 rounded-2xl bg-gray-50 border border-gray-100">
+            <div class="font-semibold">✅ Ce que le système pourrait gérer</div>
+            <div class="text-sm text-gray-600 mt-1">Questions, qualification, premier contact, orientation.</div>
+          </div>
+          <div class="fade-up p-5 rounded-2xl bg-gray-50 border border-gray-100">
+            <div class="font-semibold">✅ Ce qui vous fait perdre des opportunités</div>
+            <div class="text-sm text-gray-600 mt-1">Réponses tardives, manque de suivi, demandes mal triées.</div>
+          </div>
+          <div class="fade-up p-5 rounded-2xl bg-gray-50 border border-gray-100">
+            <div class="font-semibold">✅ Le bon premier pas</div>
+            <div class="text-sm text-gray-600 mt-1">Une mise en place simple, utile et adaptée à votre activité.</div>
+          </div>
         </div>
 
-        <div class="glass rounded-[26px] p-6">
-          <p class="text-sm font-bold text-indigo-300 mb-3">RÉSERVATION</p>
-          <h3 class="text-xl font-bold mb-3">Calendrier intégré</h3>
-          <p class="text-slate-300 text-sm leading-relaxed">
-            Vos prospects réservent automatiquement un créneau disponible sans aller-retour inutile.
-          </p>
-        </div>
-
-        <div class="glass rounded-[26px] p-6">
-          <p class="text-sm font-bold text-indigo-300 mb-3">VIDÉO</p>
-          <h3 class="text-xl font-bold mb-3">Vidéo publicitaire de votre offre</h3>
-          <p class="text-slate-300 text-sm leading-relaxed">
-            Une présentation courte pour capter l’attention, rassurer et faire comprendre votre valeur.
-          </p>
-        </div>
-
-        <div class="glass rounded-[26px] p-6">
-          <p class="text-sm font-bold text-indigo-300 mb-3">ASSISTANT</p>
-          <h3 class="text-xl font-bold mb-3">Bot simple qui répond et oriente</h3>
-          <p class="text-slate-300 text-sm leading-relaxed">
-            Il répond aux questions fréquentes, explique vos services et pousse vers la réservation.
+        <div class="mt-9">
+          <a
+            href="#welcome-whatsapp"
+            class="inline-flex items-center justify-center bg-green-500 text-white px-10 py-4 rounded-2xl text-lg font-bold hover:scale-[1.02] hover:bg-green-600 transition-transform shadow-cta pulse-cta"
+          >
+            Commencer mon diagnostic WhatsApp
+          </a>
+          <p class="text-sm text-gray-400 mt-3 italic">
+            Simple, rapide, sans engagement.
           </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- HOW IT WORKS -->
-  <section id="fonctionne" class="px-4 sm:px-6 pb-20">
-    <div class="max-w-7xl mx-auto glass rounded-[32px] p-8 sm:p-10">
-      <div class="text-center max-w-4xl mx-auto mb-12">
-        <p class="text-indigo-300 font-bold uppercase tracking-[0.22em] text-xs mb-4">Comment ça marche</p>
-        <h2 class="section-title text-3xl sm:text-5xl font-black mb-5">
-          Vous nous confiez votre offre. Nous mettons en place le système.
-        </h2>
-        <p class="text-lg text-slate-300">
-          Aucune configuration compliquée de votre côté. Nous installons tout pour vous.
-        </p>
-      </div>
+  <!-- WHATSAPP CTA -->
+  <section id="welcome-whatsapp" class="py-20 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-5xl mx-auto">
+        <div class="border border-gray-100 rounded-3xl shadow-premium p-8 md:p-12 bg-gradient-to-br from-white via-slate-50 to-white relative overflow-hidden fade-up">
+          <div class="absolute -top-8 -right-8 w-40 h-40 bg-green-100 rounded-full blur-3xl opacity-60"></div>
 
-      <div class="grid lg:grid-cols-4 gap-5">
-        <div class="glass rounded-2xl p-6">
-          <p class="text-sm font-bold text-indigo-300 mb-3">ÉTAPE 1</p>
-          <h3 class="font-bold text-xl mb-3">On clarifie votre offre</h3>
-          <p class="text-sm text-slate-300">Nous définissons ce que vous vendez, à qui, et quel type de rendez-vous vous voulez obtenir.</p>
-        </div>
-        <div class="glass rounded-2xl p-6">
-          <p class="text-sm font-bold text-indigo-300 mb-3">ÉTAPE 2</p>
-          <h3 class="font-bold text-xl mb-3">On crée votre landing</h3>
-          <p class="text-sm text-slate-300">Nous construisons une page prête à convaincre, avec votre message, votre vidéo et vos appels à l’action.</p>
-        </div>
-        <div class="glass rounded-2xl p-6">
-          <p class="text-sm font-bold text-indigo-300 mb-3">ÉTAPE 3</p>
-          <h3 class="font-bold text-xl mb-3">On intègre agenda et assistant</h3>
-          <p class="text-sm text-slate-300">Vos prospects peuvent poser leurs questions, comprendre votre offre et réserver directement.</p>
-        </div>
-        <div class="glass rounded-2xl p-6">
-          <p class="text-sm font-bold text-indigo-300 mb-3">ÉTAPE 4</p>
-          <h3 class="font-bold text-xl mb-3">Vous recevez les demandes</h3>
-          <p class="text-sm text-slate-300">Quand un prospect réserve ou demande des informations, vous êtes notifié immédiatement.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+          <div class="relative text-center">
+            <span class="section-pill">WhatsApp ADA</span>
 
-  <!-- RESERVATION -->
-  <section id="reservation" class="px-4 sm:px-6 pb-20">
-    <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-8 items-stretch">
-      <div class="glass rounded-[30px] p-8 sm:p-10">
-        <p class="text-indigo-300 font-bold uppercase tracking-[0.22em] text-xs mb-4">Réservation</p>
-        <h2 class="section-title text-3xl sm:text-4xl font-black mb-4">
-          Réservez un appel en 30 secondes.
-        </h2>
-        <p class="text-slate-300 text-lg mb-8">
-          Nous vous montrons comment ce système peut être adapté à votre activité et à votre manière de vendre.
-        </p>
+            <h2 class="text-3xl md:text-5xl font-bold mt-5 leading-tight">
+              Parlez avec ADA sur WhatsApp
+            </h2>
 
-        <!-- Calendly placeholder -->
-        <div id="calendly-container" class="glass-strong rounded-[26px] p-6 min-h-[280px] flex items-center justify-center">
-          <div class="text-center">
-            <div class="w-14 h-14 mx-auto rounded-full border-2 border-indigo-400/30 border-t-indigo-400 animate-spin mb-5"></div>
-            <p class="font-bold text-white mb-2">Espace réservé au calendrier</p>
-            <p class="text-sm text-slate-400 max-w-sm">
-              Ici sera intégré votre système de prise de rendez-vous automatique.
+            <p class="text-lg text-slate-600 max-w-3xl mx-auto mt-6 leading-relaxed">
+              Décrivez rapidement votre activité et vos demandes.
+              ADA vous aide à voir comment installer un assistant commercial dans votre WhatsApp pour répondre plus vite et laisser passer moins d’opportunités.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-10 text-left">
+              <div class="fade-up bg-white border border-gray-100 rounded-2xl p-5 shadow-sm">
+                <div class="font-bold text-slate-900">✅ Réponses plus rapides</div>
+                <div class="text-sm text-slate-600 mt-2">Pour ne plus laisser vos clients attendre.</div>
+              </div>
+
+              <div class="fade-up bg-white border border-gray-100 rounded-2xl p-5 shadow-sm">
+                <div class="font-bold text-slate-900">✅ Demandes mieux qualifiées</div>
+                <div class="text-sm text-slate-600 mt-2">Pour savoir plus vite qui est prêt à avancer.</div>
+              </div>
+
+              <div class="fade-up bg-white border border-gray-100 rounded-2xl p-5 shadow-sm">
+                <div class="font-bold text-slate-900">✅ Moins d’opportunités perdues</div>
+                <div class="text-sm text-slate-600 mt-2">Pour mieux convertir les conversations qui comptent.</div>
+              </div>
+            </div>
+
+            <div class="mt-10">
+              <a
+                href="https://wa.me/41790000000?text=Bonjour%2C%20je%20viens%20du%20site%20ADA.%20J%E2%80%99aimerais%20savoir%20si%20je%20perds%20des%20clients%20faute%20de%20r%C3%A9ponse%20ou%20de%20suivi%20sur%20WhatsApp."
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center gap-3 bg-green-500 text-white px-8 py-4 rounded-2xl text-lg font-bold hover:bg-green-600 transition shadow-xl pulse-cta"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M20.52 3.48A11.86 11.86 0 0 0 12.06 0C5.54 0 .24 5.3.24 11.82c0 2.08.54 4.12 1.58 5.93L0 24l6.45-1.69a11.77 11.77 0 0 0 5.61 1.43h.01c6.52 0 11.82-5.3 11.82-11.82 0-3.15-1.23-6.11-3.37-8.44ZM12.07 21.7h-.01a9.86 9.86 0 0 1-5.02-1.37l-.36-.21-3.83 1 1.02-3.73-.23-.38a9.83 9.83 0 0 1-1.51-5.19c0-5.44 4.43-9.87 9.88-9.87 2.64 0 5.11 1.03 6.98 2.9a9.8 9.8 0 0 1 2.89 6.98c0 5.44-4.43 9.87-9.88 9.87Zm5.42-7.4c-.3-.15-1.77-.87-2.05-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.47-2.39-1.5-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.45.13-.6.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.38-.03-.53-.08-.15-.67-1.6-.91-2.2-.24-.58-.49-.5-.67-.5l-.57-.01c-.2 0-.53.08-.8.38-.27.3-1.04 1.01-1.04 2.47 0 1.45 1.07 2.86 1.22 3.06.15.2 2.1 3.2 5.08 4.48.71.3 1.27.49 1.7.63.72.23 1.37.2 1.88.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.18-1.42-.08-.12-.28-.2-.58-.35Z"></path>
+                </svg>
+                Vérifier mon WhatsApp
+              </a>
+            </div>
+
+            <p class="text-sm text-slate-500 mt-5">
+              Vous serez redirigé vers WhatsApp pour commencer l’échange avec ADA.
             </p>
           </div>
         </div>
-
-        <p class="text-sm text-slate-400 mt-5">
-          Installation clé en main par nos experts. Aucune compétence technique requise de votre part.
-        </p>
-      </div>
-
-      <div id="audit" class="glass rounded-[30px] p-8 sm:p-10">
-        <p class="text-indigo-300 font-bold uppercase tracking-[0.22em] text-xs mb-4">Audit gratuit</p>
-        <h2 class="section-title text-3xl sm:text-4xl font-black mb-4">
-          Voyez si vous perdez déjà des opportunités.
-        </h2>
-        <p class="text-slate-300 text-lg mb-7">
-          Testez en direct si votre activité manque un système de réponse, de réservation et d’orientation client.
-        </p>
-
-        <!-- Bot placeholder -->
-        <div class="glass-strong rounded-[26px] p-5 mb-6">
-          <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-4">
-            <div>
-              <p class="font-bold text-white">ADA Assistant</p>
-              <p class="text-xs text-emerald-300">En ligne</p>
-            </div>
-            <div class="typing-dots flex gap-1">
-              <span></span><span></span><span></span>
-            </div>
-          </div>
-
-          <div class="space-y-4">
-            <div class="flex justify-start">
-              <div class="max-w-[85%] bg-white/6 rounded-2xl px-4 py-3 text-sm text-slate-200">
-                Bonjour 👋 Je peux vous expliquer comment fonctionne le système ADA et voir s’il correspond à votre activité.
-              </div>
-            </div>
-            <div class="flex justify-end">
-              <div class="max-w-[85%] bg-indigo-500/20 rounded-2xl px-4 py-3 text-sm text-white">
-                Je veux savoir si ce système peut m’aider à obtenir plus de rendez-vous.
-              </div>
-            </div>
-            <div class="flex justify-start">
-              <div class="max-w-[85%] bg-white/6 rounded-2xl px-4 py-3 text-sm text-slate-200">
-                Oui. Nous créons pour vous la page, l’agenda, la vidéo et l’assistant. Ensuite, vos visiteurs sont guidés vers la réservation.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <a href="#reservation" class="btn-primary pulse-soft inline-flex items-center justify-center px-7 py-4 rounded-2xl font-bold text-white w-full sm:w-auto">
-          Lancer mon audit
-        </a>
       </div>
     </div>
   </section>
 
-  <!-- WHY TRUST -->
-  <section class="px-4 sm:px-6 pb-20">
-    <div class="max-w-7xl mx-auto">
-      <div class="text-center max-w-4xl mx-auto mb-12">
-        <p class="text-indigo-300 font-bold uppercase tracking-[0.22em] text-xs mb-4">Pourquoi cela rassure</p>
-        <h2 class="section-title text-3xl sm:text-5xl font-black mb-5">
-          Vous ne recevez pas un outil compliqué. Vous recevez un système prêt à être utilisé.
-        </h2>
+  <!-- FOOTER -->
+  <footer class="py-10 bg-white border-t border-gray-100">
+    <div class="container mx-auto px-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <img src="Logo_ada.PNG" alt="ADA Logo" class="h-10 w-auto" />
+        <div>
+          <div class="font-bold">ADA</div>
+          <div class="text-xs text-slate-500">Assistant commercial • WhatsApp • Lausanne</div>
+        </div>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-5">
-        <div class="glass rounded-[26px] p-6">
-          <h3 class="text-xl font-bold mb-3">Clé en main</h3>
-          <p class="text-slate-300 text-sm leading-relaxed">
-            Nous installons l’ensemble pour vous. Vous n’avez pas à toucher au côté technique.
-          </p>
-        </div>
-        <div class="glass rounded-[26px] p-6">
-          <h3 class="text-xl font-bold mb-3">Pensé pour convertir</h3>
-          <p class="text-slate-300 text-sm leading-relaxed">
-            Chaque élément a un rôle clair: capter, rassurer, répondre et faire réserver.
-          </p>
-        </div>
-        <div class="glass rounded-[26px] p-6">
-          <h3 class="text-xl font-bold mb-3">Évolutif</h3>
-          <p class="text-slate-300 text-sm leading-relaxed">
-            Ce système est une première étape. Nous pouvons ensuite développer des automatisations plus avancées selon votre activité.
-          </p>
-        </div>
+      <div class="text-sm text-slate-600 text-center sm:text-right">
+        © ADA 2026 — Tous droits réservés<br>
+        Fondé par <span class="font-semibold">Jhon Edward Pabón</span>
       </div>
     </div>
-  </section>
+  </footer>
 
-  <!-- PRICING -->
-  <section id="tarifs" class="px-4 sm:px-6 pb-20">
-    <div class="max-w-5xl mx-auto">
-      <div class="text-center mb-12">
-        <p class="text-indigo-300 font-bold uppercase tracking-[0.22em] text-xs mb-4">Tarifs</p>
-        <h2 class="section-title text-3xl sm:text-5xl font-black mb-5">
-          Une offre simple pour lancer votre système rapidement.
-        </h2>
-        <p class="text-slate-300 text-lg">
-          Offre de lancement pour les premiers clients en Suisse.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-6">
-        <div class="glass rounded-[28px] p-8">
-          <p class="text-sm font-bold text-indigo-300 uppercase tracking-widest mb-4">Installation</p>
-          <div class="flex items-end gap-2 mb-2">
-            <span class="text-5xl font-black text-white">490</span>
-            <span class="text-2xl text-slate-400 mb-1">CHF</span>
-          </div>
-          <p class="text-sm text-slate-400 mb-6">paiement unique</p>
-
-          <ul class="space-y-3 text-sm text-slate-300">
-            <li>• Landing de conversion personnalisée</li>
-            <li>• Intégration de l’agenda</li>
-            <li>• Mise en place de la vidéo</li>
-            <li>• Assistant simple prêt à répondre</li>
-            <li>• Installation complète par ADA</li>
-          </ul>
-        </div>
-
-        <div class="glass-strong rounded-[28px] p-8">
-          <p class="text-sm font-bold text-indigo-300 uppercase tracking-widest mb-4">Maintenance</p>
-          <div class="flex items-end gap-2 mb-2">
-            <span class="text-5xl font-black text-white">150</span>
-            <span class="text-2xl text-slate-400 mb-1">CHF</span>
-          </div>
-          <p class="text-sm text-slate-400 mb-6">par mois</p>
-
-          <ul class="space-y-3 text-sm text-slate-300">
-            <li>• Système actif et surveillé</li>
-            <li>• Ajustements simples</li>
-            <li>• Support prioritaire</li>
-            <li>• Suivi de fonctionnement</li>
-            <li>• Optimisations progressives</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="mt-8 glass rounded-[24px] p-6 text-center">
-        <p class="text-lg text-white font-bold mb-2">
-          Un seul client récupéré peut couvrir plusieurs mois de service.
-        </p>
-        <p class="text-slate-400 text-sm">
-          Le vrai coût n’est pas le système. Le vrai coût, c’est le nombre d’opportunités que vous perdez aujourd’hui.
-        </p>
-      </div>
-
-      <div class="text-center mt-8">
-        <a href="#reservation" class="btn-primary inline-flex items-center justify-center px-8 py-4 rounded-2xl font-bold text-white">
-          Voir si ce système peut s’installer pour mon activité
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="px-4 sm:px-6 pb-20">
-    <div class="max-w-5xl mx-auto glass rounded-[32px] p-8 sm:p-10">
-      <div class="text-center max-w-3xl mx-auto mb-10">
-        <p class="text-indigo-300 font-bold uppercase tracking-[0.22em] text-xs mb-4">Questions fréquentes</p>
-        <h2 class="section-title text-3xl sm:text-4xl font-black">
-          Les questions que l’on nous pose le plus souvent.
-        </h2>
-      </div>
-
-      <div class="space-y-4">
-        <div class="glass rounded-2xl p-5">
-          <p class="font-bold text-white mb-2">Est-ce que cela fonctionne avec mon activité ?</p>
-          <p class="text-slate-300 text-sm">Oui, si vous vendez un service et que vous voulez obtenir plus de rendez-vous, ce système est adapté.</p>
-        </div>
-
-        <div class="glass rounded-2xl p-5">
-          <p class="font-bold text-white mb-2">Et si j’ai déjà un site web ?</p>
-          <p class="text-slate-300 text-sm">Très bien. Ce que nous installons n’est pas juste un site, c’est un système de conversion complet.</p>
-        </div>
-
-        <div class="glass rounded-2xl p-5">
-          <p class="font-bold text-white mb-2">Dois-je faire quelque chose techniquement ?</p>
-          <p class="text-slate-300 text-sm">Non. Installation clé en main par nos experts. Aucune compétence technique requise de votre part.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FINAL CTA -->
-  <section class="px-4 sm:px-6 pb-24">
-    <div class="max-w-6xl mx-auto glass-strong rounded-[34px] p-8 sm:p-12 text-center">
-      <p class="text-indigo-300 font-bold uppercase tracking-[0.22em] text-xs mb-4">Prêt à passer à l’action ?</p>
-      <h2 class="section-title text-3xl sm:text-5xl font-black mb-5">
-        Ne laissez plus vos visiteurs repartir sans réponse.
-      </h2>
-      <p class="text-lg text-slate-300 max-w-3xl mx-auto mb-8">
-        Nous vous installons une landing qui vend, un agenda qui convertit, une vidéo qui rassure et un assistant qui répond à vos prospects.
-      </p>
-
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="#reservation" class="btn-primary inline-flex items-center justify-center px-8 py-4 rounded-2xl font-bold text-white">
-          Réserver une démo
-        </a>
-        <a href="#audit" class="btn-secondary inline-flex items-center justify-center px-8 py-4 rounded-2xl font-semibold border border-white/10 text-white">
-          Lancer un audit
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- MOBILE STICKY CTA -->
-  <div class="fixed bottom-4 left-4 right-4 z-50 md:hidden">
-    <a href="#reservation" class="btn-primary w-full inline-flex items-center justify-center py-4 rounded-2xl font-bold text-white">
-      Réserver une démo
+  <!-- FLOATING WHATSAPP -->
+  <div class="whatsapp-float-exact">
+    <a
+      href="https://wa.me/41790000000?text=Bonjour%2C%20je%20viens%20du%20site%20ADA.%20J%E2%80%99aimerais%20savoir%20si%20je%20perds%20des%20clients%20faute%20de%20r%C3%A9ponse%20ou%20de%20suivi%20sur%20WhatsApp."
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Ouvrir WhatsApp"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <path fill="#fff" d="M19.11 17.36c-.26-.13-1.52-.75-1.76-.83-.24-.09-.41-.13-.58.13-.17.26-.67.83-.82 1-.15.17-.3.2-.56.07-.26-.13-1.08-.4-2.06-1.29-.76-.68-1.28-1.52-1.43-1.78-.15-.26-.02-.4.11-.53.12-.12.26-.3.39-.45.13-.15.17-.26.26-.43.09-.17.04-.32-.02-.45-.07-.13-.58-1.4-.8-1.92-.21-.5-.43-.43-.58-.44h-.5c-.17 0-.45.07-.69.33-.24.26-.9.88-.9 2.15 0 1.27.92 2.5 1.05 2.67.13.17 1.81 2.76 4.39 3.87.61.27 1.09.43 1.46.55.62.2 1.18.17 1.63.1.5-.08 1.52-.62 1.73-1.21.22-.59.22-1.09.15-1.2-.06-.1-.24-.17-.5-.3Z"/>
+        <path fill="#fff" d="M16.02 3.2c-7.08 0-12.82 5.7-12.82 12.72 0 2.24.59 4.42 1.7 6.34L3 29l6.97-1.82a12.88 12.88 0 0 0 6.05 1.54h.01c7.07 0 12.81-5.7 12.81-12.73 0-3.4-1.33-6.6-3.66-9-2.33-2.4-5.43-3.79-8.76-3.79Zm0 23.37h-.01a10.7 10.7 0 0 1-5.45-1.5l-.39-.23-4.14 1.08 1.1-4.03-.25-.41a10.58 10.58 0 0 1-1.64-5.57c0-5.84 4.8-10.6 10.78-10.6 2.89 0 5.6 1.13 7.63 3.18 2.03 2.05 3.14 4.78 3.14 7.69 0 5.84-4.8 10.59-10.77 10.59Z"/>
+      </svg>
     </a>
   </div>
 
+  <script>
+    const fadeElements = document.querySelectorAll('.fade-up');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    fadeElements.forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
